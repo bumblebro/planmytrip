@@ -9,6 +9,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import PlacesAutocomplete from "./PlacesAutocomplete";
+import NearbyPlaces from "./NearbyPlaces";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -28,7 +29,11 @@ function Maps() {
   const [selected1, setSelected1] = useState(null);
   const [selected2, setSelected2] = useState(null);
   const [showMap, setShowMap] = useState(false);
+  const [selRange, setSelRange] = useState(null);
+  const [range, setRange] = useState(null);
   const [location, setLocation] = useState({});
+  const [positions, setPositions] = useState([]);
+  const [nearbyPlaces, setNearbyPlaces] = useState([]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -48,8 +53,16 @@ function Maps() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
-      <form action="#">
+    <div>
+      <form
+        className="flex flex-col items-center"
+        action="#"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setShowMap(true);
+          setRange(selRange);
+        }}
+      >
         {" "}
         <div className="places-container">
           <PlacesAutocomplete
@@ -63,42 +76,47 @@ function Maps() {
             setShowMap={setShowMap}
           />
         </div>
-        <button
-          onClick={() => {
-            setShowMap(true);
-          }}
-        >
-          Submit
-        </button>
+        <div className="flex flex-row">
+          {" "}
+          <input
+            type="text"
+            placeholder="Range"
+            onChange={(e) => {
+              let val = e.target.value * 1000;
+              setSelRange(val);
+            }}
+          />{" "}
+          <h1>km</h1>
+        </div>
+        <button>Submit</button>
       </form>
-      {showMap ? (
-        <div style={{ height: "50vh", width: "50%" }}>
+      {showMap && (
+        <div style={{ height: "80vh", width: "80%" }}>
           <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
             <Map fullscreenControl={false} zoomControl={true}>
-              {" "}
-              <Marker
-                key={"Marker"} // Use a unique key for each marker
-                position={{ lat: 12.5581, lng: 75.3908 }}
-                title={"Namma Sullia"}
+              <Direction
+                selected1={selected1}
+                selected2={selected2}
+                setPositions={setPositions}
               />
-              <Direction selected1={selected1} selected2={selected2} />
-            </Map>
-          </APIProvider>
-        </div>
-      ) : (
-        <div style={{ height: "50vh", width: "50%" }}>
-          <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
-            <Map
-              // center={location}
-              zoom={9}
-              fullscreenControl={false}
-              zoomControl={true}
-            >
-              \{" "}
+
+              {nearbyPlaces.map((position) => (
+                <Marker
+                  key={position.lat + "," + position.lng}
+                  position={position}
+                  label={"x"}
+                  title={"Helloo"}
+                />
+              ))}
             </Map>
           </APIProvider>
         </div>
       )}
+      <NearbyPlaces
+        waypoints={positions}
+        radius={range}
+        setNearbyPlaces={setNearbyPlaces}
+      />
     </div>
   );
 }

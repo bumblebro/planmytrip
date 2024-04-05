@@ -2,7 +2,7 @@
 import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 
-function Direction({ selected1, selected2 }) {
+function Direction({ selected1, selected2, setPositions }) {
   const map = useMap();
   const routesLibrary = useMapsLibrary("routes");
   const [directionsService, setDirectionsService] = useState();
@@ -11,6 +11,7 @@ function Direction({ selected1, selected2 }) {
   const [routeIndex, setRouteIndex] = useState(0);
   const selected = routes[routeIndex];
   const leg = selected?.legs[0];
+  const waypoints = [];
 
   useEffect(() => {
     if (!routesLibrary || !map) return;
@@ -31,10 +32,11 @@ function Direction({ selected1, selected2 }) {
       .then((response) => {
         directionsRenderer.setDirections(response);
         setRoutes(response.routes);
-        const waypoints = [];
+
         response.routes[0].legs[0].steps.forEach((step) => {
           waypoints.push(step.end_location);
         });
+        setPositions(waypoints);
         console.log("waypoint:", waypoints);
       });
 

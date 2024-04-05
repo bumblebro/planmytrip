@@ -1,4 +1,5 @@
 import NearbyPlace from "./components/NearbyPlace";
+import NearbyPlaces from "./components/NearbyPlaces";
 import Places from "./components/Places";
 
 function App() {
