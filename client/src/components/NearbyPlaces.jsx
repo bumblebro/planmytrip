@@ -57,17 +57,18 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
   }, [waypoints, radius, isLoaded]); // Dependencies include all waypoints
 
   return (
-    <div>
-      <h2>Tourist Places Nearby:</h2>
-      <ul>
-        {touristPlaces.map((place) => (
-          <li key={place.lat}>
-            {/* Include waypoint information in the display */}
-            {place.place} ({place.waypoint.lat}, {place.waypoint.lng})
-          </li>
-        ))}
-      </ul>
-    </div>
+    <></>
+    // <div>
+    //   <h2>Tourist Places Nearby:</h2>
+    //   <ul>
+    //     {touristPlaces.map((place) => (
+    //       <li key={place.lat}>
+    //         {/* Include waypoint information in the display */}
+    //         {place.place} ({place.waypoint.lat}, {place.waypoint.lng})
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import img1 from "/src/images/map-pin-simple (2).svg";
+import { useCallback, useEffect, useMemo } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 
 import { useState } from "react";
@@ -91,9 +92,13 @@ function Maps() {
         <button>Submit</button>
       </form>
       {showMap && (
-        <div style={{ height: "80vh", width: "80%" }}>
+        <div style={{ height: "100vh", width: "100%" }}>
           <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
-            <Map fullscreenControl={false} zoomControl={true}>
+            <Map
+              fullscreenControl={false}
+              zoomControl={true}
+              position={selected1}
+            >
               <Direction
                 selected1={selected1}
                 selected2={selected2}
@@ -104,9 +109,27 @@ function Maps() {
                 <Marker
                   key={position.lat + "," + position.lng}
                   position={position}
-                  label={"x"}
-                  title={"Helloo"}
-                />
+                  label={{
+                    text: "h",
+                    fontSize: `${new window.google.maps.Size(20, 20)}`,
+                    color: "grey",
+                  }}
+                  title={position.place}
+                  icon={{
+                    url: img1,
+                    scaledSize: new window.google.maps.Size(40, 40),
+                  }}
+                  onClick={(e) => {
+                    console.log(position);
+                    let data = [];
+                    nearbyPlaces.map((places) => {
+                      if (e.latLng.lat() !== places.lat) {
+                        data.push(places);
+                      }
+                    });
+                    setNearbyPlaces(data);
+                  }}
+                ></Marker>
               ))}
             </Map>
           </APIProvider>
@@ -117,6 +140,39 @@ function Maps() {
         radius={range}
         setNearbyPlaces={setNearbyPlaces}
       />
+      <div>
+        <h2>
+          Tourist Places
+          Nearbydddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd:
+        </h2>
+        <ul>
+          {nearbyPlaces.map((place) => (
+            <div
+              key={place.waypoint.lat}
+              className="flex flex-row justify-between"
+            >
+              <li key={place.lat}>
+                {/* Include waypoint information in the display */}
+                {place.place} ({place.waypoint.lat}, {place.waypoint.lng})
+              </li>
+              <button
+                onClick={() => {
+                  let data = [];
+                  nearbyPlaces.map((places) => {
+                    if (place.place !== places.place) {
+                      data.push(places);
+                    }
+                  });
+
+                  setNearbyPlaces(data);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
