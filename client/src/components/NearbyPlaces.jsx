@@ -27,7 +27,7 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results);
+        // console.log(results);
         // Update touristPlaces with results for this waypoint
         setTouristPlaces((prevPlaces) => [
           ...prevPlaces,
@@ -45,6 +45,7 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng(),
             waypoint, // Add waypoint information for clarity
+            photos: place.photos,
           })),
         ]);
       }

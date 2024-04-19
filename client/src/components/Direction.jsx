@@ -62,7 +62,7 @@ function Direction({ selected1, selected2, setPositions }) {
       <h2>Other Routes</h2>
       <ul>
         {routes.map((route, index) => (
-          <li key={route.summary}>
+          <li key={index}>
             <button onClick={() => setRouteIndex(index)}>
               {route.summary}
             </button>

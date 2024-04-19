@@ -1,6 +1,6 @@
 "use client";
 
-import img1 from "/src/images/map-pin-simple (2).svg";
+import img1 from "/src/images/map-pin-fill (6).svg";
 import { useCallback, useEffect, useMemo } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 
@@ -62,6 +62,7 @@ function Maps() {
           e.preventDefault();
           setShowMap(true);
           setRange(selRange);
+          console.log(nearbyPlaces[0].photos.html_attributions[0])
         }}
       >
         {" "}
@@ -98,6 +99,8 @@ function Maps() {
               fullscreenControl={false}
               zoomControl={true}
               position={selected1}
+              mapTypeId="hybrid"
+              // mapId="8e0a97af9386fef"
             >
               <Direction
                 selected1={selected1}
@@ -105,22 +108,22 @@ function Maps() {
                 setPositions={setPositions}
               />
 
-              {nearbyPlaces.map((position) => (
+              {nearbyPlaces.map((position, index) => (
                 <Marker
-                  key={position.lat + "," + position.lng}
+                  key={index}
                   position={position}
-                  label={{
-                    text: "h",
-                    fontSize: `${new window.google.maps.Size(20, 20)}`,
-                    color: "grey",
-                  }}
+                  // label={{
+                  //   text: "hdddd efvdcds vreve",
+                  //   fontSize: `${new window.google.maps.Size(20, 20)}`,
+                  //   color: "black",
+                  // }}
                   title={position.place}
                   icon={{
-                    url: img1,
-                    scaledSize: new window.google.maps.Size(40, 40),
+                    url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+                    scaledSize: new window.google.maps.Size(25, 25),
                   }}
                   onClick={(e) => {
-                    console.log(position);
+                    console.log(nearbyPlaces);
                     let data = [];
                     nearbyPlaces.map((places) => {
                       if (e.latLng.lat() !== places.lat) {
@@ -146,15 +149,13 @@ function Maps() {
           Nearbydddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd:
         </h2>
         <ul>
-          {nearbyPlaces.map((place) => (
-            <div
-              key={place.waypoint.lat}
-              className="flex flex-row justify-between"
-            >
-              <li key={place.lat}>
+          {nearbyPlaces.map((place, index) => (
+            <div key={index} className="flex flex-row justify-between">
+              <li>
                 {/* Include waypoint information in the display */}
-                {place.place} ({place.waypoint.lat}, {place.waypoint.lng})
+                {place.place} ({place.waypoint.lat}, {place.waypoint.lng}, )
               </li>
+            
               <button
                 onClick={() => {
                   let data = [];

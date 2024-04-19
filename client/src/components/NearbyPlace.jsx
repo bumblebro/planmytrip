@@ -49,8 +49,8 @@ const NearbyPlace = ({ waypoint, radius }) => {
     <div>
       <h2>Tourist Places Nearby:</h2>
       <ul>
-        {touristPlaces.map((place) => (
-          <li key={place}>
+        {touristPlaces.map((place, index) => (
+          <li key={index}>
             {place.place} {place.lat} {place.lng}
           </li>
         ))}
