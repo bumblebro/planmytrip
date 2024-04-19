@@ -41,11 +41,12 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
         setNearbyPlaces((prevPlaces) => [
           ...prevPlaces,
           ...results.map((place) => ({
+            data: place,
             place: place.name,
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng(),
             waypoint, // Add waypoint information for clarity
-            photos: place.photos,
+            photo: place.photos,
           })),
         ]);
       }

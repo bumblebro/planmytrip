@@ -11,6 +11,7 @@ import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import NearbyPlaces from "./NearbyPlaces";
+import ImageRender from "./ImageRender";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -62,7 +63,9 @@ function Maps() {
           e.preventDefault();
           setShowMap(true);
           setRange(selRange);
-          console.log(nearbyPlaces[0].photos.html_attributions[0])
+          setNearbyPlaces([]);
+          console.log(nearbyPlaces[0]);
+          // console.log(nearbyPlaces[0].photo[0].getUrl());
         }}
       >
         {" "}
@@ -93,7 +96,7 @@ function Maps() {
         <button>Submit</button>
       </form>
       {showMap && (
-        <div style={{ height: "100vh", width: "100%" }}>
+        <div className="mx-auto" style={{ height: "50vh", width: "50%" }}>
           <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
             <Map
               fullscreenControl={false}
@@ -123,7 +126,6 @@ function Maps() {
                     scaledSize: new window.google.maps.Size(25, 25),
                   }}
                   onClick={(e) => {
-                    console.log(nearbyPlaces);
                     let data = [];
                     nearbyPlaces.map((places) => {
                       if (e.latLng.lat() !== places.lat) {
@@ -144,20 +146,21 @@ function Maps() {
         setNearbyPlaces={setNearbyPlaces}
       />
       <div>
-        <h2>
-          Tourist Places
-          Nearbydddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd:
-        </h2>
+        <h2>Tourist Places</h2>
         <ul>
           {nearbyPlaces.map((place, index) => (
             <div key={index} className="flex flex-row justify-between">
-              <li>
-                {/* Include waypoint information in the display */}
-                {place.place} ({place.waypoint.lat}, {place.waypoint.lng}, )
-              </li>
-            
+              <div>
+                {" "}
+                <li>{place.place}</li>
+                <h1>Rating: {place.data.rating}</h1>
+                <h2>Status: {place.data.business_status}</h2>
+                <h3>Total Ratings: {place.data.user_ratings_total}</h3>
+              </div>
+              <ImageRender place={place} />
               <button
                 onClick={() => {
+                  console.log(place.photo[0].getUrl());
                   let data = [];
                   nearbyPlaces.map((places) => {
                     if (place.place !== places.place) {
