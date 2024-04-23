@@ -56,90 +56,105 @@ function Maps() {
 
   return (
     <div>
-      <form
-        className="flex flex-col items-center"
-        action="#"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setShowMap(true);
-          setRange(selRange);
-          setNearbyPlaces([]);
-          console.log(nearbyPlaces[0]);
-          // console.log(nearbyPlaces[0].photo[0].getUrl());
-        }}
-      >
-        {" "}
-        <div className="places-container">
+      <div className="flex h-svh">
+        <form
+          className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
+          action="#"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setShowMap(true);
+            setRange(selRange);
+            setNearbyPlaces([]);
+            console.log(nearbyPlaces[0]);
+            // console.log(nearbyPlaces[0].photo[0].getUrl());
+          }}
+        >
+          {" "}
           <PlacesAutocomplete
             setSelected={setSelected1}
             setShowMap={setShowMap}
+            placeholder={"Choose starting point"}
           />
-        </div>
-        <div className="places-container">
           <PlacesAutocomplete
             setSelected={setSelected2}
             setShowMap={setShowMap}
+            placeholder={"Choose destination"}
           />
-        </div>
-        <div className="flex flex-row">
-          {" "}
-          <input
-            type="text"
-            placeholder="Range"
-            onChange={(e) => {
-              let val = e.target.value * 1000;
-              setSelRange(val);
-            }}
-          />{" "}
-          <h1>km</h1>
-        </div>
-        <button>Submit</button>
-      </form>
-      {showMap && (
-        <div className="mx-auto" style={{ height: "50vh", width: "50%" }}>
-          <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
-            <Map
-              fullscreenControl={false}
-              zoomControl={true}
-              position={selected1}
-              mapTypeId="hybrid"
-              // mapId="8e0a97af9386fef"
-            >
-              <Direction
-                selected1={selected1}
-                selected2={selected2}
-                setPositions={setPositions}
-              />
+          <div className="flex flex-row">
+            {" "}
+            <input
+              className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 "
+              type="text"
+              placeholder="Range in km"
+              onChange={(e) => {
+                let val = e.target.value * 1000;
+                setSelRange(val);
+              }}
+            />{" "}
+          </div>
+          <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-white hover:border-transparent">
+            Submit
+          </button>
+        </form>
 
-              {nearbyPlaces.map((position, index) => (
-                <Marker
-                  key={index}
-                  position={position}
-                  // label={{
-                  //   text: "hdddd efvdcds vreve",
-                  //   fontSize: `${new window.google.maps.Size(20, 20)}`,
-                  //   color: "black",
-                  // }}
-                  title={position.place}
-                  icon={{
-                    url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-                    scaledSize: new window.google.maps.Size(25, 25),
-                  }}
-                  onClick={(e) => {
-                    let data = [];
-                    nearbyPlaces.map((places) => {
-                      if (e.latLng.lat() !== places.lat) {
-                        data.push(places);
-                      }
-                    });
-                    setNearbyPlaces(data);
-                  }}
-                ></Marker>
-              ))}
-            </Map>
-          </APIProvider>
-        </div>
-      )}
+        {showMap ? (
+          <div className="w-full">
+            <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
+              <Map
+                fullscreenControl={false}
+                zoomControl={true}
+                position={selected1}
+                mapTypeId="hybrid"
+                // mapId="8e0a97af9386fef"
+              >
+                <Direction
+                  selected1={selected1}
+                  selected2={selected2}
+                  setPositions={setPositions}
+                />
+
+                {nearbyPlaces.map((position, index) => (
+                  <Marker
+                    key={index}
+                    position={position}
+                    // label={{
+                    //   text: "hdddd efvdcds vreve",
+                    //   fontSize: `${new window.google.maps.Size(20, 20)}`,
+                    //   color: "black",
+                    // }}
+                    title={position.place}
+                    icon={{
+                      url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+                      scaledSize: new window.google.maps.Size(25, 25),
+                    }}
+                    onClick={(e) => {
+                      let data = [];
+                      nearbyPlaces.map((places) => {
+                        if (e.latLng.lat() !== places.lat) {
+                          data.push(places);
+                        }
+                      });
+                      setNearbyPlaces(data);
+                    }}
+                  ></Marker>
+                ))}
+              </Map>
+            </APIProvider>
+          </div>
+        ) : (
+          <div className="w-full">
+            <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
+              <Map
+                fullscreenControl={false}
+                zoomControl={true}
+                position={{ lat: 12.8060661, lng: 74.9461935 }}
+                mapTypeId="hybrid"
+                // mapId="8e0a97af9386fef"
+              ></Map>
+            </APIProvider>
+          </div>
+        )}
+      </div>
       <NearbyPlaces
         waypoints={positions}
         radius={range}

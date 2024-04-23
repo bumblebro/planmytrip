@@ -1,7 +1,16 @@
-import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from "@reach/combobox";
-import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxOption,
+  ComboboxPopover,
+} from "@reach/combobox";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
-const PlacesAutocomplete = ({ setSelected, setShowMap }) => {
+const PlacesAutocomplete = ({ setSelected, setShowMap, placeholder }) => {
   const {
     ready,
     value,
@@ -26,10 +35,11 @@ const PlacesAutocomplete = ({ setSelected, setShowMap }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
-        className="combobox-input"
-        placeholder="Search an address"
+        className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 "
+        placeholder={placeholder}
       />
-      <ComboboxPopover>
+
+      <ComboboxPopover className="border border-solid rounded-md">
         <ComboboxList>
           {status === "OK" &&
             data.map(({ place_id, description }) => (
