@@ -11,5 +11,21 @@ function ImageRender({ place }) {
     }
   }, [place]);
 
-  return <img className="w-2/12" src={imageUrl} alt="" />;
+  return (
+    <>
+      {imageUrl ? (
+        <img
+          className="object-cover w-32 h-32 rounded-lg"
+          src={imageUrl}
+          alt=""
+        />
+      ) : (
+        <img
+          className="object-cover w-32 h-32 rounded-lg"
+          src="https://maps.gstatic.com/tactile/pane/result-no-thumbnail-2x.png"
+          alt=""
+        />
+      )}
+    </>
+  );
 }

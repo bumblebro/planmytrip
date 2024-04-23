@@ -3,7 +3,7 @@ import { useLoadScript } from "@react-google-maps/api";
 
 const libraries = ["places"]; // Include the Places library
 
-const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
+const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces, searchType }) => {
   // State to store all tourist places for multiple waypoints
   const [touristPlaces, setTouristPlaces] = useState([]);
   const apiKey = "AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs"; // Replace with your Google Maps API key
@@ -22,7 +22,7 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces }) => {
     const request = {
       location: waypoint,
       radius: radius,
-      type: ["tourist_attraction"], // Change type for different categories
+      type: [searchType], // Change type for different categories
     };
 
     service.nearbySearch(request, (results, status) => {
