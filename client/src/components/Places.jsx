@@ -144,7 +144,7 @@ function Maps() {
 
         {showMap ? (
           <div className="w-full">
-            <APIProvider apiKey="AIzaSyCFiSVdTooJD6pGLIxEDmW1Pas0lEnlt_Q">
+            <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
                 fullscreenControl={false}
                 zoomControl={true}
