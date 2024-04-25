@@ -5,7 +5,7 @@ const libraries = ["places"]; // Include the Places library
 
 const NearbyPlace = ({ waypoint, radius }) => {
   const [touristPlaces, setTouristPlaces] = useState([]);
-  const apiKey = "AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs"; // Replace with your Google Maps API key
+  const apiKey = import.meta.env.VITE_API_KEY; // Replace with your Google Maps API key
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,

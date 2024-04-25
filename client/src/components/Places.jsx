@@ -15,7 +15,7 @@ import ImageRender from "./ImageRender";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs",
+    googleMapsApiKey: import.meta.env.VITE_API_KEY,
     libraries: ["places"],
   });
 
@@ -144,7 +144,7 @@ function Maps() {
 
         {showMap ? (
           <div className="w-full">
-            <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
+            <APIProvider apiKey="AIzaSyCFiSVdTooJD6pGLIxEDmW1Pas0lEnlt_Q">
               <Map
                 fullscreenControl={false}
                 zoomControl={true}
@@ -189,7 +189,7 @@ function Maps() {
           </div>
         ) : (
           <div className="w-full">
-            <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
+            <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
                 fullscreenControl={false}
                 zoomControl={true}

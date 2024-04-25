@@ -13,7 +13,7 @@ function MapView() {
 
   return (
     <div style={{ height: "50vh", width: "50%" }}>
-      <APIProvider apiKey="AIzaSyD_xecbv6K1U2uuCNfvwWhq_svY3PgP5Bs">
+      <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
         <Map
           center={position}
           zoom={9}
