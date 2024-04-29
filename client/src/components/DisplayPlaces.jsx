@@ -79,11 +79,10 @@ function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
                 </ScrollLink>
                 <a
                   href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
-                  target="_blank" className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-white rounded-md " 
+                  target="_blank"
+                  className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-white rounded-md "
                 >
-                  <button className="">
-                    Open in google map
-                  </button>
+                  <button className="">Open in google map</button>
                   <img className="w-4 text-white" src={svg} alt="" />
                 </a>
               </div>

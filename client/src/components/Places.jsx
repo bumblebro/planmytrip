@@ -200,6 +200,7 @@ function Maps() {
             <DisplayPlaces
               nearbyPlaces={nearbyPlaces}
               SetDistinctMarker={SetDistinctMarker}
+          
             />
           )}{" "}
         </div>
