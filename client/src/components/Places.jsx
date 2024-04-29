@@ -1,9 +1,8 @@
 "use client";
-
 import img1 from "/src/images/map-pin-fill (6).svg";
-import { useCallback, useEffect, useMemo } from "react";
+
+import { useEffect } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
-import StarRatings from "react-star-ratings";
 import { useState } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 
@@ -11,7 +10,8 @@ import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import NearbyPlaces from "./NearbyPlaces";
-import ImageRender from "./ImageRender";
+import DisplayPlaces from "./DisplayPlaces";
+import DisplayMap from "./DisplayMap";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -38,23 +38,24 @@ function Maps() {
   const [positions, setPositions] = useState([]);
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
   const [searchType, setSearchType] = useState("tourist_attraction");
+  const [km, SetKm] = useState(null);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, error);
-    } else {
-      console.log("Geolocation not supported");
-    }
-    function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      setLocation({ latitude, longitude });
-      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-    }
-    function error() {
-      console.log("Unable to retrieve your location");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(success, error);
+  //   } else {
+  //     console.log("Geolocation not supported");
+  //   }
+  //   function success(position) {
+  //     const latitude = position.coords.latitude;
+  //     const longitude = position.coords.longitude;
+  //     setLocation({ latitude, longitude });
+  //     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  //   }
+  //   function error() {
+  //     console.log("Unable to retrieve your location");
+  //   }
+  // }, []);
 
   return (
     <div>
@@ -68,6 +69,7 @@ function Maps() {
             setRange(selRange);
             setNearbyPlaces([]);
             setShowMap(true);
+            console.log(selected1);
           }}
         >
           {" "}
@@ -139,147 +141,56 @@ function Maps() {
           </div>
           <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-white hover:border-transparent">
             Submit
-          </button>
+          </button>{" "}
+          {km > 50000 && (
+            <h1>
+              The Distance between the current locations is{" "}
+              <span className="text-red-500">{km / 1000}kms</span>. It must be
+              less than <span className="text-red-500">50kms</span>
+            </h1>
+          )}
         </form>
 
         {showMap ? (
-          <div className="w-full">
-            <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
-              <Map
-                fullscreenControl={false}
-                zoomControl={true}
-                position={selected1}
-                mapTypeId="hybrid"
-                // mapId="8e0a97af9386fef"
-              >
-                <Direction
-                  selected1={selected1}
-                  selected2={selected2}
-                  setPositions={setPositions}
-                />
-
-                {nearbyPlaces.map((position, index) => (
-                  <Marker
-                    key={index}
-                    position={position}
-                    // label={{
-                    //   text: "hdddd efvdcds vreve",
-                    //   fontSize: `${new window.google.maps.Size(20, 20)}`,
-                    //   color: "black",
-                    // }}
-                    title={position.place}
-                    icon={{
-                      url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-                      scaledSize: new window.google.maps.Size(25, 25),
-                    }}
-                    onClick={(e) => {
-                      let data = [];
-                      nearbyPlaces.map((places) => {
-                        if (e.latLng.lat() !== places.lat) {
-                          data.push(places);
-                        }
-                      });
-                      setNearbyPlaces(data);
-                      console.log(nearbyPlaces);
-                    }}
-                  ></Marker>
-                ))}
-              </Map>
-            </APIProvider>
-          </div>
+          <DisplayMap
+            nearbyPlaces={nearbyPlaces}
+            selected1={selected1}
+            selected2={selected2}
+            setPositions={setPositions}
+            SetKm={SetKm}
+            setNearbyPlaces={setNearbyPlaces}
+          />
         ) : (
           <div className="w-full">
-            <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
+            {/* <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
                 fullscreenControl={false}
                 zoomControl={true}
-                position={{ lat: 12.8060661, lng: 74.9461935 }}
-                mapTypeId="hybrid"
+                position={{ lat: 12.5580735, lng: 75.3907667 }}
+                // mapTypeId="hybrid"
                 // mapId="8e0a97af9386fef"
               ></Map>
+            </APIProvider> */}
+            <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
+              <Map
+                // zoom={10}
+                zoomControl={true}
+                center={{ lat: 12.5580735, lng: 75.3907667 }}
+                // mapTypeId="hybrid"
+              />
             </APIProvider>
           </div>
         )}
       </div>
-
-      <NearbyPlaces
-        waypoints={positions}
-        radius={range}
-        setNearbyPlaces={setNearbyPlaces}
-        searchType={searchType}
-      />
-      {showMap && (
-        <div className="mx-4 my-8">
-          <h2 className="pb-2 pl-8 text-xl text-slate-800">
-            Results ({nearbyPlaces.length})
-          </h2>
-          <ul className="grid grid-cols-2 gap-4">
-            {nearbyPlaces.map((place, index) => (
-              <div
-                key={index}
-                className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4"
-              >
-                <div className="flex flex-col justify-center">
-                  <li className="text-xl font-medium">{place.place}</li>
-                  {place.data.rating ? (
-                    <div className="flex items-center justify-start gap-1">
-                      <h1 className="text-sm text-slate-500">
-                        {place.data.rating || "0.0"}
-                      </h1>
-                      <div className="pb-0.5">
-                        <StarRatings
-                          rating={place.data.rating}
-                          starRatedColor="#fbbc04"
-                          // changeRating={this.changeRating}
-                          numberOfStars={5}
-                          name="rating"
-                          starDimension="15px"
-                          starSpacing="1px"
-                        />
-                      </div>
-                      <span className="text-sm text-slate-500">
-                        ({place.data.user_ratings_total || 0})
-                      </span>{" "}
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-start gap-1">
-                      <h1 className="text-sm text-slate-500">No reviews</h1>
-                    </div>
-                  )}
-
-                  <h1 className="text-sm text-slate-500">
-                    {place.data.vicinity}
-                  </h1>
-                  <h2 className="text-sm text-slate-500">
-                    {place.data.business_status === "OPERATIONAL" && (
-                      <span className="text-green-600">Open</span>
-                    )}
-                    {place.data.business_status === "CLOSED_TEMPORARILY" && (
-                      <span className="text-[#dd3d3d]">Temporarily closed</span>
-                    )}
-                  </h2>
-                </div>
-
-                <ImageRender place={place} />
-
-                {/* <button
-                onClick={() => {
-                  console.log(place.photo[0].getUrl());
-                  let data = [];
-                  nearbyPlaces.map((places) => {
-                    if (place.place !== places.place) {
-                      data.push(places);
-                    }
-                  });
-
-                  setNearbyPlaces(data);
-                }}
-              >
-                Remove
-              </button> */}
-              </div>
-            ))}
-          </ul>
+      {km < 50000 && (
+        <div>
+          <NearbyPlaces
+            waypoints={positions}
+            radius={range}
+            setNearbyPlaces={setNearbyPlaces}
+            searchType={searchType}
+          />
+          {showMap && <DisplayPlaces nearbyPlaces={nearbyPlaces} />}{" "}
         </div>
       )}
     </div>
