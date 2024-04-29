@@ -39,6 +39,7 @@ function Maps() {
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
   const [searchType, setSearchType] = useState("tourist_attraction");
   const [km, SetKm] = useState(null);
+  const [distinctMarker, SetDistinctMarker] = useState(null);
 
   // useEffect(() => {
   //   if (navigator.geolocation) {
@@ -70,6 +71,7 @@ function Maps() {
             setNearbyPlaces([]);
             setShowMap(true);
             console.log(selected1);
+            SetDistinctMarker(null);
           }}
         >
           {" "}
@@ -159,6 +161,7 @@ function Maps() {
             setPositions={setPositions}
             SetKm={SetKm}
             setNearbyPlaces={setNearbyPlaces}
+            distinctMarker={distinctMarker}
           />
         ) : (
           <div className="w-full">
@@ -177,6 +180,14 @@ function Maps() {
           </div>
         )}
       </div>
+      <button
+        className="w-48 rounded-md bg-[#3b82f6]"
+        onClick={() => {
+          SetDistinctMarker(null);
+        }}
+      >
+        Show All Places on map
+      </button>
       {km < 50000 && (
         <div>
           <NearbyPlaces
@@ -185,7 +196,12 @@ function Maps() {
             setNearbyPlaces={setNearbyPlaces}
             searchType={searchType}
           />
-          {showMap && <DisplayPlaces nearbyPlaces={nearbyPlaces} />}{" "}
+          {showMap && (
+            <DisplayPlaces
+              nearbyPlaces={nearbyPlaces}
+              SetDistinctMarker={SetDistinctMarker}
+            />
+          )}{" "}
         </div>
       )}
     </div>

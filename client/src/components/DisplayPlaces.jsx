@@ -1,12 +1,16 @@
 import StarRatings from "react-star-ratings";
 import ImageRender from "./ImageRender";
+import Scroll from "react-scroll";
+import svg from "/src/images/external.svg";
 
-function DisplayPlaces({ nearbyPlaces }) {
+function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
+  const ScrollLink = Scroll.Link;
   return (
     <div className="mx-4 my-8">
       <h2 className="pb-2 pl-8 text-xl text-slate-800">
         Results ({nearbyPlaces.length})
       </h2>
+
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {nearbyPlaces.map((place, index) => (
           <div
@@ -50,6 +54,39 @@ function DisplayPlaces({ nearbyPlaces }) {
                   <span className="text-[#dd3d3d]">Temporarily closed</span>
                 )}
               </h2>
+              <div className="flex gap-4">
+                {" "}
+                <ScrollLink
+                  to="footer"
+                  offset={-50}
+                  smooth={true}
+                  duration={500}
+                >
+                  <button
+                    className=" rounded-md bg-[#1a73e8] text-white px-2 py-1 text-sm"
+                    onClick={() => {
+                      console.log(place.data.geometry.location.lat());
+                      console.log(place.data.place_id);
+                      SetDistinctMarker({
+                        lat: place.data.geometry.location.lat(),
+                        lng: place.data.geometry.location.lng(),
+                        place: place.place,
+                      });
+                    }}
+                  >
+                    Show in above map
+                  </button>
+                </ScrollLink>
+                <a
+                  href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
+                  target="_blank" className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-white rounded-md " 
+                >
+                  <button className="">
+                    Open in google map
+                  </button>
+                  <img className="w-4 text-white" src={svg} alt="" />
+                </a>
+              </div>
             </div>
 
             <ImageRender place={place} />
