@@ -1,13 +1,13 @@
 import StarRatings from "react-star-ratings";
 import ImageRender from "./ImageRender";
 
-function DisplayPlaces({nearbyPlaces,}) {
+function DisplayPlaces({ nearbyPlaces }) {
   return (
     <div className="mx-4 my-8">
       <h2 className="pb-2 pl-8 text-xl text-slate-800">
         Results ({nearbyPlaces.length})
       </h2>
-      <ul className="grid grid-cols-2 gap-4">
+      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {nearbyPlaces.map((place, index) => (
           <div
             key={index}

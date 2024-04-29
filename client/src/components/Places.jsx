@@ -59,7 +59,7 @@ function Maps() {
 
   return (
     <div>
-      <div className="flex h-svh">
+      <div className="flex flex-col h-svh lg:flex-row">
         <form
           className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
           action="#"
@@ -83,7 +83,7 @@ function Maps() {
             setShowMap={setShowMap}
             placeholder={"Choose destination"}
           />
-          <div className="flex flex-row ">
+          <div className="flex flex-row">
             {" "}
             <select
               className="border border-solid rounded-md text-[.875rem] w-64 px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 "
@@ -172,12 +172,7 @@ function Maps() {
               ></Map>
             </APIProvider> */}
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
-              <Map
-                // zoom={10}
-                zoomControl={true}
-                center={{ lat: 12.5580735, lng: 75.3907667 }}
-                // mapTypeId="hybrid"
-              />
+              <Map zoom={10} center={{ lat: 12.5580735, lng: 75.3907667 }} />{" "}
             </APIProvider>
           </div>
         )}
