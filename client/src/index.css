@@ -10,6 +10,7 @@ body {
 .modal {
   position: fixed; /* Ensures the modal overlays the current screen */
   top: 0;
+
   left: 0;
   right: 0;
   bottom: 0;

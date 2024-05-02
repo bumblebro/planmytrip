@@ -126,7 +126,12 @@ function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
         <div className="modal">
           <div className="modal-content">
             <iframe
-              src="https://www.google.com/"
+             width="700"
+             height="400"
+              // src="https://www.google.com/embed/maps/place/?q=place_id:ChIJ1bq552rzpDsRQHLfqixs-1k"
+              src={`https://www.google.com/maps/embed/v1/search?key=${
+                import.meta.env.VITE_API_KEY
+              }&q=Eiffel+Tower,Paris+France`}
               title="External Webpage"
             />
             <button
