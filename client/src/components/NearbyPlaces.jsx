@@ -47,6 +47,7 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces, searchType }) => {
             lng: place.geometry.location.lng(),
             waypoint, // Add waypoint information for clarity
             photo: place.photos,
+            placeid: place.place_id,
           })),
         ]);
       }

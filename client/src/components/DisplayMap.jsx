@@ -3,6 +3,7 @@ import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import img from "/src/images/image.png";
 import img1 from "/src/images/location.png";
+// import img1 from "/src/images/placeholder.png";
 
 function DisplayMap({
   nearbyPlaces,
@@ -50,15 +51,16 @@ function DisplayMap({
                 key={index}
                 position={position}
                 // label={{
-                //   text: "hdddd efvdcds vreve",
-                //   fontSize: `${new window.google.maps.Size(20, 20)}`,
-                //   color: "black",
+                //   text: `${index + 1}`,
+                //   // fontSize: `${new window.google.maps.Size(50, 50)}`,
+                //   color: "white",
                 // }}
                 title={position.place}
                 icon={{
                   url: img1,
                   scaledSize: new window.google.maps.Size(30, 30),
                 }}
+                width="20px"
                 onClick={(e) => {
                   let data = [];
                   nearbyPlaces.map((places) => {

@@ -6,6 +6,7 @@ function App() {
   return (
     <div>
       <NavBar />
+     
       <Places />
       {/* <NearbyPlace waypoint={{lat:12.5581, lng:75.3908 }} radius={10000}/> */}
     </div>

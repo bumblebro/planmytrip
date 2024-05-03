@@ -4,7 +4,7 @@ import Scroll from "react-scroll";
 import svg from "/src/images/external.svg";
 import { useState } from "react";
 
-function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
+function DisplayPlaces({ nearbyPlaces, SetDistinctMarker, setNearbyPlaces }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const ScrollLink = Scroll.Link;
@@ -83,41 +83,55 @@ function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
                       Show in above map
                     </button>
                   </ScrollLink>
-                  {/* <a
+                  <a
                     href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                     target="_blank"
                     className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-white rounded-md "
-                  > */}
-                  <button
-                    onClick={() => {
-                      setIsOpen(true);
-                    }}
-                    className=""
                   >
-                    Open in google map
+                    <button
+                      onClick={() => {
+                        // setIsOpen(true);
+                      }}
+                      className=""
+                    >
+                      Open in google map
+                    </button>
+                    <img className="w-4 text-white" src={svg} alt="" />
+                  </a>{" "}
+                  <button
+                    className="flex gap-2 bg-[#e34133] px-2 py-1 text-sm text-white rounded-md "
+                    onClick={async () => {
+                      // console.log(place.photo[0].getUrl());
+                      console.log(place.data.place_id);
+                      console.log(nearbyPlaces);
+                      // let data = [];
+                      // await nearbyPlaces.map((places) => {
+                      //   // console.log(place.place !== places.place);
+                      //   if (place.data.place_id !== places.placeid) {
+                      //     data.push(places);
+                      //   } else null;
+                      // });
+                      // const newplaces = await nearbyPlaces.filter((pla) => {
+                      //   return place.data.place_id !== pla.placeid;
+                      // });
+                      const matchingPlace = await nearbyPlaces.find(
+                        (pla) => pla.placeid === place.data.place_id
+                      );
+
+                      if (matchingPlace) {
+                        const newPlaces = nearbyPlaces.filter(
+                          (pla) => pla !== matchingPlace
+                        );
+                        setNearbyPlaces(newPlaces);
+                      }
+                    }}
+                  >
+                    Remove
                   </button>
-                  <img className="w-4 text-white" src={svg} alt="" />
-                  {/* </a> */}
                 </div>
               </div>
 
               <ImageRender place={place} />
-
-              {/* <button
-          onClick={() => {
-            console.log(place.photo[0].getUrl());
-            let data = [];
-            nearbyPlaces.map((places) => {
-              if (place.place !== places.place) {
-                data.push(places);
-              }
-            });
-
-            setNearbyPlaces(data);
-          }}
-        >
-          Remove
-        </button> */}
             </div>
           ))}
         </ul>
@@ -126,8 +140,8 @@ function DisplayPlaces({ nearbyPlaces, SetDistinctMarker }) {
         <div className="modal">
           <div className="modal-content">
             <iframe
-             width="700"
-             height="400"
+              width="700"
+              height="400"
               // src="https://www.google.com/embed/maps/place/?q=place_id:ChIJ1bq552rzpDsRQHLfqixs-1k"
               src={`https://www.google.com/maps/embed/v1/search?key=${
                 import.meta.env.VITE_API_KEY
