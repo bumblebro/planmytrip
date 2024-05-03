@@ -20,6 +20,7 @@ function DisplayMap({
         <Map
           fullscreenControl={false}
           zoomControl={true}
+          // zoom={20}
           // {{distinctMarker& zoom={30}}}
           position={selected1}
           // mapTypeId="hybrid"

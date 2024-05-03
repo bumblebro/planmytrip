@@ -71,7 +71,7 @@ function Maps() {
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
             action="#"
-            onSubmit={async (e) => {
+            onSubmit={ (e) => {
               e.preventDefault();
               setShowMap(true);
               setRange(selRange);

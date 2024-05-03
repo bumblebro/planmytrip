@@ -10,12 +10,12 @@ function DisplayPlaces({ nearbyPlaces, SetDistinctMarker, setNearbyPlaces }) {
   const ScrollLink = Scroll.Link;
   return (
     <>
-      <div className="mx-4 my-8">
+      <div className="mx-4 my-8 ">
         <h2 className="pb-2 pl-8 text-xl text-slate-800">
           Results ({nearbyPlaces.length})
         </h2>
 
-        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2 scrollbar-thin  overflow-scroll h-screen overflow-x-hidden">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
