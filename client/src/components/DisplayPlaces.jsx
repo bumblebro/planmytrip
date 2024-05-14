@@ -3,8 +3,13 @@ import ImageRender from "./ImageRender";
 import Scroll from "react-scroll";
 import svg from "/src/images/external.svg";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-function DisplayPlaces({ nearbyPlaces, SetDistinctMarker, setNearbyPlaces }) {
+function DisplayPlaces({ SetDistinctMarker, setNearbyPlaces }) {
+  const nearbyPlaces = useSelector((state) => {
+    console.log(state.nearbyPlaces);
+    return state.nearbyPlaces;
+  });
   const [isOpen, setIsOpen] = useState(false);
 
   const ScrollLink = Scroll.Link;

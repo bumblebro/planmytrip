@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useLoadScript } from "@react-google-maps/api";
+import { useDispatch, useSelector } from "react-redux";
+import { addPlace } from "../features/mapSlice";
 
 const libraries = ["places"]; // Include the Places library
 
-const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces, searchType }) => {
+const NearbyPlaces = ({ waypoints, radius, searchType }) => {
   // State to store all tourist places for multiple waypoints
+  const dispatch = useDispatch();
+
   const [touristPlaces, setTouristPlaces] = useState([]);
   const apiKey = import.meta.env.VITE_API_KEY; // Replace with your Google Maps API key
 
@@ -25,9 +29,9 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces, searchType }) => {
       type: [searchType], // Change type for different categories
     };
 
-    service.nearbySearch(request, (results, status) => {
+    service.nearbySearch(request, async (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        // console.log(results);
+        console.log(results);
         // Update touristPlaces with results for this waypoint
         setTouristPlaces((prevPlaces) => [
           ...prevPlaces,
@@ -38,18 +42,18 @@ const NearbyPlaces = ({ waypoints, radius, setNearbyPlaces, searchType }) => {
             waypoint, // Add waypoint information for clarity
           })),
         ]);
-        setNearbyPlaces((prevPlaces) => [
-          ...prevPlaces,
-          ...results.map((place) => ({
-            data: place,
-            place: place.name,
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-            waypoint, // Add waypoint information for clarity
-            photo: place.photos,
-            placeid: place.place_id,
-          })),
-        ]);
+
+        const arr = await results.map((place) => ({
+          data: place,
+          place: place.name,
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+          waypoint, // Add waypoint information for clarity
+          photo: place.photos,
+          placeid: place.place_id,
+        }));
+        console.log(arr);
+        dispatch(addPlace(...arr));
       }
     });
   };

@@ -12,6 +12,7 @@ import PlacesAutocomplete from "./PlacesAutocomplete";
 import NearbyPlaces from "./NearbyPlaces";
 import DisplayPlaces from "./DisplayPlaces";
 import DisplayMap from "./DisplayMap";
+import { useSelector } from "react-redux";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -28,6 +29,9 @@ export default function Places() {
 }
 
 function Maps() {
+  const maps = useSelector((state) => {
+    return state;
+  });
   const [selected1, setSelected1] = useState(null);
   const [selected2, setSelected2] = useState(null);
   const [showMap, setShowMap] = useState(false);
@@ -71,7 +75,7 @@ function Maps() {
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
             action="#"
-            onSubmit={ (e) => {
+            onSubmit={(e) => {
               e.preventDefault();
               setShowMap(true);
               setRange(selRange);
@@ -79,6 +83,7 @@ function Maps() {
               console.log(selected1);
               SetDistinctMarker(null);
               setNearbyPlaces([]);
+              console.log(maps);
             }}
           >
             {" "}
@@ -204,7 +209,6 @@ function Maps() {
           <NearbyPlaces
             waypoints={positions}
             radius={range}
-            setNearbyPlaces={setNearbyPlaces}
             searchType={searchType}
           />
           {showMap && (
