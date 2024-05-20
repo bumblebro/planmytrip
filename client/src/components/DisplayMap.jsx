@@ -3,17 +3,18 @@ import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import img from "/src/images/image.png";
 import img1 from "/src/images/location.png";
+import { useSelector } from "react-redux";
 // import img1 from "/src/images/placeholder.png";
 
 function DisplayMap({
-  nearbyPlaces,
   selected1,
   selected2,
-  setPositions,
   SetKm,
-  setNearbyPlaces,
   distinctMarker,
 }) {
+  const nearbyPlaces = useSelector((state) => {
+    return state.nearbyPlaces;
+  });
   return (
     <div className="w-full" id="footer">
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
@@ -29,7 +30,6 @@ function DisplayMap({
           <Direction
             selected1={selected1}
             selected2={selected2}
-            setPositions={setPositions}
             SetKm={SetKm}
           />
           {distinctMarker ? (

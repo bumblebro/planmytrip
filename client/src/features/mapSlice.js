@@ -1,9 +1,14 @@
+import { position } from "@chakra-ui/react";
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
   nearbyPlaces: [],
   selected1: null,
   selected2: null,
+  positions: [],
+  radius: null,
+  active: false,
 };
 
 export const mapSlice = createSlice({
@@ -11,10 +16,20 @@ export const mapSlice = createSlice({
   initialState,
   reducers: {
     addPlace: (state, action) => {
-      state.nearbyPlaces.push(action.payload);
+      state.nearbyPlaces = action.payload;
+    },
+    addPositions: (state, action) => {
+      state.positions = action.payload;
+    },
+    addRadius: (state, action) => {
+      state.radius = action.payload;
+    },
+    addActive: (state, action) => {
+      state.active = action.payload;
     },
   },
 });
 
-export const { addPlace } = mapSlice.actions;
+export const { addPlace, addPositions, addRadius, addActive } =
+  mapSlice.actions;
 export default mapSlice.reducer;

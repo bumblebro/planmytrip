@@ -5,12 +5,15 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from "@reach/combobox";
+import { useDispatch } from "react-redux";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import { addActive } from "../features/mapSlice";
 
-const PlacesAutocomplete = ({ setSelected, setShowMap, placeholder }) => {
+const PlacesAutocomplete = ({ setSelected, placeholder }) => {
+  const dispatch = useDispatch();
   const {
     ready,
     value,
@@ -26,8 +29,7 @@ const PlacesAutocomplete = ({ setSelected, setShowMap, placeholder }) => {
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
-
-    setShowMap(false);
+    dispatch(addActive(false));
   };
 
   return (

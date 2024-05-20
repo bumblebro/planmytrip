@@ -5,7 +5,7 @@ import svg from "/src/images/external.svg";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-function DisplayPlaces({ SetDistinctMarker, setNearbyPlaces }) {
+function DisplayPlaces({ SetDistinctMarker }) {
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
@@ -20,7 +20,7 @@ function DisplayPlaces({ SetDistinctMarker, setNearbyPlaces }) {
           Results ({nearbyPlaces.length})
         </h2>
 
-        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2 scrollbar-thin  overflow-scroll h-screen overflow-x-hidden">
+        <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}

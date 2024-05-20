@@ -1,8 +1,11 @@
 "use client";
 import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPositions } from "../features/mapSlice";
 
-function Direction({ selected1, selected2, setPositions, SetKm }) {
+function Direction({ selected1, selected2, SetKm }) {
+  const dispatch = useDispatch();
   const map = useMap();
   const routesLibrary = useMapsLibrary("routes");
   const [directionsService, setDirectionsService] = useState();
@@ -36,11 +39,12 @@ function Direction({ selected1, selected2, setPositions, SetKm }) {
         response.routes[0].legs[0].steps.forEach((step) => {
           waypoints.push(step.end_location);
         });
-        setPositions(waypoints);
+        console.log(waypoints);
+        dispatch(addPositions(waypoints));
         console.log("waypoint:", waypoints);
         SetKm(response.routes[0].legs[0].distance.value);
         console.log(response.routes[0].legs[0].distance.value);
-   
+
         // console.log(selected);
       });
 

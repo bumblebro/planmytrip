@@ -12,7 +12,13 @@ import PlacesAutocomplete from "./PlacesAutocomplete";
 import NearbyPlaces from "./NearbyPlaces";
 import DisplayPlaces from "./DisplayPlaces";
 import DisplayMap from "./DisplayMap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addActive,
+  addPlace,
+  addPositions,
+  addRadius,
+} from "../features/mapSlice";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -29,18 +35,20 @@ export default function Places() {
 }
 
 function Maps() {
+  const dispatch = useDispatch();
   const maps = useSelector((state) => {
     return state;
   });
+
+  const active = useSelector((state) => {
+    return state.active;
+  });
   const [selected1, setSelected1] = useState(null);
   const [selected2, setSelected2] = useState(null);
-  const [showMap, setShowMap] = useState(false);
   const [selRange, setSelRange] = useState(5000);
   const [selRangeinkm, setSelRangeInKm] = useState(5);
   const [range, setRange] = useState(null);
   const [location, setLocation] = useState({});
-  const [positions, setPositions] = useState([]);
-  const [nearbyPlaces, setNearbyPlaces] = useState([]);
   const [searchType, setSearchType] = useState("tourist_attraction");
   const [km, SetKm] = useState(null);
   const [distinctMarker, SetDistinctMarker] = useState(null);
@@ -70,31 +78,29 @@ function Maps() {
 
   return (
     <div>
-      <div className="flex flex-col h-svh lg:flex-row gap-4 mx-6">
-        <div className="flex flex-col  items-center gap-4">
+      <div className="flex flex-col gap-4 mx-6 h-svh lg:flex-row">
+        <div className="flex flex-col items-center gap-4">
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
             action="#"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              setShowMap(true);
+              dispatch(addPlace([]));
+              dispatch(addPositions([]));
+
               setRange(selRange);
-              setShowMap(true);
               console.log(selected1);
               SetDistinctMarker(null);
-              setNearbyPlaces([]);
-              console.log(maps);
+              dispatch(addActive(true));
             }}
           >
             {" "}
             <PlacesAutocomplete
               setSelected={setSelected1}
-              setShowMap={setShowMap}
               placeholder={"Choose starting point"}
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
-              setShowMap={setShowMap}
               placeholder={"Choose destination"}
             />
             <div className="flex flex-row">
@@ -106,7 +112,7 @@ function Maps() {
                   let val = e.target.value;
                   setSearchType(val);
                   setRange(selRange);
-                  setShowMap(false);
+                  dispatch(addActive(false));
                 }}
                 name="Types"
                 id=""
@@ -147,8 +153,9 @@ function Maps() {
                   console.log(e.target.value);
                   setSelRangeInKm(e.target.value);
                   let val = selRangeinkm * 1000;
+                  dispatch(addRadius(val));
                   setSelRange(val);
-                  setShowMap(false);
+                  dispatch(addActive(false));
                 }}
               />
               <span>{selRangeinkm} Km</span>
@@ -176,14 +183,11 @@ function Maps() {
           )}
         </div>
 
-        {showMap ? (
+        {active ? (
           <DisplayMap
-            nearbyPlaces={nearbyPlaces}
             selected1={selected1}
             selected2={selected2}
-            setPositions={setPositions}
             SetKm={SetKm}
-            setNearbyPlaces={setNearbyPlaces}
             distinctMarker={distinctMarker}
           />
         ) : (
@@ -206,18 +210,8 @@ function Maps() {
 
       {km < 50000 && (
         <div>
-          <NearbyPlaces
-            waypoints={positions}
-            radius={range}
-            searchType={searchType}
-          />
-          {showMap && (
-            <DisplayPlaces
-              nearbyPlaces={nearbyPlaces}
-              SetDistinctMarker={SetDistinctMarker}
-              setNearbyPlaces={setNearbyPlaces}
-            />
-          )}{" "}
+          {active && <NearbyPlaces searchType={searchType} />}
+          {active && <DisplayPlaces SetDistinctMarker={SetDistinctMarker} />}
         </div>
       )}
     </div>
