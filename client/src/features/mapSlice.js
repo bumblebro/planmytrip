@@ -7,7 +7,7 @@ const initialState = {
   selected1: null,
   selected2: null,
   positions: [],
-  radius: null,
+  radius: 5000,
   active: false,
 };
 

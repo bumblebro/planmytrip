@@ -36,8 +36,11 @@ export default function Places() {
 
 function Maps() {
   const dispatch = useDispatch();
-  const maps = useSelector((state) => {
-    return state;
+  // const maps = useSelector((state) => {
+  //   return state;
+  // });
+  const radius = useSelector((state) => {
+    return state.radius;
   });
 
   const active = useSelector((state) => {
@@ -45,10 +48,11 @@ function Maps() {
   });
   const [selected1, setSelected1] = useState(null);
   const [selected2, setSelected2] = useState(null);
-  const [selRange, setSelRange] = useState(5000);
+  // const [showMap, setShowMap] = useState(false);
+  // const [selRange, setSelRange] = useState(5000);
   const [selRangeinkm, setSelRangeInKm] = useState(5);
-  const [range, setRange] = useState(null);
-  const [location, setLocation] = useState({});
+  // const [range, setRange] = useState(null);
+  // const [location, setLocation] = useState({});
   const [searchType, setSearchType] = useState("tourist_attraction");
   const [km, SetKm] = useState(null);
   const [distinctMarker, SetDistinctMarker] = useState(null);
@@ -88,7 +92,7 @@ function Maps() {
               dispatch(addPlace([]));
               dispatch(addPositions([]));
 
-              setRange(selRange);
+              // setRange(selRange);
               console.log(selected1);
               SetDistinctMarker(null);
               dispatch(addActive(true));
@@ -97,10 +101,12 @@ function Maps() {
             {" "}
             <PlacesAutocomplete
               setSelected={setSelected1}
+              // setShowMap={setShowMap}
               placeholder={"Choose starting point"}
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
+              // setShowMap={setShowMap}
               placeholder={"Choose destination"}
             />
             <div className="flex flex-row">
@@ -111,7 +117,7 @@ function Maps() {
                 onClick={(e) => {
                   let val = e.target.value;
                   setSearchType(val);
-                  setRange(selRange);
+                  // setRange(selRange);
                   dispatch(addActive(false));
                 }}
                 name="Types"
@@ -147,18 +153,18 @@ function Maps() {
                 type="range"
                 min={0}
                 max={25}
-                step={5}
-                value={selRangeinkm}
+                step={1}
+                value={radius / 1000}
                 onChange={(e) => {
                   console.log(e.target.value);
-                  setSelRangeInKm(e.target.value);
-                  let val = selRangeinkm * 1000;
+                  // setSelRangeInKm(e.target.value);
+                  let val = e.target.value * 1000;
                   dispatch(addRadius(val));
-                  setSelRange(val);
+                  // setSelRange(val);
                   dispatch(addActive(false));
                 }}
               />
-              <span>{selRangeinkm} Km</span>
+              <span>{radius / 1000} Km</span>
             </div>
             <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-white hover:border-transparent">
               Submit
