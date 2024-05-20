@@ -73,27 +73,10 @@ const NearbyPlaces = ({ searchType }) => {
   }, [nearbyPlaces]);
 
   useEffect(() => {
-    waypoints.map((waypoint) => loadPlacesForWaypoint(waypoint));
+    {
+      waypoints && waypoints.map((waypoint) => loadPlacesForWaypoint(waypoint));
+    }
   }, [waypoints, radius, isLoaded]); // Dependencies include all waypoints
-  useEffect(() => {
-    dispatch(addPlace([]));
-    dispatch(addPositions([]));
-  }, [radius]);
-
-  return (
-    <></>
-    // <div>
-    //   <h2>Tourist Places Nearby:</h2>
-    //   <ul>
-    //     {touristPlaces.map((place) => (
-    //       <li key={place.lat}>
-    //         {/* Include waypoint information in the display */}
-    //         {place.place} ({place.waypoint.lat}, {place.waypoint.lng})
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
-  );
 };
 
 export default NearbyPlaces;
