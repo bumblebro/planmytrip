@@ -6,31 +6,32 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function DisplayPlaces({ SetDistinctMarker }) {
-  const [uniquePlaces, setUniquePlaces] = useState([]);
+  // const [uniquePlaces, setUniquePlaces] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const ScrollLink = Scroll.Link;
-
-  useEffect(() => {
-    const uniquelist = [
-      ...new Set(nearbyPlaces.map((obj) => JSON.stringify(obj))),
-    ];
-    setUniquePlaces(uniquelist);
-  }, [nearbyPlaces]);
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
   });
 
+  // useEffect(() => {
+  //   const uniquelist = nearbyPlaces.filter(
+  //     (obj, index, self) =>
+  //       index === self.findIndex((t) => t.placeid === obj.placeid)
+  //   );
+  //   setUniquePlaces(uniquelist);
+  // }, [nearbyPlaces]);
+
   return (
     <>
       <div className="mx-4 my-8 ">
         <h2 className="pb-2 pl-8 text-xl text-slate-800">
-          Results ({uniquePlaces.length})
+          Results ({nearbyPlaces.length})
         </h2>
 
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin">
-          {uniquePlaces.map((place, index) => (
+          {nearbyPlaces.map((place, index) => (
             <div
               key={index}
               className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4"

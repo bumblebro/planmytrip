@@ -60,7 +60,11 @@ const NearbyPlaces = ({ searchType }) => {
   };
 
   useEffect(() => {
-    dispatch(addPlace(nearbyPlaces));
+    const uniquelist = nearbyPlaces.filter(
+      (obj, index, self) =>
+        index === self.findIndex((t) => t.placeid === obj.placeid)
+    );
+    dispatch(addPlace(uniquelist));
   }, [nearbyPlaces]);
 
   useEffect(() => {
