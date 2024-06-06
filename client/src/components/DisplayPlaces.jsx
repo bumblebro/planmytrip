@@ -2,26 +2,35 @@ import StarRatings from "react-star-ratings";
 import ImageRender from "./ImageRender";
 import Scroll from "react-scroll";
 import svg from "/src/images/external.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function DisplayPlaces({ SetDistinctMarker }) {
+  const [uniquePlaces, setUniquePlaces] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const ScrollLink = Scroll.Link;
+
+  useEffect(() => {
+    const uniquelist = [
+      ...new Set(nearbyPlaces.map((obj) => JSON.stringify(obj))),
+    ];
+    setUniquePlaces(uniquelist);
+  }, [nearbyPlaces]);
+
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
   });
-  const [isOpen, setIsOpen] = useState(false);
 
-  const ScrollLink = Scroll.Link;
   return (
     <>
       <div className="mx-4 my-8 ">
         <h2 className="pb-2 pl-8 text-xl text-slate-800">
-          Results ({nearbyPlaces.length})
+          Results ({uniquePlaces.length})
         </h2>
 
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin">
-          {nearbyPlaces.map((place, index) => (
+          {uniquePlaces.map((place, index) => (
             <div
               key={index}
               className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4"
@@ -127,7 +136,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                         const newPlaces = nearbyPlaces.filter(
                           (pla) => pla !== matchingPlace
                         );
-                        setNearbyPlaces(newPlaces);
+                        // setNearbyPlaces(newPlaces);
                       }
                     }}
                   >

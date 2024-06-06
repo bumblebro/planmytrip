@@ -17,8 +17,8 @@ const NearbyPlaces = ({ searchType }) => {
     return state.radius;
   });
 
-  const [touristPlaces, setTouristPlaces] = useState([]);
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
+  const [result, SetResult] = useState([]);
   const apiKey = import.meta.env.VITE_API_KEY; // Replace with your Google Maps API key
 
   const { isLoaded } = useLoadScript({
@@ -40,30 +40,21 @@ const NearbyPlaces = ({ searchType }) => {
 
     service.nearbySearch(request, async (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        // Update touristPlaces with results for this waypoint
-        setTouristPlaces((prevPlaces) => [
-          ...prevPlaces,
-          ...results.map((place) => ({
-            place: place.name,
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-            waypoint, // Add waypoint information for clarity
-          })),
-        ]);
         setNearbyPlaces((prevPlaces) => [
           ...prevPlaces,
-          ...results.map((place) => ({
-            data: place,
-            place: place.name,
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-            waypoint, // Add waypoint information for clarity
-            photo: place.photos,
-            placeid: place.place_id,
-          })),
+          ...results.map((place) => {
+            return {
+              data: place,
+              place: place.name,
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
+              waypoint, // Add waypoint information for clarity
+              photo: place.photos,
+              placeid: place.place_id,
+            };
+          }),
         ]);
         console.log(nearbyPlaces);
-        console.log(touristPlaces);
       }
     });
   };
