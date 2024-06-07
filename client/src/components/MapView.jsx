@@ -19,6 +19,7 @@ function MapView() {
           zoom={9}
           fullscreenControl={false}
           zoomControl={true}
+          mapTypeId="hybrid"
         >
           \{" "}
         </Map>

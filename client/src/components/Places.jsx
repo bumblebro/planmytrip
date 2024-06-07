@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import { useLoadScript } from "@react-google-maps/api";
+import ContentLoader, { Code } from "react-content-loader";
 
 import "@reach/combobox/styles.css";
 import Direction from "./Direction";
@@ -26,7 +27,12 @@ export default function Places() {
     libraries: ["places"],
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded)
+    return (
+      <div className="w-9/12 mx-auto mt-10">
+        <Code />
+      </div>
+    );
   return (
     <>
       <Maps />
@@ -112,7 +118,7 @@ function Maps() {
             <div className="flex flex-row">
               {" "}
               <select
-                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 "
+                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#374151] text-[#8690a2]"
                 placeholder="Type"
                 onClick={(e) => {
                   let val = e.target.value;
@@ -147,9 +153,9 @@ function Maps() {
               }}
             />{" "}
           </div> */}{" "}
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2 text-[#3c573c] font-medium">
               <input
-                className="w-48"
+                className="w-50"
                 type="range"
                 min={0}
                 max={25}
@@ -163,10 +169,36 @@ function Maps() {
                   // setSelRange(val);
                   dispatch(addActive(false));
                 }}
-              />
-              <span>{radius / 1000} Km</span>
+              />{" "}
+              <div className="flex gap-1">
+                <h1>{radius / 1000}</h1>
+                <h1>Km</h1>
+              </div>
+            </div> */}
+            <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
+              <input
+                id="default-range"
+                type="range"
+                min={0}
+                max={25}
+                step={5}
+                value={radius / 1000}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  // setSelRangeInKm(e.target.value);
+                  let val = e.target.value * 1000;
+                  dispatch(addRadius(val));
+                  // setSelRange(val);
+                  dispatch(addActive(false));
+                }}
+                className="h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+              />{" "}
+              <div className="flex gap-1">
+                <h1>{radius / 1000}</h1>
+                <h1>Km</h1>
+              </div>
             </div>
-            <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-white hover:border-transparent">
+            <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-[#fefce1] hover:border-transparent">
               Submit
             </button>{" "}
             {/* {km > 50000 && (
@@ -179,7 +211,7 @@ function Maps() {
           </form>
           {distinctMarker && (
             <button
-              className="w-48 rounded-md bg-[#3b82f6] text-white"
+              className="w-48 rounded-md bg-[#3b82f6] text-[#fefce1]"
               onClick={() => {
                 SetDistinctMarker(null);
               }}
@@ -208,7 +240,11 @@ function Maps() {
               ></Map>
             </APIProvider> */}
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
-              <Map zoom={10} center={{ lat: 12.5580735, lng: 75.3907667 }} />{" "}
+              <Map
+                zoom={10}
+                center={{ lat: 12.5580735, lng: 75.3907667 }}
+                mapTypeId={"hybrid"}
+              />{" "}
             </APIProvider>
           </div>
         )}

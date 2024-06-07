@@ -38,15 +38,19 @@ const PlacesAutocomplete = ({ setSelected, placeholder }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
-        className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 "
+        className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 bg-[#374151] text-[#fefce1]"
         placeholder={placeholder}
       />
 
-      <ComboboxPopover className="border border-solid rounded-md">
-        <ComboboxList>
+      <ComboboxPopover className="border border-solid rounded-md bg-[#374151] ">
+        <ComboboxList className="bg-[#374151] rounded-md text-[#fefce1] ">
           {status === "OK" &&
             data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
+              <ComboboxOption
+                key={place_id}
+                value={description}
+                className="hover:bg-slate-900"
+              />
             ))}
         </ComboboxList>
       </ComboboxPopover>

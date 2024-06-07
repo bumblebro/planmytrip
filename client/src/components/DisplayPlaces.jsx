@@ -15,18 +15,10 @@ function DisplayPlaces({ SetDistinctMarker }) {
     return state.nearbyPlaces;
   });
 
-  // useEffect(() => {
-  //   const uniquelist = nearbyPlaces.filter(
-  //     (obj, index, self) =>
-  //       index === self.findIndex((t) => t.placeid === obj.placeid)
-  //   );
-  //   setUniquePlaces(uniquelist);
-  // }, [nearbyPlaces]);
-
   return (
     <>
       <div className="mx-4 my-8 ">
-        <h2 className="pb-2 pl-8 text-xl text-slate-800">
+        <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
 
@@ -34,10 +26,12 @@ function DisplayPlaces({ SetDistinctMarker }) {
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4"
+              className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4 rounded-md"
             >
               <div className="flex flex-col justify-center">
-                <li className="text-xl font-medium">{place.place}</li>
+                <li className="text-xl font-medium text-[#fefce1]">
+                  {place.place}
+                </li>
                 {place.data.rating ? (
                   <div className="flex items-center justify-start gap-1">
                     <h1 className="text-sm text-slate-500">
@@ -84,7 +78,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     duration={500}
                   >
                     <button
-                      className=" rounded-md bg-[#1a73e8] text-white px-2 py-1 text-sm"
+                      className=" rounded-md bg-[#1a73e8] text-[#fefce1] px-2 py-1 text-sm"
                       onClick={() => {
                         console.log(place.data.geometry.location.lat());
                         console.log(place.data.place_id);
@@ -101,7 +95,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   <a
                     href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                     target="_blank"
-                    className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-white rounded-md "
+                    className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-[#fefce1] rounded-md "
                   >
                     <button
                       onClick={() => {
@@ -114,7 +108,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <img className="w-4 text-white" src={svg} alt="" />
                   </a>{" "}
                   <button
-                    className="flex gap-2 bg-[#e34133] px-2 py-1 text-sm text-white rounded-md "
+                    className="flex gap-2 bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md "
                     onClick={async () => {
                       // console.log(place.photo[0].getUrl());
                       console.log(place.data.place_id);

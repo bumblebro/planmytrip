@@ -6,12 +6,7 @@ import img1 from "/src/images/location.png";
 import { useSelector } from "react-redux";
 // import img1 from "/src/images/placeholder.png";
 
-function DisplayMap({
-  selected1,
-  selected2,
-  SetKm,
-  distinctMarker,
-}) {
+function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   const nearbyPlaces = useSelector((state) => {
     return state.nearbyPlaces;
   });
@@ -24,7 +19,7 @@ function DisplayMap({
           // zoom={20}
           // {{distinctMarker& zoom={30}}}
           position={selected1}
-          // mapTypeId="hybrid"
+          mapTypeId="hybrid"
           // mapId="8e0a97af9386fef"
         >
           <Direction
