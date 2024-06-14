@@ -98,17 +98,13 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                       target="_blank"
                       className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
+                      onClick={() => {
+                        SetPlaceName(place.place);
+                        SetLocation(place.data.vicinity);
+                        setIsOpen(true);
+                      }}
                     >
-                      <button
-                        onClick={() => {
-                          SetPlaceName(place.place);
-                          SetLocation(place.data.vicinity);
-                          setIsOpen(true);
-                        }}
-                        className=""
-                      >
-                        AI Description
-                      </button>
+                      <button className="">AI Description</button>
                       <img className="w-4 text-white" src={svg} alt="" />
                     </a>{" "}
                     <button
