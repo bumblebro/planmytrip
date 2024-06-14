@@ -30,11 +30,11 @@ function AiWindow({ setIsOpen, placename, location }) {
           <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between px-5 pt-5 border-b border-solid rounded-t border-blueGray-200">
-              <h3 className="text-3xl font-semibold">{placename}</h3>
+              <h3 className="text-xl font-semibold lg:text-3xl">{placename}</h3>
             </div>
             <div className="relative flex-auto px-6">
               {text ? (
-                <p className="my-4 text-lg leading-relaxed text-blueGray-500">
+                <p className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
                   {text}
                 </p>
               ) : (
@@ -54,9 +54,9 @@ function AiWindow({ setIsOpen, placename, location }) {
                 </ContentLoader>
               )}
             </div>
-            <div className="flex items-center justify-end border-t border-solid rounded-b border-blueGray-200">
+            <div className="flex items-center justify-end border-t border-solid rounded-b border-blueGray-200 ">
               <button
-                className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none"
+                className="px-6 pb-5 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none lg:text-lg"
                 type="button"
                 onClick={() => setIsOpen(false)}
               >
