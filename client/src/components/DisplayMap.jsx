@@ -64,7 +64,6 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
                       data.push(places);
                     }
                   });
-                  setNearbyPlaces(data);
                   console.log(nearbyPlaces);
                 }}
               ></Marker>

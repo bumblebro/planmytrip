@@ -1,13 +1,16 @@
 import StarRatings from "react-star-ratings";
 import ImageRender from "./ImageRender";
 import Scroll from "react-scroll";
-import svg from "/src/images/external.svg";
-import { useEffect, useState } from "react";
+import svg from "/src/images/Google_Bard_logo.svg";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import AiWindow from "./AiWindow";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [placename, SetPlaceName] = useState("");
+  const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
 
   const nearbyPlaces = useSelector((state) => {
@@ -21,7 +24,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
-
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
           {nearbyPlaces.map((place, index) => (
             <div
@@ -41,7 +43,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       <StarRatings
                         rating={place.data.rating}
                         starRatedColor="#fbbc04"
-                        // changeRating={this.changeRating}
                         numberOfStars={5}
                         name="rating"
                         starDimension="15px"
@@ -94,17 +95,19 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       </button>
                     </ScrollLink>
                     <a
-                      href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
+                      // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                       target="_blank"
-                      className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-[#fefce1] w-full lg:w-auto flex-row   rounded-md justify-center "
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
                     >
                       <button
                         onClick={() => {
-                          // setIsOpen(true);
+                          SetPlaceName(place.place);
+                          SetLocation(place.data.vicinity);
+                          setIsOpen(true);
                         }}
                         className=""
                       >
-                        Open in google map
+                        AI Description
                       </button>
                       <img className="w-4 text-white" src={svg} alt="" />
                     </a>{" "}
@@ -142,30 +145,15 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </div>
             </div>
           ))}
-        </ul>
+        </ul>{" "}
+        {isOpen && (
+          <AiWindow
+            setIsOpen={setIsOpen}
+            placename={placename}
+            location={location}
+          />
+        )}
       </div>{" "}
-      {isOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <iframe
-              width="700"
-              height="400"
-              // src="https://www.google.com/embed/maps/place/?q=place_id:ChIJ1bq552rzpDsRQHLfqixs-1k"
-              src={`https://www.google.com/maps/embed/v1/search?key=${
-                import.meta.env.VITE_API_KEY
-              }&q=Eiffel+Tower,Paris+France`}
-              title="External Webpage"
-            />
-            <button
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

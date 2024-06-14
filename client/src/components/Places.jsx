@@ -229,21 +229,13 @@ function Maps() {
             distinctMarker={distinctMarker}
           />
         ) : (
-          <div className="w-full">
-            {/* <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
-              <Map
-                fullscreenControl={false}
-                zoomControl={true}
-                position={{ lat: 12.5580735, lng: 75.3907667 }}
-                // mapTypeId="hybrid"
-                // mapId="8e0a97af9386fef"
-              ></Map>
-            </APIProvider> */}
+          <div className="w-full ">
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
                 zoom={10}
                 center={{ lat: 12.5580735, lng: 75.3907667 }}
                 mapTypeId={"hybrid"}
+                fullscreenControl={false}
               />{" "}
             </APIProvider>
           </div>
