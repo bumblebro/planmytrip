@@ -17,18 +17,18 @@ function DisplayPlaces({ SetDistinctMarker }) {
 
   return (
     <>
-      <div className="mx-4 my-8 ">
+      <div className="my-8 -4">
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
 
-        <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin">
+        <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex flex-row items-start justify-between pb-4 border-solid border-1black border-[1px] px-8 py-4 rounded-md"
+              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-8 py-4 rounded-md flex-col gap-2 w-full lg:gap-0"
             >
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#fefce1]">
                   {place.place}
                 </li>
@@ -69,78 +69,77 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <span className="text-[#dd3d3d]">Temporarily closed</span>
                   )}
                 </h2>
-                <div className="flex gap-4">
-                  {" "}
-                  <ScrollLink
-                    to="footer"
-                    offset={-50}
-                    smooth={true}
-                    duration={500}
-                  >
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row ">
+                    {" "}
+                    <ScrollLink
+                      to="footer"
+                      offset={-50}
+                      smooth={true}
+                      duration={500}
+                    >
+                      <button
+                        className=" rounded-md bg-[#1a73e8] text-[#fefce1] px-2 py-1 text-sm w-full"
+                        onClick={() => {
+                          console.log(place.data.geometry.location.lat());
+                          console.log(place.data.place_id);
+                          SetDistinctMarker({
+                            lat: place.data.geometry.location.lat(),
+                            lng: place.data.geometry.location.lng(),
+                            place: place.place,
+                          });
+                        }}
+                      >
+                        Show in above map
+                      </button>
+                    </ScrollLink>
+                    <a
+                      href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
+                      target="_blank"
+                      className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-[#fefce1] w-full lg:w-auto flex-row   rounded-md justify-center "
+                    >
+                      <button
+                        onClick={() => {
+                          // setIsOpen(true);
+                        }}
+                        className=""
+                      >
+                        Open in google map
+                      </button>
+                      <img className="w-4 text-white" src={svg} alt="" />
+                    </a>{" "}
                     <button
-                      className=" rounded-md bg-[#1a73e8] text-[#fefce1] px-2 py-1 text-sm"
-                      onClick={() => {
-                        console.log(place.data.geometry.location.lat());
+                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md w-full lg:w-auto "
+                      onClick={async () => {
+                        // console.log(place.photo[0].getUrl());
                         console.log(place.data.place_id);
-                        SetDistinctMarker({
-                          lat: place.data.geometry.location.lat(),
-                          lng: place.data.geometry.location.lng(),
-                          place: place.place,
-                        });
-                      }}
-                    >
-                      Show in above map
-                    </button>
-                  </ScrollLink>
-                  <a
-                    href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
-                    target="_blank"
-                    className="flex gap-2 bg-[#1a73e8] px-2 py-1 text-sm text-[#fefce1] rounded-md "
-                  >
-                    <button
-                      onClick={() => {
-                        // setIsOpen(true);
-                      }}
-                      className=""
-                    >
-                      Open in google map
-                    </button>
-                    <img className="w-4 text-white" src={svg} alt="" />
-                  </a>{" "}
-                  <button
-                    className="flex gap-2 bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md "
-                    onClick={async () => {
-                      // console.log(place.photo[0].getUrl());
-                      console.log(place.data.place_id);
-                      console.log(nearbyPlaces);
-                      // let data = [];
-                      // await nearbyPlaces.map((places) => {
-                      //   // console.log(place.place !== places.place);
-                      //   if (place.data.place_id !== places.placeid) {
-                      //     data.push(places);
-                      //   } else null;
-                      // });
-                      // const newplaces = await nearbyPlaces.filter((pla) => {
-                      //   return place.data.place_id !== pla.placeid;
-                      // });
-                      const matchingPlace = await nearbyPlaces.find(
-                        (pla) => pla.placeid === place.data.place_id
-                      );
+                        console.log(nearbyPlaces);
 
-                      if (matchingPlace) {
-                        const newPlaces = nearbyPlaces.filter(
-                          (pla) => pla !== matchingPlace
+                        const matchingPlace = await nearbyPlaces.find(
+                          (pla) => pla.placeid === place.data.place_id
                         );
-                        // setNearbyPlaces(newPlaces);
-                      }
-                    }}
-                  >
-                    Remove
-                  </button>
+
+                        if (matchingPlace) {
+                          const newPlaces = nearbyPlaces.filter(
+                            (pla) => pla !== matchingPlace
+                          );
+                          // setNearbyPlaces(newPlaces);
+                        }
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>{" "}
+                  <div className=" lg:hidden">
+                    {" "}
+                    <ImageRender place={place} />
+                  </div>
                 </div>
               </div>
-
-              <ImageRender place={place} />
+              <div className="hidden lg:flex">
+                {" "}
+                <ImageRender place={place} />
+              </div>
             </div>
           ))}
         </ul>

@@ -87,8 +87,8 @@ function Maps() {
   // }, []);
 
   return (
-    <div>
-      <div className="flex flex-col gap-4 mx-6 h-svh lg:flex-row">
+    <div className="flex flex-col">
+      <div className="flex flex-col gap-4 mx-6 lg:h-[480px]  lg:flex-row">
         <div className="flex flex-col items-center gap-4">
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"

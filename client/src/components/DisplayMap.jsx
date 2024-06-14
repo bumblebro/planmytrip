@@ -11,7 +11,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
     return state.nearbyPlaces;
   });
   return (
-    <div className="w-full" id="footer">
+    <div className="w-full " id="footer">
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
         <Map
           fullscreenControl={false}
