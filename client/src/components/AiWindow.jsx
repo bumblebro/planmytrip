@@ -56,7 +56,7 @@ function AiWindow({ setIsOpen, placename, location }) {
             </div>
             <div className="flex items-center justify-end border-t border-solid rounded-b border-blueGray-200 ">
               <button
-                className="px-6 pb-5 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none lg:text-lg"
+                className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none lg:text-lg"
                 type="button"
                 onClick={() => setIsOpen(false)}
               >
