@@ -3,8 +3,9 @@ import ImageRender from "./ImageRender";
 import Scroll from "react-scroll";
 import svg from "/src/images/Google_Bard_logo.svg";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AiWindow from "./AiWindow";
+import { addList } from "../features/mapSlice";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -12,10 +13,15 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
+  const dispatch = useDispatch();
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
+  });
+
+  const selectedPlaces = useSelector((state) => {
+    return state.selectedList;
   });
 
   return (
@@ -24,11 +30,20 @@ function DisplayPlaces({ SetDistinctMarker }) {
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
+        <div>
+          {selectedPlaces.map((item, index) => {
+            return (
+              <h1 className="text-white" key={index}>
+                {item.placeName}
+              </h1>
+            );
+          })}
+        </div>
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-8 py-4 rounded-md flex-col gap-2 w-full lg:gap-0"
+              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-8 py-4 rounded-md flex-col gap-2 w-full lg:gap-0 border-slate-800"
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#fefce1]">
@@ -127,6 +142,19 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       }}
                     >
                       Remove
+                    </button>
+                    <button
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
+                      onClick={() => {
+                        dispatch(
+                          addList({
+                            placeId: place.placeid,
+                            placeName: place.place,
+                          })
+                        );
+                      }}
+                    >
+                      Add Place
                     </button>
                   </div>{" "}
                   <div className=" lg:hidden">

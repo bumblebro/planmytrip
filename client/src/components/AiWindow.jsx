@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 
-const genAI = new GoogleGenerativeAI("AIzaSyBNJKA4LlMqZ0MIwf031-abeJqWL3ELjX8");
+const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function AiWindow({ setIsOpen, placename, location }) {
   const [text, setText] = useState(null);

@@ -9,6 +9,7 @@ const initialState = {
   positions: [],
   radius: 5000,
   active: false,
+  selectedList: [],
 };
 
 export const mapSlice = createSlice({
@@ -27,9 +28,12 @@ export const mapSlice = createSlice({
     addActive: (state, action) => {
       state.active = action.payload;
     },
+    addList: (state, action) => {
+      state.selectedList.push(action.payload);
+    },
   },
 });
 
-export const { addPlace, addPositions, addRadius, addActive } =
+export const { addPlace, addPositions, addRadius, addActive, addList } =
   mapSlice.actions;
 export default mapSlice.reducer;
