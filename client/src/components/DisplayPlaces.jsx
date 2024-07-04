@@ -14,7 +14,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
-
+  
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;

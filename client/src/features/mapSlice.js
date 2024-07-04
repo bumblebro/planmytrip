@@ -29,7 +29,16 @@ export const mapSlice = createSlice({
       state.active = action.payload;
     },
     addList: (state, action) => {
-      state.selectedList.push(action.payload);
+      let run = false;
+      const data = action.payload;
+      state.selectedList.map((item) => {
+      if (item.placeId === data.placeId) {
+          run = true;
+        }
+      });
+      if (run == true) {
+        state.selectedList.push(action.payload);
+      }
     },
   },
 });
