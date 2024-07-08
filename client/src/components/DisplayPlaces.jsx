@@ -56,14 +56,14 @@ function DisplayPlaces({ SetDistinctMarker }) {
             </div>
           </>
         )}{" "}
-        <h2 className="pb-2 pl-10 text-xl text-[#fefce1]">
+        <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-2  lg:px-8 py-4 rounded-md flex-col gap-2 lg:w-full w-10/12 lg:gap-0 border-slate-800 mx-auto"
+              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-2  lg:px-8 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 border-slate-800 mx-auto"
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#fefce1]">
