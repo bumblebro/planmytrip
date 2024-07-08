@@ -5,7 +5,7 @@ import svg from "/src/images/Google_Bard_logo.svg";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AiWindow from "./AiWindow";
-import { addList } from "../features/mapSlice";
+import { addList, addnewList } from "../features/mapSlice";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -14,7 +14,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
-  
+
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
@@ -27,18 +27,38 @@ function DisplayPlaces({ SetDistinctMarker }) {
   return (
     <>
       <div className="my-8 -4">
+        {selectedPlaces.length > 0 && (
+          <>
+            <h1 className="pb-2 flex justify-center text-xl text-[#fefce1]">
+              Selected Places
+            </h1>
+            <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1] w-10/12 lg:w-6/12 mx-auto gap-2 py-4">
+              {selectedPlaces.map((item, index) => {
+                return (
+                  <div key={index} className="flex justify-between">
+                    <h1 className="text-white" key={index}>
+                      {index + 1}) {item.placeName}
+                    </h1>
+                    <button
+                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md h-6 lg:w-auto "
+                      onClick={() => {
+                        let filtered = selectedPlaces.filter((items) => {
+                          return items.placeId !== item.placeId;
+                        });
+                        dispatch(addnewList(filtered));
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}{" "}
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
-        <div>
-          {selectedPlaces.map((item, index) => {
-            return (
-              <h1 className="text-white" key={index}>
-                {item.placeName}
-              </h1>
-            );
-          })}
-        </div>
         <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
           {nearbyPlaces.map((place, index) => (
             <div
@@ -146,12 +166,22 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <button
                       className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
                       onClick={() => {
-                        dispatch(
-                          addList({
-                            placeId: place.placeid,
-                            placeName: place.place,
-                          })
-                        );
+                        let con = false;
+                        selectedPlaces.map((item) => {
+                          if (item.placeId == place.placeid) {
+                            con = true;
+                          }
+                        });
+                        if (con == false) {
+                          dispatch(
+                            addList({
+                              placeId: place.placeid,
+                              placeName: place.place,
+                            })
+                          );
+                        } else {
+                          alert("Already Selected!");
+                        }
                       }}
                     >
                       Add Place

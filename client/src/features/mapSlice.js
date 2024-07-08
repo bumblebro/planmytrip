@@ -29,20 +29,20 @@ export const mapSlice = createSlice({
       state.active = action.payload;
     },
     addList: (state, action) => {
-      let run = false;
-      const data = action.payload;
-      state.selectedList.map((item) => {
-      if (item.placeId === data.placeId) {
-          run = true;
-        }
-      });
-      if (run == true) {
-        state.selectedList.push(action.payload);
-      }
+      state.selectedList.push(action.payload);
+    },
+    addnewList: (state, action) => {
+      state.selectedList = action.payload;
     },
   },
 });
 
-export const { addPlace, addPositions, addRadius, addActive, addList } =
-  mapSlice.actions;
+export const {
+  addPlace,
+  addPositions,
+  addRadius,
+  addActive,
+  addList,
+  addnewList,
+} = mapSlice.actions;
 export default mapSlice.reducer;
