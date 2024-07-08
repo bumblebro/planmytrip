@@ -63,7 +63,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-2 mx-6 lg:px-8 py-4 rounded-md flex-col gap-2 w-full lg:gap-0 border-slate-800"
+              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-2  lg:px-8 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 border-slate-800 mx-auto"
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#fefce1]">
