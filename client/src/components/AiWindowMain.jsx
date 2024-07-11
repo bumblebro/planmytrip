@@ -5,7 +5,7 @@ import ContentLoader, { Code } from "react-content-loader";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
-function AiWindow({ setIsOpen, placename, location,  }) {
+function AiWindowMain({ setIsOpenMain, selectedPlaces }) {
   const [text, setText] = useState(null);
   // const [showModal, setShowModal] = useState(false);
 
@@ -13,14 +13,19 @@ function AiWindow({ setIsOpen, placename, location,  }) {
     async function run() {
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `Place ${placename} located in ${location} in less than 200 words`;
+      console.log(selectedPlaces);
+      const prompt = `Which is the good places to visit amoung this ? : ${selectedPlaces.map(
+        (item) => {
+          return `${item.placeName}` + ",";
+        }
+      )} in less than 200 words and dont send markup language as response`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
       setText(data);
     }
     run();
-  }, [placename]);
+  }, [selectedPlaces]);
 
   return (
     <>
@@ -30,7 +35,7 @@ function AiWindow({ setIsOpen, placename, location,  }) {
           <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between px-5 pt-5 border-b border-solid rounded-t border-blueGray-200">
-              <h3 className="text-xl font-semibold lg:text-3xl">{placename}</h3>
+              <h3 className="text-xl font-semibold lg:text-3xl">The Places to Visit among the selected</h3>
             </div>
             <div className="relative flex-auto px-6">
               {text ? (
@@ -58,7 +63,7 @@ function AiWindow({ setIsOpen, placename, location,  }) {
               <button
                 className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none lg:text-lg"
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsOpenMain(false)}
               >
                 Close
               </button>
@@ -71,4 +76,4 @@ function AiWindow({ setIsOpen, placename, location,  }) {
   );
 }
 
-export default AiWindow;
+export default AiWindowMain;

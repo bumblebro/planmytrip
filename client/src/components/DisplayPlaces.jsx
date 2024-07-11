@@ -7,20 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import AiWindow from "./AiWindow";
 import { addList, addnewList } from "../features/mapSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import AiWindowForPlace from "./AiWindowForPlace";
+import AiWindowMain from "./AiWindowMain";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMain, setIsOpenMain] = useState(false);
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
-
-  const [text, setText] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -30,24 +28,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const selectedPlaces = useSelector((state) => {
     return state.selectedList;
   });
-
-  const aiInfo = () => {
-    const run = () => {
-      async () => {
-        setShowModal(false);
-
-        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const prompt = `Place ${placename} located in ${location} in less than 200 words`;
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const data = response.text();
-        setText(data);
-        setShowModal(true);
-      };
-    };
-    run();
-  };
 
   return (
     <>
@@ -80,12 +60,17 @@ function DisplayPlaces({ SetDistinctMarker }) {
               })}
             </div>
 
-            {showModal ? (
-              <AiWindowForPlace text={text} setShowModal={setShowModal} />
+            {isOpenMain ? (
+              <AiWindowMain
+                setIsOpenMain={setIsOpenMain}
+                selectedPlaces={selectedPlaces}
+              />
             ) : (
               <button
                 className=" flex justify-center text-xl text-[#fefce1] "
-                onClick={aiInfo}
+                onClick={() => {
+                  setIsOpenMain(true);
+                }}
               >
                 Suggest me the good places
               </button>
