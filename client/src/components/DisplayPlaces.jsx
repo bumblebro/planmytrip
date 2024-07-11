@@ -2,10 +2,14 @@ import StarRatings from "react-star-ratings";
 import ImageRender from "./ImageRender";
 import Scroll from "react-scroll";
 import svg from "/src/images/Google_Bard_logo.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AiWindow from "./AiWindow";
 import { addList, addnewList } from "../features/mapSlice";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import AiWindowForPlace from "./AiWindowForPlace";
+
+const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -15,6 +19,9 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
 
+  const [text, setText] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
     return state.nearbyPlaces;
@@ -23,6 +30,24 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const selectedPlaces = useSelector((state) => {
     return state.selectedList;
   });
+
+  const aiInfo = () => {
+    const run = () => {
+      async () => {
+        setShowModal(false);
+
+        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Place ${placename} located in ${location} in less than 200 words`;
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const data = response.text();
+        setText(data);
+        setShowModal(true);
+      };
+    };
+    run();
+  };
 
   return (
     <>
@@ -54,6 +79,21 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 );
               })}
             </div>
+
+            {showModal ? (
+              <AiWindowForPlace text={text} setShowModal={setShowModal} />
+            ) : (
+              <button
+                className=" flex justify-center text-xl text-[#fefce1] "
+                onClick={aiInfo}
+              >
+                Suggest me the good places
+              </button>
+            )}
+
+            {selectedPlaces.map((item) => {
+              <h1>{item.location}</h1>;
+            })}
           </>
         )}{" "}
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
@@ -142,7 +182,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       <button className="">AI Description</button>
                       <img className="w-4 text-white" src={svg} alt="" />
                     </a>{" "}
-                    <button
+                    {/* <button
                       className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md w-full lg:w-auto "
                       onClick={async () => {
                         // console.log(place.photo[0].getUrl());
@@ -162,7 +202,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       }}
                     >
                       Remove
-                    </button>
+                    </button> */}
                     <button
                       className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
                       onClick={() => {
@@ -177,6 +217,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                             addList({
                               placeId: place.placeid,
                               placeName: place.place,
+                              location: place.data.vicinity,
                             })
                           );
                         } else {
