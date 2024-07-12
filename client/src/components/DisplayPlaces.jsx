@@ -9,8 +9,6 @@ import { addList, addnewList } from "../features/mapSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
-
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -31,13 +29,13 @@ function DisplayPlaces({ SetDistinctMarker }) {
 
   return (
     <>
-      <div className="my-8 -4">
+      <div className="w-full my-8">
         {selectedPlaces.length > 0 && (
-          <>
-            <h1 className="pb-2 flex justify-center text-xl text-[#fefce1]">
+          <div className="w-11/12 px-4 py-4 mx-auto my-10 border-2 border-white border-solid lg:w-6/12 rounded-xl">
+            <h1 className="pb-2 flex justify-center lg:text-xl text-[#fefce1] ">
               Selected Places
             </h1>
-            <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1] w-10/12 lg:w-6/12 mx-auto gap-2 py-4">
+            <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1]  mx-auto gap-2 py-4">
               {selectedPlaces.map((item, index) => {
                 return (
                   <div key={index} className="flex justify-between">
@@ -67,7 +65,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
               />
             ) : (
               <button
-                className=" flex justify-center text-xl text-[#fefce1] "
+                className="flex justify-center px-4 py-1 mx-auto text-sm text-black bg-green-300 rounded-md"
                 onClick={() => {
                   setIsOpenMain(true);
                 }}
@@ -79,12 +77,12 @@ function DisplayPlaces({ SetDistinctMarker }) {
             {selectedPlaces.map((item) => {
               <h1>{item.location}</h1>;
             })}
-          </>
+          </div>
         )}{" "}
         <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
           Results ({nearbyPlaces.length})
         </h2>
-        <ul className="grid h-screen grid-cols-1 gap-4 overflow-scroll overflow-x-hidden lg:grid-cols-2 scrollbar-thin ">
+        <ul className="grid grid-cols-1 gap-4 overflow-scroll overflow-x-hidden h-96 lg:grid-cols-2 scrollbar-thin lg:h-screen">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
