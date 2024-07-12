@@ -18,7 +18,7 @@ function AiWindowMain({ setIsOpenMain, selectedPlaces }) {
         (item) => {
           return `${item.placeName}` + ",";
         }
-      )} in less than 200 words and dont send markup language as response`;
+      )} in less than 200 words`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
