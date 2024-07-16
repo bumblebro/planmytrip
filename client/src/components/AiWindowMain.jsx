@@ -5,7 +5,7 @@ import ContentLoader, { Code } from "react-content-loader";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
-function AiWindowMain({ setIsOpenMain, selectedPlaces }) {
+function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
   const [text, setText] = useState(null);
   // const [showModal, setShowModal] = useState(false);
 
@@ -14,11 +14,9 @@ function AiWindowMain({ setIsOpenMain, selectedPlaces }) {
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       console.log(selectedPlaces);
-      const prompt = `Which is the good places to visit amoung this ? : ${selectedPlaces.map(
-        (item) => {
-          return `${item.placeName}` + ",";
-        }
-      )} in less than 200 words`;
+      const prompt = `${question} : ${selectedPlaces.map((item) => {
+        return `${item.placeName}` + ",";
+      })} in less than 200 words`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
@@ -35,7 +33,7 @@ function AiWindowMain({ setIsOpenMain, selectedPlaces }) {
           <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between px-5 pt-5 border-b border-solid rounded-t border-blueGray-200">
-              <h3 className="text-xl font-semibold lg:text-3xl">The Places to Visit among the selected</h3>
+              <h3 className="text-xl font-semibold lg:text-3xl"> {header}</h3>
             </div>
             <div className="relative flex-auto px-6">
               {text ? (

@@ -17,6 +17,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [location, SetLocation] = useState("");
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
+  const [askQuestion, SetAskQuestion] = useState("");
+  const [question, setQuestion] = useState();
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -38,7 +40,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
             <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1]  mx-auto gap-2 py-4">
               {selectedPlaces.map((item, index) => {
                 return (
-                  <div key={index} className="flex justify-between">
+                  <div key={index} className="flex justify-between ">
                     <h1 className="text-white" key={index}>
                       {index + 1}) {item.placeName}
                     </h1>
@@ -58,20 +60,62 @@ function DisplayPlaces({ SetDistinctMarker }) {
               })}
             </div>
 
-            {isOpenMain ? (
+            {isOpenMain && question.type == "suggest" ? (
               <AiWindowMain
                 setIsOpenMain={setIsOpenMain}
                 selectedPlaces={selectedPlaces}
+                question={question.question}
+                header={question.header}
               />
             ) : (
               <button
-                className="flex justify-center px-4 py-1 mx-auto text-sm text-black bg-green-300 rounded-md"
+                className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm text-black bg-green-300 rounded-md"
                 onClick={() => {
+                  setQuestion({
+                    question: "Which is the good places to visit amoung this ?",
+                    type: "suggest",
+                    header: "The Places to Visit among the selected",
+                  });
                   setIsOpenMain(true);
                 }}
               >
-                Suggest me the good places
+                <h1>Suggest me the good places</h1>
+                <img className="w-4 text-white" src={svg} alt="" />
               </button>
+            )}
+            {isOpenMain && question.type == "ask" ? (
+              <AiWindowMain
+                setIsOpenMain={setIsOpenMain}
+                selectedPlaces={selectedPlaces}
+                question={question.question}
+                header={question.header}
+              />
+            ) : (
+              <div className="flex gap-4 mt-8">
+                <input
+                  type="text"
+                  className="w-full py-2 rounded-md bg-[#374151] text-[#fefce1] px-2 "
+                  placeholder="Ask question about above places"
+                  onChange={(e) => {
+                    SetAskQuestion(e.target.value);
+                  }}
+                />
+                <button
+                  className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md"
+                  onClick={() => {
+                    setQuestion({
+                      question: askQuestion,
+                      type: "ask",
+                      header: "Answer for your queries",
+                    });
+                    setIsOpenMain(true);
+                  }}
+                >
+                  {" "}
+                  <h1>Ask</h1>
+                  <img className="w-4 text-white" src={svg} alt="" />
+                </button>
+              </div>
             )}
 
             {selectedPlaces.map((item) => {
