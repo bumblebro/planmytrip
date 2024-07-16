@@ -91,7 +91,17 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 header={question.header}
               />
             ) : (
-              <div className="flex gap-4 mt-8">
+              <form
+                className="flex gap-4 mt-8"
+                onSubmit={() => {
+                  setQuestion({
+                    question: askQuestion,
+                    type: "ask",
+                    header: "Answer for your queries",
+                  });
+                  setIsOpenMain(true);
+                }}
+              >
                 <input
                   type="text"
                   className="w-full py-2 rounded-md bg-[#374151] text-[#fefce1] px-2 "
@@ -100,22 +110,13 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     SetAskQuestion(e.target.value);
                   }}
                 />
-                <button
-                  className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md"
-                  onClick={() => {
-                    setQuestion({
-                      question: askQuestion,
-                      type: "ask",
-                      header: "Answer for your queries",
-                    });
-                    setIsOpenMain(true);
-                  }}
-                >
+
+                <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
                   {" "}
                   <h1>Ask</h1>
                   <img className="w-4 text-white" src={svg} alt="" />
                 </button>
-              </div>
+              </form>
             )}
 
             {selectedPlaces.map((item) => {
