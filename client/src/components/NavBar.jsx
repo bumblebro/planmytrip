@@ -15,7 +15,7 @@ function NavBar() {
       /> */}
       <img
         src={svg}
-        className="py-1 pl-4 text-2xl lg:w-[200px]"
+        className="py-1 pl-4 text-2xl lg:w-[200px] w-[150px]"
         alt=""
       />
     </>
