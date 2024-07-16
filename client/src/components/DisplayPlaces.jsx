@@ -41,7 +41,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
               {selectedPlaces.map((item, index) => {
                 return (
                   <div key={index} className="flex justify-between ">
-                    <h1 className="text-white" key={index}>
+                    <h1 className="text-slate-500" key={index}>
                       {index + 1}) {item.placeName}
                     </h1>
                     <button
