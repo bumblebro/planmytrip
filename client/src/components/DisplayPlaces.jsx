@@ -33,15 +33,15 @@ function DisplayPlaces({ SetDistinctMarker }) {
     <>
       <div className="w-full my-8">
         {selectedPlaces.length > 0 && (
-          <div className="w-11/12 px-4 py-4 mx-auto my-10 border-2 border-white border-solid lg:w-6/12 rounded-xl">
-            <h1 className="pb-2 flex justify-center lg:text-xl text-[#fefce1] ">
+          <div className="w-11/12 px-4 py-4 mx-auto my-10 border-2 border-white border-solid lg:w-6/12 rounded-xl bg-[#ffffff]">
+            <h1 className="pb-2 flex justify-center lg:text-xl text-[#34333a] ">
               Selected Places
             </h1>
             <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1]  mx-auto gap-2 py-4">
               {selectedPlaces.map((item, index) => {
                 return (
                   <div key={index} className="flex justify-between ">
-                    <h1 className="text-slate-500" key={index}>
+                    <h1 className="text-[#34333a]" key={index}>
                       {index + 1}) {item.placeName}
                     </h1>
                     <button
@@ -124,17 +124,17 @@ function DisplayPlaces({ SetDistinctMarker }) {
             })}
           </div>
         )}{" "}
-        <h2 className="pb-2 pl-8 text-xl text-[#fefce1]">
-          Results ({nearbyPlaces.length})
+        <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">
+          Search Results ({nearbyPlaces.length})
         </h2>
-        <ul className="grid grid-cols-1 gap-4 overflow-scroll overflow-x-hidden h-96 lg:grid-cols-2 scrollbar-thin lg:h-screen">
+        <ul className="grid grid-cols-1 gap-4 overflow-scroll overflow-x-hidden h-96 lg:grid-cols-2 scrollbar-thin lg:h-screen lg:mx-4">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4 border-solid border-1 border-[1px] px-2  lg:px-8 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 border-slate-800 mx-auto"
+              className="flex lg:flex-row items-start justify-between pb-4  px-2  lg:px-6 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 mx-auto bg-[#ffffff] shadow-md hover:bg-[#f6f5fa] transition-all duration-10"
             >
               <div className="flex flex-col justify-center w-full">
-                <li className="text-xl font-medium text-[#fefce1]">
+                <li className="text-xl font-medium text-[#34333a] ">
                   {place.place}
                 </li>
                 {place.data.rating ? (
@@ -200,7 +200,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <a
                       // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                       target="_blank"
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-white rounded-md text-slate-500 lg:w-auto "
                       onClick={() => {
                         SetPlaceName(place.place);
                         SetLocation(place.data.vicinity);
@@ -232,7 +232,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       Remove
                     </button> */}
                     <button
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm text-black bg-white rounded-md lg:w-auto "
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-white rounded-md text-slate-500 lg:w-auto "
                       onClick={() => {
                         let con = false;
                         selectedPlaces.map((item) => {
