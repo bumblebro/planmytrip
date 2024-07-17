@@ -104,7 +104,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
               >
                 <input
                   type="text"
-                  className="w-full py-2 rounded-md bg-[#374151] text-[#fefce1] px-2 "
+                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 "
                   placeholder="Ask question about above places"
                   onChange={(e) => {
                     SetAskQuestion(e.target.value);
@@ -131,7 +131,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4  px-2  lg:px-6 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 mx-auto bg-[#ffffff] shadow-md hover:bg-[#f6f5fa] transition-all duration-10"
+              className="flex lg:flex-row items-start justify-between pb-4  px-2  lg:px-6 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 mx-auto bg-[#ffffff] shadow-md  transition-all duration-10"
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#34333a] ">
@@ -200,7 +200,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <a
                       // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                       target="_blank"
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-white rounded-md text-slate-500 lg:w-auto "
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600"
                       onClick={() => {
                         SetPlaceName(place.place);
                         SetLocation(place.data.vicinity);
@@ -232,7 +232,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       Remove
                     </button> */}
                     <button
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-white rounded-md text-slate-500 lg:w-auto "
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-[#f6f5fa] rounded-md text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600" 
                       onClick={() => {
                         let con = false;
                         selectedPlaces.map((item) => {
