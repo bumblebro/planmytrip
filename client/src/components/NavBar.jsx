@@ -14,8 +14,8 @@ function NavBar() {
         src="https://maps.googleapis.com/maps/api/staticmap?center=Z%C3%BCrich&zoom=12&size=400x400&key=AIzaSyCBL_74NEbWkfsIE3LCBO6sfk1hEE1NUB8"
         alt="Map of Zürich"
       /> */}
-      <img src={svg} className="   lg:w-[200px] w-[80px] " alt="" />
-      <img src={svg2} className="h-4 lg:h-6" alt="" />
+      <img src={svg} className="   lg:w-[200px] w-[100px] " alt="" />
+      <img src={svg2} className="h-5 lg:h-6" alt="" />
     </div>
   );
 }
