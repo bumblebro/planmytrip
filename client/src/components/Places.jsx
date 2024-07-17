@@ -87,7 +87,7 @@ function Maps() {
   // }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="flex flex-col gap-4 mx-6 lg:h-[480px]  lg:flex-row">
         <div className="flex flex-col items-center gap-4">
           <form
@@ -118,7 +118,7 @@ function Maps() {
             <div className="flex flex-row">
               {" "}
               <select
-                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#374151] text-[#8690a2]"
+                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
                 placeholder="Type"
                 onClick={(e) => {
                   let val = e.target.value;
@@ -220,7 +220,6 @@ function Maps() {
             </button>
           )}
         </div>
-
         {active ? (
           <DisplayMap
             selected1={selected1}
