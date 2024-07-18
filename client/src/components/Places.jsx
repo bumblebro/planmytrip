@@ -234,9 +234,11 @@ function Maps() {
                 zoom={10}
                 center={{ lat: 12.5580735, lng: 75.3907667 }}
                 // position={selected1}
-                mapTypeId={"hybrid"}
+                mapTypeId={"roadmap"}
                 fullscreenControl={false}
                 zoomControl={true}
+                mapId="d6266d464c671dbf"
+
 
               />{" "}
             </APIProvider>
