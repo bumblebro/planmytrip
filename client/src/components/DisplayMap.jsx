@@ -19,8 +19,9 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
           // zoom={20}
           // {{distinctMarker& zoom={30}}}
           position={selected1}
-          mapTypeId="hybrid"
-          // mapId="8e0a97af9386fef"
+          // mapTypeId="hybrid"
+          mapTypeId="roadmap"
+          mapId="d6266d464c671dbf"
         >
           <Direction
             selected1={selected1}
