@@ -127,11 +127,11 @@ function DisplayPlaces({ SetDistinctMarker }) {
         <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">
           Search Results ({nearbyPlaces.length})
         </h2>
-        <ul className="grid grid-cols-1 gap-4 mx-4 overflow-scroll overflow-x-hidden h-96 md:grid-cols-2 scrollbar-thin md:h-screen">
+        <ul className="grid grid-cols-1 gap-4 mx-4 overflow-scroll overflow-x-hidden h-96 md:grid-cols-2 scrollbar-thin md:h-screen md:gap-3">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex flex-row items-start justify-between pb-4  px-[2%]  lg:px-6 py-4 rounded-md  gap-2 w-full  lg:gap-0 mx-auto bg-[#ffffff] shadow-md  transition-all duration-10 "
+              className="flex flex-row items-start justify-between pb-4  px-[4%]  lg:px-[3%] py-4 rounded-md  gap-2 w-full   mx-auto bg-[#ffffff] shadow-md  transition-all duration-10 "
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#34333a] ">
