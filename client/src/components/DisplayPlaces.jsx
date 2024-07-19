@@ -127,11 +127,11 @@ function DisplayPlaces({ SetDistinctMarker }) {
         <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">
           Search Results ({nearbyPlaces.length})
         </h2>
-        <ul className="grid grid-cols-1 gap-4 overflow-scroll overflow-x-hidden h-96 lg:grid-cols-2 scrollbar-thin lg:h-screen lg:mx-4">
+        <ul className="grid grid-cols-1 gap-4 mx-4 overflow-scroll overflow-x-hidden h-96 md:grid-cols-2 scrollbar-thin md:h-screen">
           {nearbyPlaces.map((place, index) => (
             <div
               key={index}
-              className="flex lg:flex-row items-start justify-between pb-4  px-2  lg:px-6 py-4 rounded-md flex-col gap-2 lg:w-full w-11/12 lg:gap-0 mx-auto bg-[#ffffff] shadow-md  transition-all duration-10"
+              className="flex flex-row items-start justify-between pb-4  px-[2%]  lg:px-6 py-4 rounded-md  gap-2 w-full  lg:gap-0 mx-auto bg-[#ffffff] shadow-md  transition-all duration-10 "
             >
               <div className="flex flex-col justify-center w-full">
                 <li className="text-xl font-medium text-[#34333a] ">
@@ -174,7 +174,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   )}
                 </h2>
                 <div className="flex items-center justify-between">
-                  <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row ">
+                  <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row">
                     {" "}
                     <ScrollLink
                       to="footer"
@@ -232,7 +232,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       Remove
                     </button> */}
                     <button
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm bg-[#f6f5fa] rounded-md text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600" 
+                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
                       onClick={() => {
                         let con = false;
                         selectedPlaces.map((item) => {
@@ -256,13 +256,13 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       Add Place
                     </button>
                   </div>{" "}
-                  <div className=" lg:hidden">
+                  <div className="sm:hidden">
                     {" "}
                     <ImageRender place={place} />
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:flex">
+              <div className="hidden sm:flex">
                 {" "}
                 <ImageRender place={place} />
               </div>

@@ -88,7 +88,7 @@ function Maps() {
 
   return (
     <div className="flex flex-col ">
-      <div className="flex flex-col gap-4 mx-6 lg:h-[480px]  lg:flex-row">
+      <div className="flex flex-col gap-4 mx-6 sm:h-[480px]  sm:flex-row h-full">
         <div className="flex flex-col items-center gap-4">
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
@@ -221,26 +221,39 @@ function Maps() {
           )}
         </div>
         {active ? (
-          <DisplayMap
-            selected1={selected1}
-            selected2={selected2}
-            SetKm={SetKm}
-            distinctMarker={distinctMarker}
-          />
+         
+            <DisplayMap
+              selected1={selected1}
+              selected2={selected2}
+              SetKm={SetKm}
+              distinctMarker={distinctMarker}
+            />
+          
         ) : (
-          <div className="w-full">
+          // <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
+          //   <Map
+          //     zoom={10}
+          //     center={{ lat: 12.5580735, lng: 75.3907667 }}
+          //     // position={selected1}
+          //     mapTypeId={"roadmap"}
+          //     fullscreenControl={false}
+          //     zoomControl={true}
+          //     mapId="d6266d464c671dbf"
+          //   />{" "}
+          // </APIProvider>
+          <div className="w-full h-96 sm:h-auto">
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
-                zoom={10}
-                center={{ lat: 12.5580735, lng: 75.3907667 }}
-                // position={selected1}
-                mapTypeId={"roadmap"}
                 fullscreenControl={false}
                 zoomControl={true}
+                // zoom={20}
+                // {{distinctMarker& zoom={30}}}
+                // mapTypeId="hybrid"
+                center={{ lat: 12.5580735, lng: 75.3907667 }}
+                zoom={10}
+                mapTypeId="roadmap"
                 mapId="d6266d464c671dbf"
-
-
-              />{" "}
+              ></Map>
             </APIProvider>
           </div>
         )}
