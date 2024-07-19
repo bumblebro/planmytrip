@@ -141,41 +141,9 @@ function Maps() {
                 <option value="shopping_mall">shopping mall</option>
               </select>
             </div>{" "}
-            {/* <div className="flex flex-row">
-            {" "}
-            <input
-              className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 "
-              type="text"
-              placeholder="Range in km"
-              onChange={(e) => {
-                let val = e.target.value * 1000;
-                setSelRange(val);
-              }}
-            />{" "}
-          </div> */}{" "}
-            {/* <div className="flex items-center gap-2 text-[#3c573c] font-medium">
-              <input
-                className="w-50"
-                type="range"
-                min={0}
-                max={25}
-                step={1}
-                value={radius / 1000}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  // setSelRangeInKm(e.target.value);
-                  let val = e.target.value * 1000;
-                  dispatch(addRadius(val));
-                  // setSelRange(val);
-                  dispatch(addActive(false));
-                }}
-              />{" "}
-              <div className="flex gap-1">
-                <h1>{radius / 1000}</h1>
-                <h1>Km</h1>
-              </div>
-            </div> */}
+            {/* <h1 className="text-[.875rem] w-full text-center">Select the Range👇</h1> */}
             <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
+              <h1 className="text-[.875rem]">Range</h1>
               <input
                 id="default-range"
                 type="range"
@@ -221,14 +189,12 @@ function Maps() {
           )}
         </div>
         {active ? (
-         
-            <DisplayMap
-              selected1={selected1}
-              selected2={selected2}
-              SetKm={SetKm}
-              distinctMarker={distinctMarker}
-            />
-          
+          <DisplayMap
+            selected1={selected1}
+            selected2={selected2}
+            SetKm={SetKm}
+            distinctMarker={distinctMarker}
+          />
         ) : (
           // <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
           //   <Map
@@ -246,9 +212,6 @@ function Maps() {
               <Map
                 fullscreenControl={false}
                 zoomControl={true}
-                // zoom={20}
-                // {{distinctMarker& zoom={30}}}
-                // mapTypeId="hybrid"
                 center={{ lat: 12.5580735, lng: 75.3907667 }}
                 zoom={10}
                 mapTypeId="roadmap"
