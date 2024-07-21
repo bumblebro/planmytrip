@@ -104,8 +104,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
               >
                 <input
                   type="text"
-                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 "
-                  placeholder="Ask question about above places"
+                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm lg:text-lg"
+                  placeholder="Ask question about above places" 
                   onChange={(e) => {
                     SetAskQuestion(e.target.value);
                   }}
