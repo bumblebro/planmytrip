@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
+import ReactMarkdown from "react-markdown";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
   const [text, setText] = useState(null);
-  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function run() {
@@ -37,9 +37,13 @@ function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
             </div>
             <div className="relative flex-auto px-6">
               {text ? (
-                <p className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
-                  {text}
-                </p>
+                <div className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
+                  {/* <p className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
+                 {text}
+               </p> */}
+
+                  <ReactMarkdown>{text}</ReactMarkdown>
+                </div>
               ) : (
                 <ContentLoader
                   height={140}

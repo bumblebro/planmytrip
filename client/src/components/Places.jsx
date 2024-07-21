@@ -88,7 +88,7 @@ function Maps() {
 
   return (
     <div className="flex flex-col ">
-      <div className="flex flex-col gap-4 mx-6 lg:h-[480px]  lg:flex-row">
+      <div className="flex flex-col gap-4 mx-6 sm:h-[480px]  sm:flex-row h-full">
         <div className="flex flex-col items-center gap-4">
           <form
             className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
@@ -141,41 +141,9 @@ function Maps() {
                 <option value="shopping_mall">shopping mall</option>
               </select>
             </div>{" "}
-            {/* <div className="flex flex-row">
-            {" "}
-            <input
-              className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 "
-              type="text"
-              placeholder="Range in km"
-              onChange={(e) => {
-                let val = e.target.value * 1000;
-                setSelRange(val);
-              }}
-            />{" "}
-          </div> */}{" "}
-            {/* <div className="flex items-center gap-2 text-[#3c573c] font-medium">
-              <input
-                className="w-50"
-                type="range"
-                min={0}
-                max={25}
-                step={1}
-                value={radius / 1000}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  // setSelRangeInKm(e.target.value);
-                  let val = e.target.value * 1000;
-                  dispatch(addRadius(val));
-                  // setSelRange(val);
-                  dispatch(addActive(false));
-                }}
-              />{" "}
-              <div className="flex gap-1">
-                <h1>{radius / 1000}</h1>
-                <h1>Km</h1>
-              </div>
-            </div> */}
+            {/* <h1 className="text-[.875rem] w-full text-center">Select the Range👇</h1> */}
             <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
+              <h1 className="text-[.875rem]">Range</h1>
               <input
                 id="default-range"
                 type="range"
@@ -228,17 +196,27 @@ function Maps() {
             distinctMarker={distinctMarker}
           />
         ) : (
-          <div className="w-full">
+          // <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
+          //   <Map
+          //     zoom={10}
+          //     center={{ lat: 12.5580735, lng: 75.3907667 }}
+          //     // position={selected1}
+          //     mapTypeId={"roadmap"}
+          //     fullscreenControl={false}
+          //     zoomControl={true}
+          //     mapId="d6266d464c671dbf"
+          //   />{" "}
+          // </APIProvider>
+          <div className="w-full h-96 sm:h-auto">
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
-                zoom={10}
-                center={{ lat: 12.5580735, lng: 75.3907667 }}
-                // position={selected1}
-                mapTypeId={"hybrid"}
                 fullscreenControl={false}
                 zoomControl={true}
-
-              />{" "}
+                center={{ lat: 12.5580735, lng: 75.3907667 }}
+                zoom={10}
+                mapTypeId="roadmap"
+                mapId="d6266d464c671dbf"
+              ></Map>
             </APIProvider>
           </div>
         )}
