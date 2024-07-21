@@ -8,7 +8,6 @@ const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
   const [text, setText] = useState(null);
-  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function run() {
