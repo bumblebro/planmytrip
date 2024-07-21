@@ -8,7 +8,6 @@ const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function AiWindow({ setIsOpen, placename, location }) {
   const [text, setText] = useState(null);
-  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function run() {
