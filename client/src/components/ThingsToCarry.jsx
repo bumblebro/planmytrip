@@ -32,7 +32,7 @@ function ThingsToCarry({ selectedPlaces }) {
   }, [selectedPlaces]);
   return (
     <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4">
-      <h1 className="mb-2 ">Things to carry while visiting above place:</h1>
+      <h1 className="mb-2 ">Things to carry 🎒</h1>
       <ReactMarkdown>{text}</ReactMarkdown>{" "}
     </div>
   );
