@@ -35,7 +35,7 @@ function ThingsToCarry({ selectedPlaces }) {
   return (
     <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4">
       <h1 className="mb-2 ">Things to carry 🎒</h1>
-      <div className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
+      <div className="my-4 text-xs leading-relaxed md:text-lg text-blueGray-500">
         {text ? (
           <ReactMarkdown>{text}</ReactMarkdown>
         ) : (
