@@ -8,6 +8,7 @@ import AiWindow from "./AiWindow";
 import { addList, addnewList } from "../features/mapSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
+import ThingsToCarry from "./ThingsToCarry";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -34,18 +35,18 @@ function DisplayPlaces({ SetDistinctMarker }) {
       <div className="w-full my-8">
         {selectedPlaces.length > 0 && (
           <div className="w-11/12 px-4 py-4 mx-auto my-10 border-2 border-white border-solid lg:w-6/12 rounded-xl bg-[#ffffff]">
-            <h1 className="pb-2 flex justify-center lg:text-xl text-[#34333a] ">
-              Selected Places
+            <h1 className="pb-2 flex justify-center lg:text-xl text-[#34333a] font-medium">
+              Your Places
             </h1>
             <div className="flex flex-col   text-start text-sm lg:text-lg font-medium text-[#fefce1]  mx-auto gap-2 py-4">
               {selectedPlaces.map((item, index) => {
                 return (
                   <div key={index} className="flex justify-between ">
                     <h1 className="text-[#34333a]" key={index}>
-                      {index + 1}) {item.placeName}
+                      {item.placeName}
                     </h1>
                     <button
-                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md h-6 lg:w-auto "
+                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md h-6 lg:w-auto font-light "
                       onClick={() => {
                         let filtered = selectedPlaces.filter((items) => {
                           return items.placeId !== item.placeId;
@@ -69,7 +70,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
               />
             ) : (
               <button
-                className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm text-black bg-green-300 rounded-md"
+                className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm bg-[#f6f5fa] rounded-md text-slate-500 hover:bg-[#edecf2] hover:text-slate-600"
                 onClick={() => {
                   setQuestion({
                     question: "Which is the good places to visit amoung this ?",
@@ -83,6 +84,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 <img className="w-4 text-white" src={svg} alt="" />
               </button>
             )}
+
+            <ThingsToCarry selectedPlaces={selectedPlaces} />
             {isOpenMain && question.type == "ask" ? (
               <AiWindowMain
                 setIsOpenMain={setIsOpenMain}
@@ -104,8 +107,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
               >
                 <input
                   type="text"
-                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm lg:text-lg"
-                  placeholder="Ask question about above places" 
+                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm lg:text-base"
+                  placeholder="Ask question about above places"
                   onChange={(e) => {
                     SetAskQuestion(e.target.value);
                   }}
