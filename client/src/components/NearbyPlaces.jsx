@@ -51,6 +51,7 @@ const NearbyPlaces = ({ searchType }) => {
               waypoint, // Add waypoint information for clarity
               photo: place.photos,
               placeid: place.place_id,
+              added: false,
             };
           }),
         ]);
