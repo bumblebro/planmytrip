@@ -34,6 +34,26 @@ export const mapSlice = createSlice({
     addnewList: (state, action) => {
       state.selectedList = action.payload;
     },
+    addAdded: (state, action) => {
+      let filterdPlaces = [];
+      filterdPlaces = state.nearbyPlaces.map((item) => {
+        if (item.placeid === action.payload) {
+          return { ...item, added: true };
+        }
+        return item;
+      });
+      state.nearbyPlaces = filterdPlaces;
+    },
+    addRemoved: (state, action) => {
+      let filterdPlaces = [];
+      filterdPlaces = state.nearbyPlaces.map((item) => {
+        if (item.placeid === action.payload) {
+          return { ...item, added: false };
+        }
+        return item;
+      });
+      state.nearbyPlaces = filterdPlaces;
+    },
   },
 });
 
@@ -44,5 +64,7 @@ export const {
   addActive,
   addList,
   addnewList,
+  addAdded,
+  addRemoved,
 } = mapSlice.actions;
 export default mapSlice.reducer;

@@ -5,7 +5,12 @@ import svg from "/src/images/Google_Bard_logo.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AiWindow from "./AiWindow";
-import { addList, addnewList } from "../features/mapSlice";
+import {
+  addAdded,
+  addList,
+  addRemoved,
+  addnewList,
+} from "../features/mapSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
 import ThingsToCarry from "./ThingsToCarry";
@@ -52,6 +57,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                           return items.placeId !== item.placeId;
                         });
                         dispatch(addnewList(filtered));
+                        dispatch(addRemoved(item.placeId));
                       }}
                     >
                       Remove
@@ -234,30 +240,39 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     >
                       Remove
                     </button> */}
-                    <button
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
-                      onClick={() => {
-                        let con = false;
-                        selectedPlaces.map((item) => {
-                          if (item.placeId == place.placeid) {
-                            con = true;
-                          }
-                        });
-                        if (con == false) {
-                          dispatch(
-                            addList({
-                              placeId: place.placeid,
-                              placeName: place.place,
-                              location: place.data.vicinity,
-                            })
-                          );
-                        } else {
-                          alert("Already Selected!");
-                        }
-                      }}
-                    >
-                      Add Place
-                    </button>
+                    <div className="w-full lg:w-auto">
+                      {place.added == true ? (
+                        <button className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm text-center text-white bg-green-500 rounded-md ">
+                          Added ✓
+                        </button>
+                      ) : (
+                        <button
+                          className="flex flex-row justify-center  gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500  hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
+                          onClick={() => {
+                            let con = false;
+                            selectedPlaces.map((item) => {
+                              if (item.placeId == place.placeid) {
+                                con = true;
+                              }
+                            });
+                            if (con == false) {
+                              dispatch(
+                                addList({
+                                  placeId: place.placeid,
+                                  placeName: place.place,
+                                  location: place.data.vicinity,
+                                })
+                              );
+                              dispatch(addAdded(place.placeid));
+                            } else {
+                              alert("Already Selected!");
+                            }
+                          }}
+                        >
+                          Add Place +
+                        </button>
+                      )}
+                    </div>
                   </div>{" "}
                   <div className="sm:hidden">
                     {" "}
