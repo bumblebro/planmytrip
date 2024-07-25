@@ -6,7 +6,6 @@ import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import ContentLoader, { Code } from "react-content-loader";
-
 import "@reach/combobox/styles.css";
 import Direction from "./Direction";
 import PlacesAutocomplete from "./PlacesAutocomplete";
@@ -107,7 +106,7 @@ function Maps() {
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"📍 Where are you starting you jouney?"}  required
+              placeholder={"📍 Where are you starting you're jouney?"}  required
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
