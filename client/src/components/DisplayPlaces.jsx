@@ -14,6 +14,7 @@ import {
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
 import ThingsToCarry from "./ThingsToCarry";
+import FinalRoute from "./FinalRoute";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -127,10 +128,11 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 </button>
               </form>
             )}
+            <FinalRoute selectedPlaces={selectedPlaces} />
 
-            {selectedPlaces.map((item) => {
+            {/* {selectedPlaces.map((item) => {
               <h1>{item.location}</h1>;
-            })}
+            })} */}
           </div>
         )}{" "}
         <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">

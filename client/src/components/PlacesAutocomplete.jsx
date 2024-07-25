@@ -33,28 +33,33 @@ const PlacesAutocomplete = ({ setSelected, placeholder }) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239]"
-        placeholder={placeholder}
-      />
+    <div className="mb-2">
+      <Combobox onSelect={handleSelect}>
+        <h2 className="mb-1 text-sm font-medium text-slate-700">
+          {placeholder}
+        </h2>
+        <ComboboxInput
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+          className="border border-solid rounded-md text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239]"
+          placeholder="Select..."
+        />
 
-      <ComboboxPopover className="border border-solid rounded-md bg-[#374151] ">
-        <ComboboxList className="bg-[#ffffff] rounded-md text-[#333239] ">
-          {status === "OK" &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption
-                key={place_id}
-                value={description}
-                className="hover:bg-slate-100"
-              />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+        <ComboboxPopover className="border border-solid rounded-md bg-[#374151] ">
+          <ComboboxList className="bg-[#ffffff] rounded-md text-[#333239] ">
+            {status === "OK" &&
+              data.map(({ place_id, description }) => (
+                <ComboboxOption
+                  key={place_id}
+                  value={description}
+                  className="hover:bg-slate-100"
+                />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    </div>
   );
 };
 

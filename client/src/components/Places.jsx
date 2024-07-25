@@ -104,16 +104,15 @@ function Maps() {
               dispatch(addActive(true));
             }}
           >
-            {" "}
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"Choose starting point"}
+              placeholder={"📍 Where are you starting you jouney?"}
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
               // setShowMap={setShowMap}
-              placeholder={"Choose destination"}
+              placeholder={"🎯 What's your destination of choice?"}
             />
             <div className="flex flex-row">
               {" "}
@@ -143,7 +142,10 @@ function Maps() {
             </div>{" "}
             {/* <h1 className="text-[.875rem] w-full text-center">Select the Range👇</h1> */}
             <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
-              <h1 className="text-[.875rem]">Range</h1>
+              <div className="flex items-center gap-1">
+                <h1>🔁</h1>
+                <h1 className="text-sm font-medium text-slate-700">Range</h1>
+              </div>
               <input
                 id="default-range"
                 type="range"
