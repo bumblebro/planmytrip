@@ -115,11 +115,11 @@ function Maps() {
               placeholder={"🎯 What's your destination of choice?"}
             />
             <div className="flex flex-col mb-2">
-              <h2 className="mb-1 text-sm font-medium text-slate-700">
-              🏖️ What's the type of place?
+              <h2 className="mb-1 text-sm font-medium text-slate-800">
+                🏖️ What's the type of place?
               </h2>
               <select
-                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
+                className="border border-solid rounded-[4px]  border-slate-400 text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none    focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
                 placeholder="Type"
                 onClick={(e) => {
                   let val = e.target.value;
@@ -170,8 +170,8 @@ function Maps() {
                 <h1>Km</h1>
               </div>
             </div>
-            <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-[#fefce1] hover:border-transparent">
-              Submit
+            <button className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-[4px] hover:bg-slate-800">
+              Submit Trip
             </button>{" "}
             {/* {km > 50000 && (
               <h1>
