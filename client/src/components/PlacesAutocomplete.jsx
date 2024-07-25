@@ -42,8 +42,9 @@ const PlacesAutocomplete = ({ setSelected, placeholder }) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={!ready}
-          className="border border-solid  text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none rounded-[4px]  border-slate-400 focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239]"
+          className="border border-solid rounded-[4px]  border-slate-400  text-[.875rem] pr-20 pl-2 py-1.5 border-1 outline-none  focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239]"
           placeholder="Select..."
+          required
         />
 
         <ComboboxPopover className="border border-solid rounded-md bg-[#374151] ">

@@ -107,7 +107,7 @@ function Maps() {
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"📍 Where are you starting you jouney?"}
+              placeholder={"📍 Where are you starting you jouney?"}  required
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
@@ -129,6 +129,7 @@ function Maps() {
                 }}
                 name="Types"
                 id=""
+                required
               >
                 <option value="tourist_attraction">Tourist attractions</option>
                 <option value="restaurant">restaurant</option>
@@ -149,6 +150,7 @@ function Maps() {
                 <h1 className="text-sm font-medium text-slate-700">Range</h1>
               </div>
               <input
+                required
                 id="default-range"
                 type="range"
                 min={0}

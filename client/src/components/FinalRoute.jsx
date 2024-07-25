@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
-function FinalRoute({ selectedPlaces }) {
+function FinalRoute({ selectedPlaces, time1, time2 }) {
   const [text, setText] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function FinalRoute({ selectedPlaces }) {
       setText(null);
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `Arrannge the place to visit from 8am to 8pm ${selectedPlaces.map(
+      const prompt = `Arrannge the place to visit from ${time1} to ${time2} ${selectedPlaces.map(
         (item) => {
           return `${item.placeName}` + ",";
         }
@@ -26,11 +26,12 @@ function FinalRoute({ selectedPlaces }) {
       setText(data);
     }
     run();
-  }, [selectedPlaces]);
+  }, [selectedPlaces, time1, time2]);
 
   return (
-    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4">
-      <div className="my-4 text-xs leading-relaxed md:text-lg text-blueGray-500">
+    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 ">
+      <h1 className="mb-2 font-medium">Your Planned itinerary 🚗</h1>
+      <div className="my-4  leading-relaxed  text-blueGray-500 text-sm md:text-base">
         {text ? (
           <ReactMarkdown>{text}</ReactMarkdown>
         ) : (
