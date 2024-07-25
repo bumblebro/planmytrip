@@ -14,6 +14,7 @@ import {
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
 import ThingsToCarry from "./ThingsToCarry";
+import FinalRoute from "./FinalRoute";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -25,6 +26,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const dispatch = useDispatch();
   const [askQuestion, SetAskQuestion] = useState("");
   const [question, setQuestion] = useState();
+  const [time1, setTime1] = useState("08:00");
+  const [time2, setTime2] = useState("20:00");
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -66,7 +69,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 );
               })}
             </div>
-
             {isOpenMain && question.type == "suggest" ? (
               <AiWindowMain
                 setIsOpenMain={setIsOpenMain}
@@ -90,7 +92,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 <img className="w-4 text-white" src={svg} alt="" />
               </button>
             )}
-
             <ThingsToCarry selectedPlaces={selectedPlaces} />
             {isOpenMain && question.type == "ask" ? (
               <AiWindowMain
@@ -101,7 +102,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
               />
             ) : (
               <form
-                className="flex gap-4 mt-8"
+                className="flex gap-4 mt-8 "
                 onSubmit={() => {
                   setQuestion({
                     question: askQuestion,
@@ -113,11 +114,12 @@ function DisplayPlaces({ SetDistinctMarker }) {
               >
                 <input
                   type="text"
-                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm lg:text-base"
+                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm border border-solid  border-slate-400 focus:border-blue-600 "
                   placeholder="Ask question about above places"
                   onChange={(e) => {
                     SetAskQuestion(e.target.value);
                   }}
+                  required
                 />
 
                 <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
@@ -128,9 +130,42 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </form>
             )}
 
-            {selectedPlaces.map((item) => {
+            <div className="border border-solid   border-slate-400 px-2 mt-4 rounded-lg ">
+              <div className="flex pt-4 justify-between text-sm gap-1 items-center md:gap-2">
+                <h1>Select time to plan the Itinerary</h1>
+                <input
+                  className="border border-solid  border-slate-400 rounded-[4px] px-1  "
+                  type="time"
+                  name=""
+                  id=""
+                  value={time1}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setTime1(e.target.value);
+                  }}
+                />{" "}
+                <h1>To</h1>
+                <input
+                  className="border border-solid  border-slate-400 rounded-[4px] px-1 "
+                  type="time"
+                  name=""
+                  id=""
+                  value={time2}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setTime2(e.target.value);
+                  }}
+                />
+              </div>
+              <FinalRoute
+                selectedPlaces={selectedPlaces}
+                time1={time1}
+                time2={time2}
+              />
+            </div>
+            {/* {selectedPlaces.map((item) => {
               <h1>{item.location}</h1>;
-            })}
+            })} */}
           </div>
         )}{" "}
         <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">

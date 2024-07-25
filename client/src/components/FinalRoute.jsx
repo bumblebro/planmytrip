@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
-function ThingsToCarry({ selectedPlaces }) {
+function FinalRoute({ selectedPlaces, time1, time2 }) {
   const [text, setText] = useState(null);
 
   useEffect(() => {
@@ -14,18 +14,11 @@ function ThingsToCarry({ selectedPlaces }) {
       setText(null);
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `List the minimum things to carry with comma while going for a trip to ${selectedPlaces.map(
+      const prompt = `Arrannge the place to visit from ${time1} to ${time2} ${selectedPlaces.map(
         (item) => {
           return `${item.placeName}` + ",";
         }
-      )}  avoid sending first sentence just send me the things as result, also put emoji `;
-      //       const prompt = `List the minimum things to carry with comma while going for a trip to ${selectedPlaces.map(
-      //         (item) => {
-      //           return `${item.placeName}` + ",";
-      //         }
-      //       )} just send thing name and respective emoji.
-      // Example reply :
-      // 🎒 Backpack, 👟 Hiking shoes, 👕 Comfortable clothes (including layers), 💧 Water bottle, 🥪 Snacks, ☀️ Sunscreen, 🧢 Hat, 👓 Sunglasses, 🦟 Insect repellent, 📱 Phone with a charger, 📸 Camera (optional), 💰 Cash for emergencies, 🗺️ Map or GPS, 🩹 First-aid kit `;
+      )}  avoid sending first sentence. `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -33,11 +26,12 @@ function ThingsToCarry({ selectedPlaces }) {
       setText(data);
     }
     run();
-  }, [selectedPlaces]);
+  }, [selectedPlaces, time1, time2]);
+
   return (
-    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 border border-solid  border-slate-400">
-      <h1 className="mb-2 font-medium">Things to carry 🎒</h1>
-      <div className="my-4 text-sm leading-relaxed  text-blueGray-500 md:text-base">
+    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 ">
+      <h1 className="mb-2 font-medium">Your Planned itinerary 🚗</h1>
+      <div className="my-4  leading-relaxed  text-blueGray-500 text-sm md:text-base">
         {text ? (
           <ReactMarkdown>{text}</ReactMarkdown>
         ) : (
@@ -58,4 +52,4 @@ function ThingsToCarry({ selectedPlaces }) {
   );
 }
 
-export default ThingsToCarry;
+export default FinalRoute;

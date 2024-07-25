@@ -104,21 +104,22 @@ function Maps() {
               dispatch(addActive(true));
             }}
           >
-            {" "}
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"Choose starting point"}
+              placeholder={"📍 Where are you starting you jouney?"}  required
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
               // setShowMap={setShowMap}
-              placeholder={"Choose destination"}
+              placeholder={"🎯 What's your destination of choice?"}
             />
-            <div className="flex flex-row">
-              {" "}
+            <div className="flex flex-col mb-2">
+              <h2 className="mb-1 text-sm font-medium text-slate-800">
+                🏖️ What's the type of place?
+              </h2>
               <select
-                className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
+                className="border border-solid rounded-[4px]  border-slate-400 text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none    focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
                 placeholder="Type"
                 onClick={(e) => {
                   let val = e.target.value;
@@ -128,6 +129,7 @@ function Maps() {
                 }}
                 name="Types"
                 id=""
+                required
               >
                 <option value="tourist_attraction">Tourist attractions</option>
                 <option value="restaurant">restaurant</option>
@@ -143,8 +145,12 @@ function Maps() {
             </div>{" "}
             {/* <h1 className="text-[.875rem] w-full text-center">Select the Range👇</h1> */}
             <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
-              <h1 className="text-[.875rem]">Range</h1>
+              <div className="flex items-center gap-1">
+                <h1>🔁</h1>
+                <h1 className="text-sm font-medium text-slate-700">Range</h1>
+              </div>
               <input
+                required
                 id="default-range"
                 type="range"
                 min={0}
@@ -166,8 +172,8 @@ function Maps() {
                 <h1>Km</h1>
               </div>
             </div>
-            <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-500 hover:text-[#fefce1] hover:border-transparent">
-              Submit
+            <button className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-[4px] hover:bg-slate-800">
+              Submit Trip
             </button>{" "}
             {/* {km > 50000 && (
               <h1>
