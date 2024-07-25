@@ -29,7 +29,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
   }, [selectedPlaces, time1, time2]);
 
   return (
-    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 ">
+    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mb-4  ">
       <h1 className="mb-2 font-medium">Your Planned itinerary 🚗</h1>
       <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (

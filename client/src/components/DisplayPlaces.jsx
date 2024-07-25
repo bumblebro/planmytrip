@@ -28,6 +28,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [question, setQuestion] = useState();
   const [time1, setTime1] = useState("08:00");
   const [time2, setTime2] = useState("20:00");
+  const [showDesc, setShowDesc] = useState("false");
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -130,40 +131,59 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </form>
             )}
 
-            <div className="px-2 mt-4 border border-solid rounded-lg border-slate-400 ">
-              <div className="flex items-center justify-between gap-1 pt-4 text-sm md:gap-2">
-                <h1 className="font-medium">
-                  Choose time to plan the Itinerary
-                </h1>
-                <input
-                  className="border border-solid  border-slate-400 rounded-[4px] px-1  "
-                  type="time"
-                  name=""
-                  id=""
-                  value={time1}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setTime1(e.target.value);
-                  }}
-                />{" "}
-                <h1>To</h1>
-                <input
-                  className="border border-solid  border-slate-400 rounded-[4px] px-1 "
-                  type="time"
-                  name=""
-                  id=""
-                  value={time2}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setTime2(e.target.value);
-                  }}
-                />
+            <div className="px-2 my-4 border border-solid rounded-lg border-slate-400 ">
+              <div className="flex justify-around py-4 mx-2 md:gap-6 md:justify-start">
+                {" "}
+                <div className="flex flex-col justify-between">
+                  {" "}
+                  <h1 className="text-sm font-medium md:text-base">
+                    Choose time to plan the Itinerary
+                  </h1>{" "}
+                  <button
+                    className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-[4px] hover:bg-slate-800 items-center flex gap-2 w-[80%] justify-center text-sm"
+                    onClick={() => {
+                      setShowDesc(true);
+                    }}
+                  >
+                    <h1> Find Itinerary</h1>
+                    <img className="w-4 text-white" src={svg} alt="" />
+                  </button>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-1 text-sm ">
+                  <input
+                    className="border border-solid  border-slate-400 rounded-[4px] px-1  "
+                    type="time"
+                    name=""
+                    id=""
+                    value={time1}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setShowDesc(false);
+                      setTime1(e.target.value);
+                    }}
+                  />{" "}
+                  <h1 className="text-center">To</h1>
+                  <input
+                    className="border border-solid  border-slate-400 rounded-[4px] px-1 "
+                    type="time"
+                    name=""
+                    id=""
+                    value={time2}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setShowDesc(false);
+                      setTime2(e.target.value);
+                    }}
+                  />
+                </div>
               </div>
-              <FinalRoute
-                selectedPlaces={selectedPlaces}
-                time1={time1}
-                time2={time2}
-              />
+              {showDesc && (
+                <FinalRoute
+                  selectedPlaces={selectedPlaces}
+                  time1={time1}
+                  time2={time2}
+                />
+              )}
             </div>
             {/* {selectedPlaces.map((item) => {
               <h1>{item.location}</h1>;

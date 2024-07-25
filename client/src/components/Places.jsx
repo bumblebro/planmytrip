@@ -106,14 +106,17 @@ function Maps() {
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"📍 Where are you starting you're jouney?"}  required
+              placeholder={"📍 Where are you starting you're jouney?"}
+              required
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
               // setShowMap={setShowMap}
               placeholder={"🎯 What's your destination of choice?"}
             />
-            <div className="flex flex-col mb-2">
+            {/* IMPORTANT */}
+            {/* ----------------------------------------------------------------------------------------------------- */}
+            {/* <div className="flex flex-col mb-2">
               <h2 className="mb-1 text-sm font-medium text-slate-800">
                 🏖️ What's the type of place?
               </h2>
@@ -141,7 +144,7 @@ function Maps() {
                 <option value="grocery_store">grocery store</option>
                 <option value="shopping_mall">shopping mall</option>
               </select>
-            </div>{" "}
+            </div> */}
             {/* <h1 className="text-[.875rem] w-full text-center">Select the Range👇</h1> */}
             <div className="flex items-center gap-2 text-[#3c573c] font-medium w-full justify-center">
               <div className="flex items-center gap-1">
