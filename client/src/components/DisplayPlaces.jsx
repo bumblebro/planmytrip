@@ -130,9 +130,11 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </form>
             )}
 
-            <div className="border border-solid   border-slate-400 px-2 mt-4 rounded-lg ">
-              <div className="flex pt-4 justify-between text-sm gap-1 items-center md:gap-2">
-                <h1>Select time to plan the Itinerary</h1>
+            <div className="px-2 mt-4 border border-solid rounded-lg border-slate-400 ">
+              <div className="flex items-center justify-between gap-1 pt-4 text-sm md:gap-2">
+                <h1 className="font-medium">
+                  Choose time to plan the Itinerary
+                </h1>
                 <input
                   className="border border-solid  border-slate-400 rounded-[4px] px-1  "
                   type="time"

@@ -18,7 +18,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         (item) => {
           return `${item.placeName}` + ",";
         }
-      )}  avoid sending first sentence. `;
+      )}  avoid sending first sentence. please mention time in the 12hr format `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -31,7 +31,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
   return (
     <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 ">
       <h1 className="mb-2 font-medium">Your Planned itinerary 🚗</h1>
-      <div className="my-4  leading-relaxed  text-blueGray-500 text-sm md:text-base">
+      <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (
           <ReactMarkdown>{text}</ReactMarkdown>
         ) : (
