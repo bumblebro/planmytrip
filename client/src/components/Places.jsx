@@ -114,8 +114,10 @@ function Maps() {
               // setShowMap={setShowMap}
               placeholder={"🎯 What's your destination of choice?"}
             />
-            <div className="flex flex-row">
-              {" "}
+            <div className="flex flex-col mb-2">
+              <h2 className="mb-1 text-sm font-medium text-slate-700">
+              🏖️ What's the type of place?
+              </h2>
               <select
                 className="border border-solid rounded-md text-[.875rem] w-[15.5rem] px-2 py-1 border-1 outline-none   border-black focus:border-blue-600 focus:border-2 bg-[#ffffff] text-[#333239] appearance-none"
                 placeholder="Type"
