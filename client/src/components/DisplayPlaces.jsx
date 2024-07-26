@@ -73,7 +73,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <button
                       className="       lg:w-auto 
                       
-                      relative inline-flex items-center justify-center p-0.5  me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-1 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                      relative inline-flex items-center justify-center p-0.5  me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
                       onClick={() => {
                         setShowDesc(false);
                         let filtered = selectedPlaces.filter((items) => {
@@ -99,8 +99,29 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 header={question.header}
               />
             ) : (
+              // <button
+              //   className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm bg-[#f6f5fa] rounded-md text-slate-500 hover:bg-[#edecf2] hover:text-slate-600 mt-4"
+              //   onClick={() => {
+              //     setQuestion({
+              //       question: "Which is the good places to visit amoung this ?",
+              //       type: "suggest",
+              //       header: "The Places to Visit among the selected",
+              //     });
+              //     setIsOpenMain(true);
+              //   }}
+              // >
+              //   <h1>Suggest me the good places</h1>
+              //   <img className="w-4 text-white" src={svg} alt="" />
+              // </button>
               <button
-                className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm bg-[#f6f5fa] rounded-md text-slate-500 hover:bg-[#edecf2] hover:text-slate-600 mt-4"
+                className="
+               rounded-lg    
+               flex  items-center justify-center p-0.5   overflow-hidden text-sm font-medium
+                text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600
+                 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300
+                  dark:focus:ring-blue-800 
+                  
+                    gap-2  mx-auto  mt-4"
                 onClick={() => {
                   setQuestion({
                     question: "Which is the good places to visit amoung this ?",
@@ -110,8 +131,10 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   setIsOpenMain(true);
                 }}
               >
-                <h1>Suggest me the good places</h1>
-                <img className="w-4 text-white" src={svg} alt="" />
+                <span className="relative w-full flex items-center gap-2  transition-all ease-in duration-75 bg-white text-gray-900 rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1">
+                  <h1>Suggest me the good places</h1>
+                  <img className="w-4 text-white" src={svg} alt="" />
+                </span>
               </button>
             )}
             <ThingsToCarry selectedPlaces={selectedPlaces} />
@@ -161,22 +184,49 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </form>
             )}
 
-            <div className="px-2 my-4 border border-solid rounded-lg border-slate-400 ">
-              <div className="flex justify-around py-4 mx-2 md:gap-6 md:justify-start">
+            <div className="px-1 my-4 border border-solid rounded-lg border-slate-400 ">
+              <div className="flex justify-around py-4 mx-2 md:gap-6 md:justify-start gap-4">
                 {" "}
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-col justify-around items-center md:items-start">
                   {" "}
                   <h1 className="text-sm font-medium md:text-base">
-                    Choose time to plan the Itinerary
+                    Choose time to plan the Visit
                   </h1>{" "}
-                  <button
-                    className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-[4px] hover:bg-slate-800 items-center flex gap-2 w-[80%] justify-center text-sm"
+                  {/* <button
+                    className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-lg hover:bg-slate-800 items-center flex gap-2 w-[80%] justify-center text-sm"
                     onClick={() => {
                       setShowDesc(true);
                     }}
                   >
                     <h1> Find Itinerary</h1>
                     <img className="w-4 text-white" src={svg} alt="" />
+                  </button> */}
+                  {/* <button
+                    className="px-3 py-1 md:px-4 md:py-2   rounded-lg
+                    items-center flex gap-2 w-[80%] justify-center 
+                     
+                   text-sm font-medium text-gray-900 focus:outline-none bg-white  border
+                      border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10  focus:ring-gray-100
+                       dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
+                        dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={() => {
+                      setShowDesc(true);
+                    }}
+                  >
+                    <h1> Find Itinerary</h1>
+                    <img className="w-4 text-white" src={svg} alt="" />
+                  </button> */}
+                  <button
+                    className=" 
+                        relative inline-flex w-[80%] items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                    onClick={() => {
+                      setShowDesc(true);
+                    }}
+                  >
+                    <span className="relative  transition-all ease-in  duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full flex justify-center items-center gap-4">
+                      <h1 className="">Find Itinerary</h1>
+                      <img className="w-4 text-white" src={svg} alt="" />
+                    </span>
                   </button>
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 text-sm ">
@@ -298,8 +348,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       </button> */}
                       <button
                         className="
-                        rounded-lg    w-full
-                        relative inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 "
+                        rounded-lg    
+                        relative inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 "
                         onClick={() => {
                           console.log(place.data.geometry.location.lat());
                           console.log(place.data.place_id);
@@ -310,12 +360,12 @@ function DisplayPlaces({ SetDistinctMarker }) {
                           });
                         }}
                       >
-                        <span className="relative  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1">
+                        <span className="relative w-full  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1">
                           Show in above map
                         </span>
                       </button>
                     </ScrollLink>
-                    <a
+                    {/* <a
                       // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
                       target="_blank"
                       className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600"
@@ -327,7 +377,21 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     >
                       <button className="">AI Description</button>
                       <img className="w-4 text-white" src={svg} alt="" />
-                    </a>{" "}
+                    </a>{" "} */}
+                    <button
+                      className=" 
+                        relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                      onClick={() => {
+                        SetPlaceName(place.place);
+                        SetLocation(place.data.vicinity);
+                        setIsOpen(true);
+                      }}
+                    >
+                      <span className="relative  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full flex justify-around items-center gap-1">
+                        <h1 className="">AI Description</h1>
+                        <img className="w-4 text-white" src={svg} alt="" />
+                      </span>
+                    </button>
                     {/* <button
                       className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md w-full lg:w-auto "
                       onClick={async () => {
@@ -351,12 +415,49 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     </button> */}
                     <div className="w-full lg:w-auto">
                       {place.added == true ? (
-                        <button className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm text-center text-white bg-green-500 rounded-md ">
-                          Added ✓
+                        // <button className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm text-center text-white bg-green-500 rounded-md ">
+                        //   Added ✓
+                        // </button>
+
+                        <button
+                          className=" 
+                                      relative inline-flex items-center justify-center p-0.5  overflow-hidden 
+                                      text-sm font-medium  rounded-lg  bg-gradient-to-br from-green-400 to-blue-600 text-white   outline-none "
+                        >
+                          <span className="relative text-white  transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full bg-gradient-to-br from-green-400 to-blue-600">
+                            Added ✓
+                          </span>
                         </button>
                       ) : (
+                        // <button
+                        //   className="flex flex-row justify-center  gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500  hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
+                        //   onClick={() => {
+                        //     setShowDesc(false);
+                        //     let con = false;
+                        //     selectedPlaces.map((item) => {
+                        //       if (item.placeId == place.placeid) {
+                        //         con = true;
+                        //       }
+                        //     });
+                        //     if (con == false) {
+                        //       dispatch(
+                        //         addList({
+                        //           placeId: place.placeid,
+                        //           placeName: place.place,
+                        //           location: place.data.vicinity,
+                        //         })
+                        //       );
+                        //       dispatch(addAdded(place.placeid));
+                        //     } else {
+                        //       alert("Already Selected!");
+                        //     }
+                        //   }}
+                        // >
+                        //   Add Place +
+                        // </button>
                         <button
-                          className="flex flex-row justify-center  gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500  hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
+                          className=" 
+                                        relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg  bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white  focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                           onClick={() => {
                             setShowDesc(false);
                             let con = false;
@@ -379,7 +480,9 @@ function DisplayPlaces({ SetDistinctMarker }) {
                             }
                           }}
                         >
-                          Add Place +
+                          <span className="relative  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full">
+                            Add Place +
+                          </span>
                         </button>
                       )}
                     </div>
