@@ -106,7 +106,7 @@ function Maps() {
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"📍 Where are you starting from?"}
+              placeholder={"📍 Where are you starting your trip?"}
               required
             />
             <PlacesAutocomplete

@@ -91,6 +91,51 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 );
               })}
             </div>
+            {isOpenMain && question.type == "ask" ? (
+              <AiWindowMain
+                setIsOpenMain={setIsOpenMain}
+                selectedPlaces={selectedPlaces}
+                question={question.question}
+                header={question.header}
+              />
+            ) : (
+              <form
+                className="flex gap-4 mt-4 "
+                onSubmit={() => {
+                  setQuestion({
+                    question: askQuestion,
+                    type: "ask",
+                    header: "Answer for your queries",
+                  });
+                  setIsOpenMain(true);
+                }}
+              >
+                <input
+                  type="text"
+                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm border border-solid  border-slate-400 focus:border-blue-600 "
+                  placeholder="Ask question about above places"
+                  onChange={(e) => {
+                    SetAskQuestion(e.target.value);
+                  }}
+                  required
+                />
+
+                {/* <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
+                  {" "}
+                  <h1>Ask</h1>
+                  <img className="w-4 text-white" src={svg} alt="" />
+                </button> */}
+                <button
+                  type="button"
+                  className="
+                  px-6 py-1 mx-auto text-sm   rounded-lg
+                  text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium    text-center me-2 flex items-center justify-center gap-2"
+                >
+                  <h1>Ask</h1>{" "}
+                  <img className="w-4 text-white" src={svg} alt="" />
+                </button>
+              </form>
+            )}
             {isOpenMain && question.type == "suggest" ? (
               <AiWindowMain
                 setIsOpenMain={setIsOpenMain}
@@ -131,61 +176,16 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   setIsOpenMain(true);
                 }}
               >
-                <span className="relative w-full flex items-center gap-2  transition-all ease-in duration-75 bg-white text-gray-900 rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1">
+                <span className="py-2 relative w-full flex items-center gap-2  transition-all ease-in duration-75 bg-white text-gray-900 rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 ">
                   <h1>Suggest me the good places</h1>
                   <img className="w-4 text-white" src={svg} alt="" />
                 </span>
               </button>
             )}
             <ThingsToCarry selectedPlaces={selectedPlaces} />
-            {isOpenMain && question.type == "ask" ? (
-              <AiWindowMain
-                setIsOpenMain={setIsOpenMain}
-                selectedPlaces={selectedPlaces}
-                question={question.question}
-                header={question.header}
-              />
-            ) : (
-              <form
-                className="flex gap-4 mt-8 "
-                onSubmit={() => {
-                  setQuestion({
-                    question: askQuestion,
-                    type: "ask",
-                    header: "Answer for your queries",
-                  });
-                  setIsOpenMain(true);
-                }}
-              >
-                <input
-                  type="text"
-                  className="w-full py-2 rounded-md bg-[#f6f5fa] text-[#333239] px-2 text-sm border border-solid  border-slate-400 focus:border-blue-600 "
-                  placeholder="Ask question about above places"
-                  onChange={(e) => {
-                    SetAskQuestion(e.target.value);
-                  }}
-                  required
-                />
-
-                {/* <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
-                  {" "}
-                  <h1>Ask</h1>
-                  <img className="w-4 text-white" src={svg} alt="" />
-                </button> */}
-                <button
-                  type="button"
-                  className="
-                  px-6 py-1 mx-auto text-sm   rounded-lg
-                  text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium    text-center me-2 flex items-center justify-center gap-2"
-                >
-                  <h1>Ask</h1>{" "}
-                  <img className="w-4 text-white" src={svg} alt="" />
-                </button>
-              </form>
-            )}
 
             <div className="px-1 my-4 border border-solid rounded-lg border-slate-400 ">
-              <div className="flex justify-around py-4 mx-2 md:gap-6 md:justify-start gap-4">
+              <div className="flex justify-around py-4 mx-2 md:gap-6 sm:justify-start gap-4">
                 {" "}
                 <div className="flex flex-col justify-around items-center md:items-start">
                   {" "}
