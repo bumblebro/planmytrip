@@ -18,6 +18,7 @@ import {
   addPlace,
   addPositions,
   addRadius,
+  addnewList,
 } from "../features/mapSlice";
 
 export default function Places() {
@@ -90,14 +91,13 @@ function Maps() {
       <div className="flex flex-col gap-4 mx-6 sm:h-[480px]  sm:flex-row h-full">
         <div className="flex flex-col items-center gap-4">
           <form
-            className="flex flex-col items-center w-6/12 gap-2 mx-auto mt-11"
+            className="flex flex-col items-center w-6/12 gap-2 mx-auto sm:mt-11"
             action="#"
             onSubmit={async (e) => {
               e.preventDefault();
+              dispatch(addnewList([]));
               dispatch(addPlace([]));
               dispatch(addPositions([]));
-
-              // setRange(selRange);
               console.log(selected1);
               SetDistinctMarker(null);
               dispatch(addActive(true));
@@ -174,15 +174,7 @@ function Maps() {
                 <h1>Km</h1>
               </div>
             </div>
-            <button className="px-3 py-1 md:px-4 md:py-2   rounded-lg 
-            
-            
-                    items-center flex gap-2  justify-center 
-                     
-                   text-sm font-medium text-gray-900 focus:outline-none bg-white  border
-                      border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10  focus:ring-gray-100
-                       dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
-                        dark:hover:text-white dark:hover:bg-gray-700">
+            <button className="flex items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:px-4 md:py-2 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
               Submit Trip
             </button>{" "}
             {/* {km > 50000 && (
