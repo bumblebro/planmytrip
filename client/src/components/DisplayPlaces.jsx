@@ -52,7 +52,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 return (
                   <div
                     key={index}
-                    className="flex justify-between items-center"
+                    className="flex items-center justify-between"
                   >
                     <h1 className="text-[#34333a]" key={index}>
                       {item.placeName}
@@ -119,7 +119,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   }}
                   required
                 />
-
                 {/* <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
                   {" "}
                   <h1>Ask</h1>
@@ -127,9 +126,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 </button> */}
                 <button
                   type="button"
-                  className="
-                  px-6 py-1 mx-auto text-sm   rounded-lg
-                  text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium    text-center me-2 flex items-center justify-center gap-2"
+                  className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 me-2"
                 >
                   <h1>Ask</h1>{" "}
                   <img className="w-4 text-white" src={svg} alt="" />
@@ -176,7 +173,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   setIsOpenMain(true);
                 }}
               >
-                <span className="py-2 relative w-full flex items-center gap-2  transition-all ease-in duration-75 bg-white text-gray-900 rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 ">
+                <span className="relative flex items-center w-full gap-2 px-2 py-2 text-gray-900 transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white ">
                   <h1>Suggest me the good places</h1>
                   <img className="w-4 text-white" src={svg} alt="" />
                 </span>
@@ -185,9 +182,9 @@ function DisplayPlaces({ SetDistinctMarker }) {
             <ThingsToCarry selectedPlaces={selectedPlaces} />
 
             <div className="px-1 my-4 border border-solid rounded-lg border-slate-400 ">
-              <div className="flex justify-around py-4 mx-2 md:gap-6 sm:justify-start gap-4">
+              <div className="flex justify-around gap-4 py-4 mx-2 md:gap-6 sm:justify-start">
                 {" "}
-                <div className="flex flex-col justify-around items-center md:items-start">
+                <div className="flex flex-col items-center justify-around md:items-start">
                   {" "}
                   <h1 className="text-sm font-medium md:text-base">
                     Choose time to plan the Visit
@@ -223,7 +220,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       setShowDesc(true);
                     }}
                   >
-                    <span className="relative  transition-all ease-in  duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full flex justify-center items-center gap-4">
+                    <span className="relative flex items-center justify-center w-full gap-4 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
                       <h1 className="">Find Itinerary</h1>
                       <img className="w-4 text-white" src={svg} alt="" />
                     </span>
@@ -360,7 +357,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                           });
                         }}
                       >
-                        <span className="relative w-full  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1">
+                        <span className="relative w-full px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
                           Show in above map
                         </span>
                       </button>
@@ -387,7 +384,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                         setIsOpen(true);
                       }}
                     >
-                      <span className="relative  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full flex justify-around items-center gap-1">
+                      <span className="relative flex items-center justify-around w-full gap-1 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
                         <h1 className="">AI Description</h1>
                         <img className="w-4 text-white" src={svg} alt="" />
                       </span>
@@ -424,7 +421,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                                       relative inline-flex items-center justify-center p-0.5  overflow-hidden 
                                       text-sm font-medium  rounded-lg  bg-gradient-to-br from-green-400 to-blue-600 text-white   outline-none "
                         >
-                          <span className="relative text-white  transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full bg-gradient-to-br from-green-400 to-blue-600">
+                          <span className="relative w-full px-2 py-1 text-white transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white bg-gradient-to-br from-green-400 to-blue-600">
                             Added ✓
                           </span>
                         </button>
@@ -480,7 +477,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                             }
                           }}
                         >
-                          <span className="relative  transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0 group-hover:text-white px-2 py-1 w-full">
+                          <span className="relative w-full px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
                             Add Place +
                           </span>
                         </button>
