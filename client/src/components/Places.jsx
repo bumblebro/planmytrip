@@ -106,7 +106,7 @@ function Maps() {
             <PlacesAutocomplete
               setSelected={setSelected1}
               // setShowMap={setShowMap}
-              placeholder={"📍 Where are you starting from?"}
+              placeholder={"📍 Where are you starting your trip?"}
               required
             />
             <PlacesAutocomplete
@@ -174,7 +174,15 @@ function Maps() {
                 <h1>Km</h1>
               </div>
             </div>
-            <button className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-[4px] hover:bg-slate-800">
+            <button className="px-3 py-1 md:px-4 md:py-2   rounded-lg 
+            
+            
+                    items-center flex gap-2  justify-center 
+                     
+                   text-sm font-medium text-gray-900 focus:outline-none bg-white  border
+                      border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10  focus:ring-gray-100
+                       dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
+                        dark:hover:text-white dark:hover:bg-gray-700">
               Submit Trip
             </button>{" "}
             {/* {km > 50000 && (

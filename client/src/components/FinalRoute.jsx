@@ -18,7 +18,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         (item) => {
           return `${item.placeName}` + ",";
         }
-      )}  avoid sending first sentence. please mention time in the 12hr format `;
+      )}  avoid sending first sentence. please mention time in the 12hr format.`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
