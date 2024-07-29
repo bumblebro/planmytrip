@@ -15,6 +15,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
 import ThingsToCarry from "./ThingsToCarry";
 import FinalRoute from "./FinalRoute";
+import Emergency from "./Emergency";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -22,13 +23,16 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [isOpenMain, setIsOpenMain] = useState(false);
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
+  const [placeId, setPlaceId] = useState("");
+  const [data, setData] = useState();
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
   const [askQuestion, SetAskQuestion] = useState("");
   const [question, setQuestion] = useState();
   const [time1, setTime1] = useState("08:00");
   const [time2, setTime2] = useState("20:00");
-  const [showDesc, setShowDesc] = useState("false");
+  const [showDesc, setShowDesc] = useState(false);
+  const [emerWindow, setEmerWindow] = useState(false);
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -321,7 +325,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   )}
                 </h2>
                 <div className="flex items-center justify-between">
-                  <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row">
+                  <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row lg:justify-between lg:w-[99%]">
                     {" "}
                     <ScrollLink
                       to="footer"
@@ -381,6 +385,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       onClick={() => {
                         SetPlaceName(place.place);
                         SetLocation(place.data.vicinity);
+                        setPlaceId(place.placeid);
+                        setData(place.data);
                         setIsOpen(true);
                       }}
                     >
@@ -452,37 +458,70 @@ function DisplayPlaces({ SetDistinctMarker }) {
                         // >
                         //   Add Place +
                         // </button>
-                        <button
-                          className=" 
+                        <div className="flex justify-between">
+                          <button
+                            className=" 
                                         relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg  bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white  focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-                          onClick={() => {
-                            setShowDesc(false);
-                            let con = false;
-                            selectedPlaces.map((item) => {
-                              if (item.placeId == place.placeid) {
-                                con = true;
+                            onClick={() => {
+                              setShowDesc(false);
+                              let con = false;
+                              selectedPlaces.map((item) => {
+                                if (item.placeId == place.placeid) {
+                                  con = true;
+                                }
+                              });
+                              if (con == false) {
+                                dispatch(
+                                  addList({
+                                    placeId: place.placeid,
+                                    placeName: place.place,
+                                    location: place.data.vicinity,
+                                    data: place.data,
+                                  })
+                                );
+                                dispatch(addAdded(place.placeid));
+                              } else {
+                                alert("Already Selected!");
                               }
-                            });
-                            if (con == false) {
-                              dispatch(
-                                addList({
-                                  placeId: place.placeid,
-                                  placeName: place.place,
-                                  location: place.data.vicinity,
-                                })
-                              );
-                              dispatch(addAdded(place.placeid));
-                            } else {
-                              alert("Already Selected!");
-                            }
-                          }}
-                        >
-                          <span className="relative w-full px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
-                            Add Place +
-                          </span>
-                        </button>
+                            }}
+                          >
+                            <span className="relative w-full px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
+                              Add Place +
+                            </span>
+                          </button>
+                          <button
+                            className=" 
+                        relative lg:hidden inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                            onClick={() => {
+                              SetPlaceName(place.place);
+                              SetLocation(place.data.vicinity);
+                              setPlaceId(place.placeid);
+                              setData(place.data);
+                              setEmerWindow(true);
+                            }}
+                          >
+                            <span className="relative flex items-center justify-around w-full gap-1 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
+                              <h1 className="">🆘</h1>
+                            </span>
+                          </button>
+                        </div>
                       )}
                     </div>
+                    <button
+                      className=" 
+                        relative hidden lg:inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                      onClick={() => {
+                        SetPlaceName(place.place);
+                        SetLocation(place.data.vicinity);
+                        setPlaceId(place.placeid);
+                        setData(place.data);
+                        setEmerWindow(true);
+                      }}
+                    >
+                      <span className="relative flex items-center justify-around w-full gap-1 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
+                        <h1 className="">🆘</h1>
+                      </span>
+                    </button>
                   </div>{" "}
                   <div className="sm:hidden">
                     {" "}
@@ -502,6 +541,15 @@ function DisplayPlaces({ SetDistinctMarker }) {
             setIsOpen={setIsOpen}
             placename={placename}
             location={location}
+          />
+        )}
+        {emerWindow && (
+          <Emergency
+            setEmerWindow={setEmerWindow}
+            placename={placename}
+            location={location}
+            placeid={placeId}
+            data={data}
           />
         )}
       </div>{" "}
