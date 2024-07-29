@@ -19,6 +19,7 @@ import {
   addPositions,
   addRadius,
   addnewList,
+  addselected1,
 } from "../features/mapSlice";
 
 export default function Places() {
@@ -98,6 +99,7 @@ function Maps() {
               dispatch(addnewList([]));
               dispatch(addPlace([]));
               dispatch(addPositions([]));
+              dispatch(addselected1(selected1));
               console.log(selected1);
               SetDistinctMarker(null);
               dispatch(addActive(true));

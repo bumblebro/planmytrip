@@ -54,6 +54,9 @@ export const mapSlice = createSlice({
       });
       state.nearbyPlaces = filterdPlaces;
     },
+    addselected1: (state, action) => {
+      state.selected1 = action.payload;
+    },
   },
 });
 
@@ -66,5 +69,6 @@ export const {
   addnewList,
   addAdded,
   addRemoved,
+  addselected1,
 } = mapSlice.actions;
 export default mapSlice.reducer;

@@ -3,17 +3,22 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
+import { useSelector } from "react-redux";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
 function Emergency({ placeid, placename, location, setEmerWindow, data }) {
   const [text, setText] = useState(null);
 
+  const selectedPlace1 = useSelector((state) => {
+    return state.selected1;
+  });
+
   useEffect(() => {
     async function run() {
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
-      const prompt = `Give me the name, address, comtact details of nearest hospital to vist near ${placename} located in ${location}.`;
+      const prompt = `Give me the name, address, contact details of nearest hospital near place:${placename} location:${location} place id: ${placeid} which comes near the lat:  ${selectedPlace1.lat} lng:  ${selectedPlace1.lng} this are all the details from the google map`;
       // const prompt = `what informations can you provide using this data? ${placename} located in ${location} with place ID as ${placeid} .search across web`;
       // const prompt = `Can you be provid me with the link to ${placename} located in ${location} with place ID as ${placeid}.`;
       const result = await model.generateContent(prompt);
@@ -33,7 +38,9 @@ function Emergency({ placeid, placename, location, setEmerWindow, data }) {
             {/*header*/}
             <div className="flex items-start justify-between px-5 pt-5 border-b border-solid rounded-t border-blueGray-200">
               <h3 className="text-lg font-semibold lg:text-2xl">
-                ⚠️Emergency contact near <span className="text-blue-800">{placename}</span>
+                ⚠️ Emergency contact near{" "}
+                <span className="text-blue-800">{placename}</span>{" "}
+              
               </h3>
             </div>
             <div className="relative flex-auto px-6">
