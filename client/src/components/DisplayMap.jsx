@@ -10,6 +10,9 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   const nearbyPlaces = useSelector((state) => {
     return state.nearbyPlaces;
   });
+  const waypoint = useSelector((state) => {
+    return state.waypoint;
+  });
   return (
     <div className="w-full h-96 sm:h-auto" id="footer">
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
@@ -27,6 +30,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
             selected1={selected1}
             selected2={selected2}
             SetKm={SetKm}
+            waypoint={waypoint}
           />
           {distinctMarker ? (
             <Marker

@@ -10,6 +10,7 @@ const initialState = {
   radius: 5000,
   active: false,
   selectedList: [],
+  waypoint: [],
 };
 
 export const mapSlice = createSlice({
@@ -57,6 +58,12 @@ export const mapSlice = createSlice({
     addselected1: (state, action) => {
       state.selected1 = action.payload;
     },
+    addselected2: (state, action) => {
+      state.selected2 = action.payload;
+    },
+    addwaypoint: (state, action) => {
+      state.waypoint.push(action.payload);
+    },
   },
 });
 
@@ -70,5 +77,7 @@ export const {
   addAdded,
   addRemoved,
   addselected1,
+  addselected2,
+  addwaypoint,
 } = mapSlice.actions;
 export default mapSlice.reducer;

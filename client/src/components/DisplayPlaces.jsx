@@ -10,6 +10,7 @@ import {
   addList,
   addRemoved,
   addnewList,
+  addwaypoint,
 } from "../features/mapSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import AiWindowMain from "./AiWindowMain";
@@ -33,6 +34,10 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [time2, setTime2] = useState("20:00");
   const [showDesc, setShowDesc] = useState(false);
   const [emerWindow, setEmerWindow] = useState(false);
+
+  const waypoint = useSelector((state) => {
+    return state.waypoint;
+  });
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -130,7 +135,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 </button> */}
                 <button
                   type="button"
-                  className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 me-2"
+                  className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 me-2"
                 >
                   <h1>Ask</h1>{" "}
                   <img className="w-4 text-white" src={svg} alt="" />
@@ -479,6 +484,18 @@ function DisplayPlaces({ SetDistinctMarker }) {
                                     data: place.data,
                                   })
                                 );
+                                console.log(place.waypoint);
+                                dispatch(
+                                  addwaypoint({
+                                    location: {
+                                      lat: place.lat,
+                                      lng: place.lat,
+                                    },
+                                    stopover: true, // Indicates this waypoint is a stop
+                                  })
+                                );
+
+                                console.log(waypoint);
                                 dispatch(addAdded(place.placeid));
                               } else {
                                 alert("Already Selected!");
