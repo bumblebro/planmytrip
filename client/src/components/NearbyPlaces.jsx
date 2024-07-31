@@ -6,8 +6,11 @@ import { addPlace, addPositions } from "../features/mapSlice";
 const libraries = ["places"]; // Include the Places library
 
 const NearbyPlaces = ({ searchType }) => {
-  // State to store all tourist places for multiple waypoints
   const dispatch = useDispatch();
+  const apiKey = import.meta.env.VITE_API_KEY; // Replace with your Google Maps API key
+
+  const [nearbyPlaces, setNearbyPlaces] = useState([]);
+
   const waypoints = useSelector((state) => {
     console.log(state.positions);
     return state.positions;
@@ -16,10 +19,6 @@ const NearbyPlaces = ({ searchType }) => {
   const radius = useSelector((state) => {
     return state.radius;
   });
-
-  const [nearbyPlaces, setNearbyPlaces] = useState([]);
-  const [result, SetResult] = useState([]);
-  const apiKey = import.meta.env.VITE_API_KEY; // Replace with your Google Maps API key
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
@@ -55,6 +54,7 @@ const NearbyPlaces = ({ searchType }) => {
             };
           }),
         ]);
+
         console.log(nearbyPlaces);
       }
     });

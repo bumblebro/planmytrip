@@ -28,7 +28,9 @@ const PlacesAutocomplete = ({ setSelected, placeholder }) => {
 
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
-    setSelected({ lat, lng });
+    const placeName = results[0].formatted_address;
+    console.log(placeName);
+    setSelected({ lat, lng, placeName });
     dispatch(addActive(false));
   };
 

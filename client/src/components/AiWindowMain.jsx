@@ -38,10 +38,6 @@ function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
             <div className="relative flex-auto px-6">
               {text ? (
                 <div className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
-                  {/* <p className="my-4 text-sm leading-relaxed lg:text-lg text-blueGray-500">
-                 {text}
-               </p> */}
-
                   <ReactMarkdown>{text}</ReactMarkdown>
                 </div>
               ) : (

@@ -19,14 +19,6 @@ function ThingsToCarry({ selectedPlaces }) {
           return `${item.placeName}` + ",";
         }
       )}  avoid sending first sentence just send me the things as result, also put emoji `;
-      //       const prompt = `List the minimum things to carry with comma while going for a trip to ${selectedPlaces.map(
-      //         (item) => {
-      //           return `${item.placeName}` + ",";
-      //         }
-      //       )} just send thing name and respective emoji.
-      // Example reply :
-      // 🎒 Backpack, 👟 Hiking shoes, 👕 Comfortable clothes (including layers), 💧 Water bottle, 🥪 Snacks, ☀️ Sunscreen, 🧢 Hat, 👓 Sunglasses, 🦟 Insect repellent, 📱 Phone with a charger, 📸 Camera (optional), 💰 Cash for emergencies, 🗺️ Map or GPS, 🩹 First-aid kit `;
-
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
@@ -37,7 +29,7 @@ function ThingsToCarry({ selectedPlaces }) {
   return (
     <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 border border-solid  border-slate-400">
       <h1 className="mb-2 font-medium">Things to carry 🎒</h1>
-      <div className="my-4 text-sm leading-relaxed  text-blueGray-500 md:text-base">
+      <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (
           <ReactMarkdown>{text}</ReactMarkdown>
         ) : (
