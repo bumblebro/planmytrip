@@ -44,6 +44,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
     return state.selectedList;
   });
 
+  const orderedPlaces = useSelector((state) => state.orderedPlaces);
+
   return (
     <>
       <div className="w-full my-8">
@@ -62,19 +64,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     <h1 className="text-[#34333a]" key={index}>
                       {item.placeName}
                     </h1>
-                    {/* <button
-                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md h-6 lg:w-auto font-light "
-                      onClick={() => {
-                        setShowDesc(false);
-                        let filtered = selectedPlaces.filter((items) => {
-                          return items.placeId !== item.placeId;
-                        });
-                        dispatch(addnewList(filtered));
-                        dispatch(addRemoved(item.placeId));
-                      }}
-                    >
-                      Remove
-                    </button> */}
                     <button
                       className="       lg:w-auto 
                       
@@ -124,11 +113,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   }}
                   required
                 />
-                {/* <button className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm text-black bg-green-300 rounded-md">
-                  {" "}
-                  <h1>Ask</h1>
-                  <img className="w-4 text-white" src={svg} alt="" />
-                </button> */}
                 <button
                   type="button"
                   className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 me-2"
@@ -146,20 +130,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 header={question.header}
               />
             ) : (
-              // <button
-              //   className="flex justify-center gap-2 px-4 py-1 py-2 mx-auto text-sm bg-[#f6f5fa] rounded-md text-slate-500 hover:bg-[#edecf2] hover:text-slate-600 mt-4"
-              //   onClick={() => {
-              //     setQuestion({
-              //       question: "Which is the good places to visit amoung this ?",
-              //       type: "suggest",
-              //       header: "The Places to Visit among the selected",
-              //     });
-              //     setIsOpenMain(true);
-              //   }}
-              // >
-              //   <h1>Suggest me the good places</h1>
-              //   <img className="w-4 text-white" src={svg} alt="" />
-              // </button>
               <button
                 className="
                rounded-lg    
@@ -193,31 +163,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   {" "}
                   <h1 className="text-sm font-medium md:text-base">
                     Choose time to plan the Visit
-                  </h1>{" "}
-                  {/* <button
-                    className="px-3 py-1 md:px-4 md:py-2 font-medium text-white bg-[#181818] border  rounded-lg hover:bg-slate-800 items-center flex gap-2 w-[80%] justify-center text-sm"
-                    onClick={() => {
-                      setShowDesc(true);
-                    }}
-                  >
-                    <h1> Find Itinerary</h1>
-                    <img className="w-4 text-white" src={svg} alt="" />
-                  </button> */}
-                  {/* <button
-                    className="px-3 py-1 md:px-4 md:py-2   rounded-lg
-                    items-center flex gap-2 w-[80%] justify-center 
-                     
-                   text-sm font-medium text-gray-900 focus:outline-none bg-white  border
-                      border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10  focus:ring-gray-100
-                       dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
-                        dark:hover:text-white dark:hover:bg-gray-700"
-                    onClick={() => {
-                      setShowDesc(true);
-                    }}
-                  >
-                    <h1> Find Itinerary</h1>
-                    <img className="w-4 text-white" src={svg} alt="" />
-                  </button> */}
+                  </h1>
                   <button
                     className=" 
                         relative inline-flex w-[80%] items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
@@ -261,15 +207,12 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </div>
               {showDesc && (
                 <FinalRoute
-                  selectedPlaces={selectedPlaces}
+                  selectedPlaces={orderedPlaces}
                   time1={time1}
                   time2={time2}
                 />
               )}
             </div>
-            {/* {selectedPlaces.map((item) => {
-              <h1>{item.location}</h1>;
-            })} */}
           </div>
         )}{" "}
         <h2 className="pb-2 pl-8 text-xl font-medium text-[#34333a]">
@@ -334,20 +277,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       smooth={true}
                       duration={500}
                     >
-                      {/* <button
-                        className=" rounded-md bg-[#1a73e8] text-[#fefce1] px-2 py-1 text-sm w-full"
-                        onClick={() => {
-                          console.log(place.data.geometry.location.lat());
-                          console.log(place.data.place_id);
-                          SetDistinctMarker({
-                            lat: place.data.geometry.location.lat(),
-                            lng: place.data.geometry.location.lng(),
-                            place: place.place,
-                          });
-                        }}
-                      >
-                        Show in above map
-                      </button> */}
                       <button
                         className="
                         rounded-lg    
@@ -367,19 +296,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                         </span>
                       </button>
                     </ScrollLink>
-                    {/* <a
-                      // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
-                      target="_blank"
-                      className="flex flex-row justify-center w-full gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500 lg:w-auto hover:bg-[#edecf2] hover:text-slate-600"
-                      onClick={() => {
-                        SetPlaceName(place.place);
-                        SetLocation(place.data.vicinity);
-                        setIsOpen(true);
-                      }}
-                    >
-                      <button className="">AI Description</button>
-                      <img className="w-4 text-white" src={svg} alt="" />
-                    </a>{" "} */}
                     <button
                       className=" 
                         relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
@@ -396,33 +312,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
                         <img className="w-4 text-white" src={svg} alt="" />
                       </span>
                     </button>
-                    {/* <button
-                      className="flex gap-2 justify-center bg-[#e34133] px-2 py-1 text-sm text-[#fefce1] rounded-md w-full lg:w-auto "
-                      onClick={async () => {
-                        // console.log(place.photo[0].getUrl());
-                        console.log(place.data.place_id);
-                        console.log(nearbyPlaces);
-
-                        const matchingPlace = await nearbyPlaces.find(
-                          (pla) => pla.placeid === place.data.place_id
-                        );
-
-                        if (matchingPlace) {
-                          const newPlaces = nearbyPlaces.filter(
-                            (pla) => pla !== matchingPlace
-                          );
-                          // setNearbyPlaces(newPlaces);
-                        }
-                      }}
-                    >
-                      Remove
-                    </button> */}
                     <div className="w-full lg:w-auto">
                       {place.added == true ? (
-                        // <button className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm text-center text-white bg-green-500 rounded-md ">
-                        //   Added ✓
-                        // </button>
-
                         <button
                           className=" 
                                       relative inline-flex items-center justify-center p-0.5  overflow-hidden 
@@ -433,32 +324,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                           </span>
                         </button>
                       ) : (
-                        // <button
-                        //   className="flex flex-row justify-center  gap-2 px-2 py-1 text-sm rounded-md bg-[#f6f5fa] text-slate-500  hover:bg-[#edecf2] hover:text-slate-600 text-center items-center"
-                        //   onClick={() => {
-                        //     setShowDesc(false);
-                        //     let con = false;
-                        //     selectedPlaces.map((item) => {
-                        //       if (item.placeId == place.placeid) {
-                        //         con = true;
-                        //       }
-                        //     });
-                        //     if (con == false) {
-                        //       dispatch(
-                        //         addList({
-                        //           placeId: place.placeid,
-                        //           placeName: place.place,
-                        //           location: place.data.vicinity,
-                        //         })
-                        //       );
-                        //       dispatch(addAdded(place.placeid));
-                        //     } else {
-                        //       alert("Already Selected!");
-                        //     }
-                        //   }}
-                        // >
-                        //   Add Place +
-                        // </button>
                         <div className="flex justify-between">
                           <button
                             className=" 

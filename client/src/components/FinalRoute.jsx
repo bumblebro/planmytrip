@@ -16,7 +16,6 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
   useEffect(() => {
     async function run() {
       setText(null);
-      // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const prompt = `Arrange the place to visit from ${time1} to ${time2} with origin place as ${
         selected1.placeName
@@ -24,9 +23,9 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         selected2.placeName
       } and it is oneway trip and places to visit is ${selectedPlaces.map(
         (item) => {
-          return `${item.placeName}` + ",";
+          return `${item.placeName} of lat:${item.lat} lng:${item.lng}` + ",";
         }
-      )}  avoid sending first sentence. please mention time in the 12hr format. `;
+      )} avoid sending first sentence and lat, lng in response and please mention time in the 12hr format. `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;

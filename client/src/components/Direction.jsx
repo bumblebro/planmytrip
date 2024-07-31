@@ -2,7 +2,7 @@
 import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPositions, addlink } from "../features/mapSlice";
+import { addPositions, addlink, addorderedPlaces } from "../features/mapSlice";
 
 function Direction({ selected1, selected2, SetKm }) {
   const dispatch = useDispatch();
@@ -15,9 +15,10 @@ function Direction({ selected1, selected2, SetKm }) {
   const [first, setFirst] = useState(true);
   const selected = routes[routeIndex];
   const leg = selected?.legs[0];
-  const [reWayPoint, setrReWayPoint] = useState();
+  const [reWayPoint, setreWayPoint] = useState([]);
 
   const waypoint = useSelector((state) => state.selectedList);
+
   useEffect(() => {
     if (!routesLibrary || !map) return;
 
@@ -34,7 +35,7 @@ function Direction({ selected1, selected2, SetKm }) {
 
   function createGoogleMapsLinkLatLng(selected1, selected2, reWayPoint) {
     const waypointsString = reWayPoint
-      .map((waypoint) => `${waypoint.location.lat},${waypoint.location.lng}`)
+      .map((waypoint) => `${waypoint.lat},${waypoint.lng}`)
       .join("/");
     const url = `https://www.google.com/maps/dir/${selected1.lat},${selected1.lng}/${waypointsString}/${selected2.lat},${selected2.lng}`;
     return url;
@@ -70,12 +71,14 @@ function Direction({ selected1, selected2, SetKm }) {
           setFirst(false);
         }
         SetKm(response.routes[0].legs[0].distance.value);
+        console.log("Routes", response.routes[0].waypoint_order);
         const reorderedWaypoints = response.routes[0].waypoint_order.map(
-          (index) => waypoints[index]
+          (index) => waypoint[index]
         );
-        setrReWayPoint(reorderedWaypoints);
+        setreWayPoint(reorderedWaypoints);
         // Now you have the reordered waypoints in the reorderedWaypoints array
         console.log(reorderedWaypoints);
+        dispatch(addorderedPlaces(reorderedWaypoints));
         console.log(
           createGoogleMapsLinkLatLng(selected1, selected2, reWayPoint)
         );

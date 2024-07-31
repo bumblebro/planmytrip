@@ -53,11 +53,6 @@ function Maps() {
   });
   const [selected1, setSelected1] = useState(null);
   const [selected2, setSelected2] = useState(null);
-  // const [showMap, setShowMap] = useState(false);
-  // const [selRange, setSelRange] = useState(5000);
-  const [selRangeinkm, setSelRangeInKm] = useState(5);
-  // const [range, setRange] = useState(null);
-  // const [location, setLocation] = useState({});
   const [searchType, setSearchType] = useState("tourist_attraction");
   const [km, SetKm] = useState(null);
   const [distinctMarker, SetDistinctMarker] = useState(null);
@@ -82,9 +77,6 @@ function Maps() {
               dispatch(addPositions([]));
               dispatch(addselected1(selected1));
               dispatch(addselected2(selected2));
-
-              // dispatch(addselected2(selected2));
-
               console.log(selected1);
               SetDistinctMarker(null);
               dispatch(addActive(true));
@@ -92,13 +84,11 @@ function Maps() {
           >
             <PlacesAutocomplete
               setSelected={setSelected1}
-              // setShowMap={setShowMap}
               placeholder={"📍 Where are you starting your trip?"}
               required
             />
             <PlacesAutocomplete
               setSelected={setSelected2}
-              // setShowMap={setShowMap}
               placeholder={"🎯 What's your destination of choice?"}
             />
             {/* IMPORTANT */}

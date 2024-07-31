@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
   nearbyPlaces: [],
@@ -10,6 +11,7 @@ const initialState = {
   selectedList: [],
   waypoint: [],
   link: "",
+  orderedPlaces: [],
 };
 
 export const mapSlice = createSlice({
@@ -66,6 +68,9 @@ export const mapSlice = createSlice({
     addlink: (state, action) => {
       state.link = action.payload;
     },
+    addorderedPlaces: (state, action) => {
+      state.orderedPlaces = action.payload;
+    },
   },
 });
 
@@ -82,5 +87,6 @@ export const {
   addselected2,
   addwaypoint,
   addlink,
+  addorderedPlaces,
 } = mapSlice.actions;
 export default mapSlice.reducer;
