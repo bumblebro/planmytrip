@@ -1,6 +1,4 @@
-import { position } from "@chakra-ui/react";
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 
 const initialState = {
   nearbyPlaces: [],
@@ -11,6 +9,7 @@ const initialState = {
   active: false,
   selectedList: [],
   waypoint: [],
+  change: false,
 };
 
 export const mapSlice = createSlice({

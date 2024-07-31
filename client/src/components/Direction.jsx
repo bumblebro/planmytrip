@@ -14,27 +14,36 @@ function Direction({ selected1, selected2, SetKm }) {
   const [routeIndex, setRouteIndex] = useState(0);
   const selected = routes[routeIndex];
   const leg = selected?.legs[0];
-  const waypoints = [];
 
-  const waypoint = useSelector((state) => {
-    return state.waypoint;
-  });
+  const waypoint = useSelector((state) => state.selectedList);
 
   useEffect(() => {
     if (!routesLibrary || !map) return;
-    setDirectionsService(new routesLibrary.DirectionsService());
-    setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }));
-    console.log({ selected1, selected2, SetKm, waypoint });
-  }, [routesLibrary, map, waypoint]);
+
+    const service = new routesLibrary.DirectionsService();
+    const renderer = new routesLibrary.DirectionsRenderer({ map });
+
+    setDirectionsService(service);
+    setDirectionsRenderer(renderer);
+
+    return () => {
+      renderer.setMap(null);
+    };
+  }, [routesLibrary, map]);
 
   useEffect(() => {
     if (!directionsService || !directionsRenderer) return;
+
+    // const waypoints = waypoint.map((point) => ({
+    //   location: { lat: point.lat, lng: point.lng },
+    //   stopover: true,
+    // }));
 
     directionsService
       .route({
         origin: selected1,
         destination: selected2,
-        waypoints: waypoint,
+        // waypoints,
         travelMode: google.maps.TravelMode.DRIVING,
         optimizeWaypoints: true,
         provideRouteAlternatives: true,
@@ -43,20 +52,24 @@ function Direction({ selected1, selected2, SetKm }) {
         directionsRenderer.setDirections(response);
         setRoutes(response.routes);
 
-        response.routes[0].legs[0].steps.forEach((step) => {
-          waypoints.push(step.end_location);
-        });
-        console.log(waypoints);
-        dispatch(addPositions(waypoints));
-        console.log("waypoint:", waypoints);
+        const newWaypoints = response.routes[0].legs[0].steps.map(
+          (step) => step.end_location
+        );
+        dispatch(addPositions(newWaypoints));
         SetKm(response.routes[0].legs[0].distance.value);
-        console.log(response.routes[0].legs[0].distance.value);
-
-        // console.log(selected);
+      })
+      .catch((error) => {
+        console.error("Error fetching directions:", error);
       });
-
-    return () => directionsRenderer.setMap(null);
-  }, [directionsService, directionsRenderer]);
+  }, [
+    directionsService,
+    directionsRenderer,
+    waypoint,
+    selected1,
+    selected2,
+    dispatch,
+    SetKm,
+  ]);
 
   useEffect(() => {
     if (!directionsRenderer) return;
@@ -66,6 +79,7 @@ function Direction({ selected1, selected2, SetKm }) {
   if (!leg) return null;
 
   return (
+    // Your JSX for rendering directions or other components
     <div className="directions">
       <h2>{selected.summary}</h2>
       <p>

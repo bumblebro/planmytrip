@@ -11,7 +11,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
     return state.nearbyPlaces;
   });
   const waypoint = useSelector((state) => {
-    return state.waypoint;
+    return state.nearbyPlaces;
   });
   return (
     <div className="w-full h-96 sm:h-auto" id="footer">

@@ -24,7 +24,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [isOpenMain, setIsOpenMain] = useState(false);
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
-  const [placeId, setPlaceId] = useState("");
+  // const [placeId, setPlaceId] = useState("");
   const [data, setData] = useState();
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
@@ -34,10 +34,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [time2, setTime2] = useState("20:00");
   const [showDesc, setShowDesc] = useState(false);
   const [emerWindow, setEmerWindow] = useState(false);
-
-  const waypoint = useSelector((state) => {
-    return state.waypoint;
-  });
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -476,27 +472,29 @@ function DisplayPlaces({ SetDistinctMarker }) {
                                 }
                               });
                               if (con == false) {
+                                // dispatch(
+                                //   addwaypoint({
+                                //     lat: place.lat,
+                                //     lng: place.lng,
+                                //   })
+                                // );
                                 dispatch(
                                   addList({
                                     placeId: place.placeid,
                                     placeName: place.place,
                                     location: place.data.vicinity,
+                                    lat: place.lat,
+                                    lng: place.lng,
                                     data: place.data,
                                   })
                                 );
-                                console.log(place.waypoint);
+                                dispatch(addAdded(place.placeid));
                                 dispatch(
                                   addwaypoint({
-                                    location: {
-                                      lat: place.lat,
-                                      lng: place.lat,
-                                    },
-                                    stopover: true, // Indicates this waypoint is a stop
+                                    lat: place.lat,
+                                    lng: place.lng,
                                   })
                                 );
-
-                                console.log(waypoint);
-                                dispatch(addAdded(place.placeid));
                               } else {
                                 alert("Already Selected!");
                               }
