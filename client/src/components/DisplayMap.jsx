@@ -13,18 +13,22 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   const waypoint = useSelector((state) => {
     return state.nearbyPlaces;
   });
+
   return (
-    <div className="w-full h-96 sm:h-auto" id="footer">
+    <div className="w-full h-96 sm:h-auto " id="footer">
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
         <Map
           fullscreenControl={false}
           zoomControl={true}
-          // zoom={20}
+          // zoom={12}
           // {{distinctMarker& zoom={30}}}
           position={selected1}
           // mapTypeId="hybrid"
           mapTypeId="roadmap"
           mapId="d6266d464c671dbf"
+          gestureHandling="greedy"
+          zoomAnimationDuration={500}
+          zoomEasing="easeInOut"
         >
           <Direction
             selected1={selected1}

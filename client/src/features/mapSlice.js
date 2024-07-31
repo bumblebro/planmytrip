@@ -9,7 +9,7 @@ const initialState = {
   active: false,
   selectedList: [],
   waypoint: [],
-  change: false,
+  link: "",
 };
 
 export const mapSlice = createSlice({
@@ -63,6 +63,9 @@ export const mapSlice = createSlice({
     addwaypoint: (state, action) => {
       state.waypoint.push(action.payload);
     },
+    addlink: (state, action) => {
+      state.link = action.payload;
+    },
   },
 });
 
@@ -78,5 +81,6 @@ export const {
   addselected1,
   addselected2,
   addwaypoint,
+  addlink,
 } = mapSlice.actions;
 export default mapSlice.reducer;

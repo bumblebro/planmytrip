@@ -44,9 +44,6 @@ export default function Places() {
 
 function Maps() {
   const dispatch = useDispatch();
-  // const maps = useSelector((state) => {
-  //   return state;
-  // });
   const radius = useSelector((state) => {
     return state.radius;
   });
@@ -70,23 +67,6 @@ function Maps() {
       alert("Please select the locations with the distance less than 50KM");
     }
   }, [km]);
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(success, error);
-  //   } else {
-  //     console.log("Geolocation not supported");
-  //   }
-  //   function success(position) {
-  //     const latitude = position.coords.latitude;
-  //     const longitude = position.coords.longitude;
-  //     setLocation({ latitude, longitude });
-  //     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-  //   }
-  //   function error() {
-  //     console.log("Unable to retrieve your location");
-  //   }
-  // }, []);
 
   return (
     <div className="flex flex-col ">
@@ -184,13 +164,6 @@ function Maps() {
             <button className="flex items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:px-4 md:py-2 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
               Submit Trip
             </button>{" "}
-            {/* {km > 50000 && (
-              <h1>
-                The Distance between the current locations is{" "}
-                <span className="text-red-500">{km / 1000}kms</span>. It must be
-                less than <span className="text-red-500">50kms</span>
-              </h1>
-            )} */}
           </form>
           {distinctMarker && (
             <button
@@ -211,17 +184,6 @@ function Maps() {
             distinctMarker={distinctMarker}
           />
         ) : (
-          // <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
-          //   <Map
-          //     zoom={10}
-          //     center={{ lat: 12.5580735, lng: 75.3907667 }}
-          //     // position={selected1}
-          //     mapTypeId={"roadmap"}
-          //     fullscreenControl={false}
-          //     zoomControl={true}
-          //     mapId="d6266d464c671dbf"
-          //   />{" "}
-          // </APIProvider>
           <div className="w-full h-96 sm:h-auto">
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map

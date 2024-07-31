@@ -24,7 +24,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [isOpenMain, setIsOpenMain] = useState(false);
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
-  // const [placeId, setPlaceId] = useState("");
+  const [placeId, setPlaceId] = useState("");
   const [data, setData] = useState();
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
@@ -472,12 +472,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                                 }
                               });
                               if (con == false) {
-                                // dispatch(
-                                //   addwaypoint({
-                                //     lat: place.lat,
-                                //     lng: place.lng,
-                                //   })
-                                // );
                                 dispatch(
                                   addList({
                                     placeId: place.placeid,
