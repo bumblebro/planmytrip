@@ -4,6 +4,7 @@ import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
+import svg from "../images/googlemap.svg";
 
 const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
 
@@ -42,7 +43,24 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         {text ? (
           <div>
             <ReactMarkdown>{text}</ReactMarkdown>
-            <h1>{link}</h1>
+            <a href={link} target="_blank">
+              <button
+                href={link}
+                target="_blank"
+                className="
+               rounded-lg    
+               flex  items-center justify-center p-0.5   overflow-hidden text-sm font-medium
+                text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600
+                 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300
+                  dark:focus:ring-blue-800    
+                    gap-2  mx-auto  mt-4"
+              >
+                <span className="relative flex items-center w-full gap-2 px-2 py-2 text-gray-900 transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white ">
+                  <h1>Open Route in Google Maps</h1>
+                  <img className="w-6 text-white" src={svg} alt="" />
+                </span>
+              </button>
+            </a>
           </div>
         ) : (
           <>
@@ -57,9 +75,6 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
               <rect x="0" y="15" rx="4" ry="4" width="250" height="10" />
               <rect x="0" y="30" rx="4" ry="4" width="300" height="10" />
             </ContentLoader>{" "}
-            <a href={link} target="_blank">
-              xxxxxx
-            </a>
           </>
         )}
       </div>
