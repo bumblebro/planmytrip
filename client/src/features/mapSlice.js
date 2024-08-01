@@ -12,6 +12,7 @@ const initialState = {
   waypoint: [],
   link: "",
   orderedPlaces: [],
+  searchImage: false,
 };
 
 export const mapSlice = createSlice({
@@ -71,6 +72,9 @@ export const mapSlice = createSlice({
     addorderedPlaces: (state, action) => {
       state.orderedPlaces = action.payload;
     },
+    addsearchImage: (state, action) => {
+      state.searchImage = action.payload;
+    },
   },
 });
 
@@ -88,5 +92,6 @@ export const {
   addwaypoint,
   addlink,
   addorderedPlaces,
+  addsearchImage,
 } = mapSlice.actions;
 export default mapSlice.reducer;
