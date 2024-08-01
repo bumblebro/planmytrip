@@ -5,7 +5,7 @@ import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
 function Emergency({
   placeid,

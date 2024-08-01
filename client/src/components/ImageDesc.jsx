@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
 function ImageDesc() {
   const [image, setImage] = useState(null);
