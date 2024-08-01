@@ -25,6 +25,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [placename, SetPlaceName] = useState("");
   const [location, SetLocation] = useState("");
   const [placeId, setPlaceId] = useState("");
+  const [latlng, setLatLng] = useState();
   const [data, setData] = useState();
   const ScrollLink = Scroll.Link;
   const dispatch = useDispatch();
@@ -172,7 +173,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     }}
                   >
                     <span className="relative flex items-center justify-center w-full gap-4 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
-                      <h1 className="">Find Itinerary</h1>
+                      <h1 className="">Build Your Trip</h1>
                       <img className="w-4 text-white" src={svg} alt="" />
                     </span>
                   </button>
@@ -367,9 +368,14 @@ function DisplayPlaces({ SetDistinctMarker }) {
                             className=" 
                         relative lg:hidden inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
                             onClick={() => {
+                              setLatLng({
+                                lat: place.waypoint.lat,
+                                lng: place.waypoint.lng,
+                              });
                               SetPlaceName(place.place);
                               SetLocation(place.data.vicinity);
                               setPlaceId(place.placeid);
+                              console.log(latlng);
                               setData(place.data);
                               setEmerWindow(true);
                             }}
@@ -385,9 +391,14 @@ function DisplayPlaces({ SetDistinctMarker }) {
                       className=" 
                         relative hidden lg:inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
                       onClick={() => {
+                        setLatLng({
+                          lat: place.waypoint.lat,
+                          lng: place.waypoint.lng,
+                        });
                         SetPlaceName(place.place);
                         SetLocation(place.data.vicinity);
                         setPlaceId(place.placeid);
+                        console.log(latlng);
                         setData(place.data);
                         setEmerWindow(true);
                       }}
@@ -424,6 +435,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
             location={location}
             placeid={placeId}
             data={data}
+            latlng={latlng}
           />
         )}
       </div>{" "}
