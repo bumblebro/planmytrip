@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import Places from "./components/Places";
 import Footer from "./components/Footer";
 import TagLineBody from "./components/TagLineBody";
+import ImageDesc from "./components/ImageDesc";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Places />
       {/* <NearbyPlace waypoint={{lat:12.5581, lng:75.3908 }} radius={10000}/> */}
       <Footer />
+      <ImageDesc />
     </div>
   );
 }
