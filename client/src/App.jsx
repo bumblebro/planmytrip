@@ -3,14 +3,16 @@ import NavBar from "./components/NavBar";
 import Places from "./components/Places";
 import Footer from "./components/Footer";
 import TagLineBody from "./components/TagLineBody";
+import ImageDesc from "./components/ImageDesc";
+import { useSelector } from "react-redux";
 
 function App() {
+  const imgsearch = useSelector((state) => state.searchImage);
+
   return (
     <div className="flex flex-col justify-between h-[100vh]">
       <NavBar />
-      {/* <TagLineBody /> */}
-      <Places />
-      {/* <NearbyPlace waypoint={{lat:12.5581, lng:75.3908 }} radius={10000}/> */}
+      {imgsearch == true ? <ImageDesc /> : <Places />}
       <Footer />
     </div>
   );

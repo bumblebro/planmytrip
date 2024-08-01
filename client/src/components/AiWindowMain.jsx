@@ -4,7 +4,7 @@ import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
 function AiWindowMain({ setIsOpenMain, selectedPlaces, question, header }) {
   const [text, setText] = useState(null);

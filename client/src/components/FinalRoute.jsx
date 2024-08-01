@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 import svg from "../images/googlemap.svg";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCXDKoQVeO41DjXic40S9ONZwF8oiMFTww");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
 function FinalRoute({ selectedPlaces, time1, time2 }) {
   const [text, setText] = useState(null);
@@ -25,7 +25,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         (item) => {
           return `${item.placeName} of lat:${item.lat} lng:${item.lng}` + ",";
         }
-      )} avoid sending first sentence and lat, lng in response and please mention time in the 12hr format. `;
+      )}in descriptive and  avoid sending introductory sentence or lead-in sentence and lat lng in response and please mention time in the 12hr format. `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
