@@ -117,6 +117,14 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 <button
                   type="button"
                   className="flex items-center justify-center gap-2 px-6 py-1 mx-auto text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 me-2"
+                  onClick={() => {
+                    setQuestion({
+                      question: askQuestion,
+                      type: "ask",
+                      header: "Answer for your queries",
+                    });
+                    setIsOpenMain(true);
+                  }}
                 >
                   <h1>Ask</h1>{" "}
                   <img className="w-4 text-white" src={svg} alt="" />

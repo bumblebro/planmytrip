@@ -87,7 +87,7 @@ function ImageDesc() {
             className="hidden"
             type="file"
             accept="image/*"
-            capture="optional"
+            capture="user"
             onClick={() => {}}
             onChange={(event) => {
               setLoading(false);
