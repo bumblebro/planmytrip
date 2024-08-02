@@ -157,12 +157,16 @@ function Maps() {
           </form>
           {distinctMarker && (
             <button
-              className="w-48 rounded-md bg-[#3b82f6] text-[#fefce1]"
+              className="
+rounded-lg    
+relative inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 "
               onClick={() => {
                 SetDistinctMarker(null);
               }}
             >
-              Show All Places on map
+              <span className="relative w-full px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
+                Show All Places on map
+              </span>
             </button>
           )}
         </div>

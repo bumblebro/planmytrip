@@ -46,8 +46,7 @@ function NavBar() {
             </span>
           </button>
         )}
-
-        <img src={svg2} className="h-5 lg:h-6" alt="" />
+        {/* <img src={svg2} className="h-5 lg:h-6" alt="" /> */}
       </div>
     </div>
   );
