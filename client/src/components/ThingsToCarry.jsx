@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  FunctionDeclarationSchemaType,
+  GoogleGenerativeAI,
+} from "@google/generative-ai";
 import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
@@ -13,7 +16,26 @@ function ThingsToCarry({ selectedPlaces }) {
     async function run() {
       setText(null);
       // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: FunctionDeclarationSchemaType.ARRAY,
+            items: {
+              type: FunctionDeclarationSchemaType.OBJECT,
+              properties: {
+                item: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
+                emoji: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
+              },
+            },
+          },
+        },
+      });
       const prompt = `List the minimum things to carry with comma while going for a trip to ${selectedPlaces.map(
         (item) => {
           return `${item.placeName}` + ",";
@@ -22,7 +44,10 @@ function ThingsToCarry({ selectedPlaces }) {
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
-      setText(data);
+      console.log(data);
+      const parsedData = JSON.parse(data);
+      console.log(parsedData);
+      setText(parsedData);
     }
     run();
   }, [selectedPlaces]);
@@ -31,7 +56,17 @@ function ThingsToCarry({ selectedPlaces }) {
       <h1 className="mb-2 font-medium">Things to carry 🎒</h1>
       <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (
-          <ReactMarkdown>{text}</ReactMarkdown>
+          <div>
+            {" "}
+            {text.map((item, index) => {
+              return (
+                <div key={index} className="flex">
+                  <h1 className="font-semibold">{item.item}</h1>
+                  <h1 className="text-blue-500 font-semibold">{item.emoji}</h1>
+                </div>
+              );
+            })}
+          </div>
         ) : (
           <ContentLoader
             speed={1}

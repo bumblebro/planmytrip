@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  FunctionDeclarationSchemaType,
+  GoogleGenerativeAI,
+} from "@google/generative-ai";
 import { useState } from "react";
 import ContentLoader, { Code } from "react-content-loader";
 import ReactMarkdown from "react-markdown";
@@ -16,7 +19,29 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
   useEffect(() => {
     async function run() {
       setText(null);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: FunctionDeclarationSchemaType.ARRAY,
+            items: {
+              type: FunctionDeclarationSchemaType.OBJECT,
+              properties: {
+                timeframe: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
+                placename: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
+                description: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
+              },
+            },
+          },
+        },
+      });
       const prompt = `Arrange the place to visit from ${time1} to ${time2} with origin place as ${
         selected1.placeName
       } and destination place is ${
@@ -25,12 +50,15 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         (item) => {
           return `${item.placeName} of lat:${item.lat} lng:${item.lng}` + ",";
         }
-      )}in descriptive and  avoid sending introductory sentence or lead-in sentence and lat lng in response and please mention time in the 12hr format. `;
+      )}please mention time in the 12hr format, Dont sending lat lng and send breif description in description property about 3-4 sentence and allocate some time for lunch or dinne if required `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const data = response.text();
-      setText(data);
+      console.log(data);
+      const parsedData = JSON.parse(data);
+      console.log(parsedData);
+      setText(parsedData);
     }
     run();
   }, [selectedPlaces, time1, time2]);
@@ -41,7 +69,24 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
       <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (
           <div>
-            <ReactMarkdown>{text}</ReactMarkdown>
+            <div>
+              {text.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <div className="flex gap-2">
+                      <h1 className="font-semibold">{item.timeframe}</h1>
+                      <p>-</p>
+                      <h1 className="text-blue-500 font-semibold">
+                        {item.placename}
+                      </h1>
+                    </div>
+
+                    <h1 className="text-slate-700">{item.description}</h1>
+                  </div>
+                );
+              })}
+            </div>
+
             <a href={link} target="_blank">
               <button
                 href={link}
