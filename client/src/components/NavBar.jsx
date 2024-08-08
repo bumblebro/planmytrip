@@ -9,7 +9,7 @@ function NavBar() {
   const imgsearch = useSelector((state) => state.searchImage);
 
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-sky-100 to-cyan-200 lg:px-10 mb-11">
+    <div className="flex items-center justify-between px-4 py-2 bg-[#ffffff] lg:px-10 mb-11">
       <img
         src={svg}
         className="   lg:w-[150px] w-[100px] "
