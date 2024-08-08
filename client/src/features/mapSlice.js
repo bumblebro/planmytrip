@@ -3,6 +3,8 @@ import { act } from "react";
 
 const initialState = {
   nearbyPlaces: [],
+  nearbyHotels: [],
+
   selected1: null,
   selected2: null,
   positions: [],
@@ -12,6 +14,8 @@ const initialState = {
   waypoint: [],
   link: "",
   orderedPlaces: [],
+  orderedHotelPlaces: [],
+
   searchImage: false,
 };
 
@@ -21,6 +25,9 @@ export const mapSlice = createSlice({
   reducers: {
     addPlace: (state, action) => {
       state.nearbyPlaces = action.payload;
+    },
+    addHotel: (state, action) => {
+      state.nearbyHotels = action.payload;
     },
     addPositions: (state, action) => {
       state.positions = action.payload;
@@ -72,6 +79,9 @@ export const mapSlice = createSlice({
     addorderedPlaces: (state, action) => {
       state.orderedPlaces = action.payload;
     },
+    addorderedHotelPlaces: (state, action) => {
+      state.orderedHotelPlaces = action.payload;
+    },
     addsearchImage: (state, action) => {
       state.searchImage = action.payload;
     },
@@ -93,5 +103,7 @@ export const {
   addlink,
   addorderedPlaces,
   addsearchImage,
+  addHotel,
+  addorderedHotelPlaces,
 } = mapSlice.actions;
 export default mapSlice.reducer;
