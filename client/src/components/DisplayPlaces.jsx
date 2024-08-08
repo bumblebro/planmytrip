@@ -327,15 +327,37 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     </button>
                     <div className="w-full lg:w-auto">
                       {place.added == true ? (
-                        <button
-                          className=" 
+                        <div className="flex justify-between">
+                          <button
+                            className=" 
                                       relative inline-flex items-center justify-center p-0.5  overflow-hidden 
                                       text-sm font-medium  rounded-lg  bg-gradient-to-br from-green-400 to-blue-600 text-white   outline-none "
-                        >
-                          <span className="relative w-full px-2 py-1 text-white transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white bg-gradient-to-br from-green-400 to-blue-600">
-                            Added ✓
-                          </span>
-                        </button>
+                          >
+                            <span className="relative w-full px-2 py-1 text-white transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white bg-gradient-to-br from-green-400 to-blue-600">
+                              Added ✓
+                            </span>
+                          </button>{" "}
+                          <button
+                            className=" 
+                        relative lg:hidden inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white  focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 "
+                            onClick={() => {
+                              setLatLng({
+                                lat: place.waypoint.lat,
+                                lng: place.waypoint.lng,
+                              });
+                              SetPlaceName(place.place);
+                              SetLocation(place.data.vicinity);
+                              setPlaceId(place.placeid);
+                              console.log(latlng);
+                              setData(place.data);
+                              setEmerWindow(true);
+                            }}
+                          >
+                            <span className="relative flex items-center justify-around w-full gap-1 px-2 py-1 text-black transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white">
+                              <h1 className="">🆘</h1>
+                            </span>
+                          </button>
+                        </div>
                       ) : (
                         <div className="flex justify-between">
                           <button

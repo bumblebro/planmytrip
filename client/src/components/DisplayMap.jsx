@@ -15,7 +15,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   });
 
   return (
-    <div className="w-full h-96 sm:h-auto " id="footer">
+    <div className="w-full overflow-hidden h-96 sm:h-auto rounded-xl" id="footer">
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
         <Map
           fullscreenControl={false}

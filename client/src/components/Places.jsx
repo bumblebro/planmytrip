@@ -178,7 +178,7 @@ relative inline-flex items-center justify-center p-0.5   overflow-hidden text-sm
             distinctMarker={distinctMarker}
           />
         ) : (
-          <div className="w-full h-96 sm:h-auto">
+          <div className="w-full overflow-hidden rounded-xl h-96 sm:h-auto">
             <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
               <Map
                 fullscreenControl={false}
