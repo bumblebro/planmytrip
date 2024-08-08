@@ -238,7 +238,8 @@ function DisplayPlaces({ SetDistinctMarker }) {
             >
               <div className="flex flex-col justify-center w-full">
                 <a
-                  href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
+                  // href={`https://www.google.com/maps/place/?q=place_id:${place.data.place_id}`}
+                  href={`https://maps.google.com/?q=${place.lat},${place.lng}`}
                   className="text-xl font-medium text-[#34333a] hover:text-blue-800 "
                   target="_blank"
                 >

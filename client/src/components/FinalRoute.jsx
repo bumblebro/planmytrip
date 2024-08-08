@@ -108,8 +108,8 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
                       ) : (
                         <a
                           target="_blank"
-                          // href={`https://www.google.com/maps/place/?q=place_id:${item.placeId}`}
-                          href={`googlemaps://?q=place_id:${item.placeId}`}
+                          href={`https://www.google.com/maps/place/?q=place_id:${item.placeId}`}
+                          // href={`googlemaps://?q=place_id:${item.placeId}`}
                           className="flex items-center gap-2 text-blue-500 font-seemibold"
                         >
                           <p className="text-black">-</p>
