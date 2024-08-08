@@ -163,7 +163,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                 </span>
               </button>
             )}
-            <ThingsToCarry selectedPlaces={selectedPlaces} />
 
             <div className="px-1 my-4 border border-solid rounded-lg border-slate-400 ">
               <div className="flex justify-around gap-4 py-4 mx-2 md:gap-6 sm:justify-start">
@@ -214,12 +213,16 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   />
                 </div>
               </div>
+
               {showDesc && (
-                <FinalRoute
-                  selectedPlaces={orderedPlaces}
-                  time1={time1}
-                  time2={time2}
-                />
+                <>
+                  <ThingsToCarry selectedPlaces={selectedPlaces} />
+                  <FinalRoute
+                    selectedPlaces={orderedPlaces}
+                    time1={time1}
+                    time2={time2}
+                  />
+                </>
               )}
             </div>
           </div>

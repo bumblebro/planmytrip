@@ -52,17 +52,21 @@ function ThingsToCarry({ selectedPlaces }) {
     run();
   }, [selectedPlaces]);
   return (
-    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4 border border-solid  border-slate-400">
+    <div className="bg-[#f6f5fa] px-2 py-2 rounded-lg mt-4  border-slate-400 mb-2">
       <h1 className="mb-2 font-medium">Things to carry 🎒</h1>
       <div className="my-4 text-sm leading-relaxed text-blueGray-500 md:text-base">
         {text ? (
-          <div>
-            {" "}
+          <div className="flex flex-wrap gap-3">
             {text.map((item, index) => {
               return (
-                <div key={index} className="flex">
-                  <h1 className="font-semibold">{item.item}</h1>
-                  <h1 className="text-blue-500 font-semibold">{item.emoji}</h1>
+                <div key={index} className="inline-block">
+                  <div className="flex">
+                    {" "}
+                    <h1 className="font-semibold">{item.item}</h1>
+                    <h1 className="font-semibold text-blue-500">
+                      {item.emoji}
+                    </h1>{" "}
+                  </div>
                 </div>
               );
             })}

@@ -37,6 +37,9 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
                 description: {
                   type: FunctionDeclarationSchemaType.STRING,
                 },
+                placeId: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
               },
             },
           },
@@ -48,9 +51,12 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
         selected2.placeName
       } and it is oneway trip and places to visit is ${selectedPlaces.map(
         (item) => {
-          return `${item.placeName} of lat:${item.lat} lng:${item.lng}` + ",";
+          return (
+            `${item.placeName} of lat:${item.lat} lng:${item.lng}  placeId: ${item.placeId}` +
+            ","
+          );
         }
-      )}please mention time in the 12hr format, Dont sending lat lng and send breif description in description property about 3-4 sentence and allocate some time for lunch or dinne if required `;
+      )}  please mention time in the 12hr format, send latitude and longitude and send breif description in description property about 3-4 sentence and allocate some time for lunch and send as Lunch in placename variable or dinner as Dinner in placename variable if required`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -73,12 +79,56 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
               {text.map((item, index) => {
                 return (
                   <div key={index}>
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                       <h1 className="font-semibold">{item.timeframe}</h1>
-                      <p>-</p>
-                      <h1 className="text-blue-500 font-semibold">
-                        {item.placename}
-                      </h1>
+                      {item.placename == "Lunch" ||
+                      item.placename == "Dinner" ? (
+                        <a
+                          target="_blank"
+                          href={`https://www.google.com/maps/search/restaurants+near+me/`}
+                          className="flex items-center gap-2 text-blue-500 font-seemibold"
+                        >
+                          <p className="text-black">-</p>
+                          <h1>{item.placename}</h1>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                            />
+                          </svg>
+                        </a>
+                      ) : (
+                        <a
+                          target="_blank"
+                          href={`https://www.google.com/maps/place/?q=place_id:${item.placeId}`}
+                          className="flex items-center gap-2 text-blue-500 font-seemibold"
+                        >
+                          <p className="text-black">-</p>
+                          <h1>{item.placename}</h1>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                            />
+                          </svg>
+                        </a>
+                      )}
                     </div>
 
                     <h1 className="text-slate-700">{item.description}</h1>
