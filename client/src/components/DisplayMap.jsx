@@ -15,7 +15,10 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   });
 
   return (
-    <div className="w-full overflow-hidden h-96 sm:h-auto rounded-xl" id="footer">
+    <div
+      className="w-full overflow-hidden h-96 sm:h-auto rounded-xl"
+      id="footer"
+    >
       <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
         <Map
           fullscreenControl={false}
@@ -56,14 +59,22 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
                 key={index}
                 position={position}
                 // label={{
-                //   text: `${index + 1}`,
-                //   // fontSize: `${new window.google.maps.Size(50, 50)}`,
-                //   color: "white",
+                //   text: `${position.place}`,
+                //   fontSize: `${new window.google.maps.Size(20, 20)}`,
+                //   color: "black",
                 // }}
                 title={position.place}
+                // icon={{
+                //   url:
+                //     position && position.photo && position.photo[0]
+                //       ? position.photo[0].getUrl()
+                //       : "https://maps.gstatic.com/tactile/pane/result-no-thumbnail-2x.png",
+
+                //   scaledSize: new window.google.maps.Size(30, 30),
+                // }}
                 icon={{
-                  url: img1,
-                  scaledSize: new window.google.maps.Size(30, 30),
+                  url: { img1 },
+                  scaledSize: new window.google.maps.Size(10, 10),
                 }}
                 width="20px"
                 onClick={(e) => {

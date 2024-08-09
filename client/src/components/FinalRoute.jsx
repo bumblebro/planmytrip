@@ -11,7 +11,7 @@ import svg from "../images/googlemap.svg";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
-function FinalRoute({ selectedPlaces, time1, time2, toPDF }) {
+function FinalRoute({ selectedPlaces, time1, time2, handlePrint }) {
   const [text, setText] = useState(null);
   const selected1 = useSelector((state) => state.selected1);
   const selected2 = useSelector((state) => state.selected2);
@@ -156,7 +156,7 @@ function FinalRoute({ selectedPlaces, time1, time2, toPDF }) {
                   </span>
                 </button>
               </a>{" "}
-              <a onClick={() => toPDF()}>
+              <a onClick={handlePrint}>
                 <button
                   className="
                rounded-lg    
