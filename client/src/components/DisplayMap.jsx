@@ -67,8 +67,8 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
                 title={position.place}
                 icon={{
                   url: img1,
-                  scaledSize: new window.google.maps.Size(20, 20),
-                  labelOrigin: new window.google.maps.Point(10, -10),
+                  scaledSize: new window.google.maps.Size(30, 30),
+                  labelOrigin: new window.google.maps.Point(40, -10),
                 }}
                 onClick={(e) => {
                   let data = [];
@@ -95,7 +95,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
               title={position.placeName}
               icon={{
                 url: img1,
-                scaledSize: new window.google.maps.Size(20, 20),
+                scaledSize: new window.google.maps.Size(30, 30),
                 labelOrigin: new window.google.maps.Point(10, -10),
               }}
             ></Marker>
