@@ -59,7 +59,10 @@ function Direction({ selected1, selected2, SetKm }) {
         provideRouteAlternatives: true,
       })
       .then((response) => {
-        directionsRenderer.setDirections(response);
+        directionsRenderer.setOptions({
+          directions: response,
+          suppressMarkers: true, // This will remove the default markers/icons
+        });
         setRoutes(response.routes);
 
         const newWaypoints = response.routes[0].legs[0].steps.map((step) => {

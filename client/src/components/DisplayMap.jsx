@@ -1,14 +1,15 @@
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import "@reach/combobox/styles.css";
 import Direction from "./Direction";
-import img from "/src/images/image.png";
 import img1 from "/src/images/location.png";
 import { useSelector } from "react-redux";
-// import img1 from "/src/images/placeholder.png";
 
 function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
   const nearbyPlaces = useSelector((state) => {
     return state.nearbyPlaces;
+  });
+  const selectedList = useSelector((state) => {
+    return state.selectedList;
   });
   const waypoint = useSelector((state) => {
     return state.nearbyPlaces;
@@ -23,10 +24,7 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
         <Map
           fullscreenControl={false}
           zoomControl={true}
-          // zoom={12}
-          // {{distinctMarker& zoom={30}}}
           position={selected1}
-          // mapTypeId="hybrid"
           mapTypeId="roadmap"
           mapId="d6266d464c671dbf"
           gestureHandling="greedy"
@@ -44,13 +42,15 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
               position={distinctMarker}
               label={{
                 text: distinctMarker.place,
-                fontSize: new window.google.maps.Size(40, 40),
-                color: "red",
+                fontSize: "12px",
+                color: "black",
+                className: "custom-label",
               }}
               title={distinctMarker.place}
               icon={{
                 url: img1,
                 scaledSize: new window.google.maps.Size(50, 50),
+                labelOrigin: new window.google.maps.Point(25, -10),
               }}
             ></Marker>
           ) : (
@@ -59,24 +59,17 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
                 key={index}
                 position={position}
                 // label={{
-                //   text: `${position.place}`,
-                //   fontSize: `${new window.google.maps.Size(20, 20)}`,
+                //   text: position.place,
+                //   fontSize: "12px",
                 //   color: "black",
+                //   className: "custom-label",
                 // }}
                 title={position.place}
-                // icon={{
-                //   url:
-                //     position && position.photo && position.photo[0]
-                //       ? position.photo[0].getUrl()
-                //       : "https://maps.gstatic.com/tactile/pane/result-no-thumbnail-2x.png",
-
-                //   scaledSize: new window.google.maps.Size(30, 30),
-                // }}
                 icon={{
-                  url: { img1 },
-                  scaledSize: new window.google.maps.Size(10, 10),
+                  url: img1,
+                  scaledSize: new window.google.maps.Size(20, 20),
+                  labelOrigin: new window.google.maps.Point(10, -10),
                 }}
-                width="20px"
                 onClick={(e) => {
                   let data = [];
                   nearbyPlaces.map((places) => {
@@ -89,6 +82,24 @@ function DisplayMap({ selected1, selected2, SetKm, distinctMarker }) {
               ></Marker>
             ))
           )}
+          {selectedList.map((position, index) => (
+            <Marker
+              key={index}
+              position={position}
+              label={{
+                text: position.placeName,
+                fontSize: "10px",
+                color: "black",
+                className: "custom-label",
+              }}
+              title={position.placeName}
+              icon={{
+                url: img1,
+                scaledSize: new window.google.maps.Size(20, 20),
+                labelOrigin: new window.google.maps.Point(10, -10),
+              }}
+            ></Marker>
+          ))}
         </Map>
       </APIProvider>
     </div>
