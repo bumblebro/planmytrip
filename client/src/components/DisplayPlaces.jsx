@@ -4,6 +4,8 @@ import Scroll from "react-scroll";
 import svg from "/src/images/Google_Bard_logo.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useReactToPrint } from "react-to-print";
+
 import AiWindow from "./AiWindow";
 import {
   addAdded,
@@ -17,6 +19,7 @@ import AiWindowMain from "./AiWindowMain";
 import ThingsToCarry from "./ThingsToCarry";
 import FinalRoute from "./FinalRoute";
 import Emergency from "./Emergency";
+import { useRef } from "react";
 
 function DisplayPlaces({ SetDistinctMarker }) {
   // const [uniquePlaces, setUniquePlaces] = useState([]);
@@ -35,6 +38,11 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [time2, setTime2] = useState("20:00");
   const [showDesc, setShowDesc] = useState(false);
   const [emerWindow, setEmerWindow] = useState(false);
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -164,7 +172,10 @@ function DisplayPlaces({ SetDistinctMarker }) {
               </button>
             )}
 
-            <div className="px-1 my-4 border border-solid rounded-lg border-slate-400 ">
+            <div
+              className="px-1 my-4 border border-solid rounded-lg border-slate-400 "
+              ref={componentRef}
+            >
               <div className="flex justify-around gap-4 py-4 mx-2 md:gap-6 sm:justify-start">
                 {" "}
                 <div className="flex flex-col items-center justify-around md:items-start">
@@ -213,7 +224,6 @@ function DisplayPlaces({ SetDistinctMarker }) {
                   />
                 </div>
               </div>
-
               {showDesc && (
                 <>
                   <ThingsToCarry selectedPlaces={selectedPlaces} />
@@ -221,6 +231,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     selectedPlaces={orderedPlaces}
                     time1={time1}
                     time2={time2}
+                    handlePrint={handlePrint}
                   />
                 </>
               )}

@@ -11,7 +11,7 @@ import svg from "../images/googlemap.svg";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY_FOR_AI);
 
-function FinalRoute({ selectedPlaces, time1, time2 }) {
+function FinalRoute({ selectedPlaces, time1, time2, handlePrint }) {
   const [text, setText] = useState(null);
   const selected1 = useSelector((state) => state.selected1);
   const selected2 = useSelector((state) => state.selected2);
@@ -56,7 +56,7 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
             ","
           );
         }
-      )}  please mention time in the 12hr format, send latitude and longitude and send breif description in description property about 3-4 sentence and allocate some time for lunch and send as Lunch in placename variable or dinner as Dinner in placename variable if required`;
+      )}  please mention timeframe in the 12hr format with am and pm, send latitude and longitude and send breif description in description property about 3-4 sentence and allocate some time for lunch and send as Lunch in placename variable or dinner as Dinner in placename variable if required`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -137,25 +137,55 @@ function FinalRoute({ selectedPlaces, time1, time2 }) {
                 );
               })}
             </div>
-
-            <a href={link} target="_blank">
-              <button
-                href={link}
-                target="_blank"
-                className="
+            <div className="flex justify-around">
+              <a href={link} target="_blank">
+                <button
+                  href={link}
+                  target="_blank"
+                  className="
                rounded-lg    
                flex  items-center justify-center p-0.5   overflow-hidden text-sm font-medium
                 text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600
                  group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300
                   dark:focus:ring-blue-800    
-                    gap-2  mx-auto  mt-4"
-              >
-                <span className="relative flex items-center w-full gap-2 px-2 py-2 text-gray-900 transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white ">
-                  <h1>Open Route in Google Maps</h1>
-                  <img className="w-6 text-white" src={svg} alt="" />
-                </span>
-              </button>
-            </a>
+                    gap-2    mt-4"
+                >
+                  <span className="relative flex items-center w-full gap-2 px-2 py-2 text-gray-900 transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white ">
+                    <h1>Open Route in Google Maps</h1>
+                    <img className="w-6 text-white" src={svg} alt="" />
+                  </span>
+                </button>
+              </a>{" "}
+              <a onClick={handlePrint}>
+                <button
+                  className="
+               rounded-lg    
+               flex  items-center justify-center p-0.5   overflow-hidden text-sm font-medium
+                text-gray-900  group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600
+                 group-hover:to-blue-500 hover:text-white dark:text-white  focus:outline-none focus:ring-blue-300
+                  dark:focus:ring-blue-800    
+                    gap-2    mt-4"
+                >
+                  <span className="relative flex items-center w-full gap-2 px-2 py-2 text-gray-900 transition-all duration-75 ease-in bg-white rounded-md group-hover:bg-opacity-0 group-hover:text-white ">
+                    <h1>PDF Export</h1>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </a>{" "}
+            </div>
           </div>
         ) : (
           <>
