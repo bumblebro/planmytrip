@@ -4,7 +4,7 @@ import Scroll from "react-scroll";
 import svg from "/src/images/Google_Bard_logo.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useReactToPrint } from "react-to-print";
+import { usePDF } from "react-to-pdf";
 
 import AiWindow from "./AiWindow";
 import {
@@ -38,11 +38,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
   const [time2, setTime2] = useState("20:00");
   const [showDesc, setShowDesc] = useState(false);
   const [emerWindow, setEmerWindow] = useState(false);
-  const componentRef = useRef();
-
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+  const { toPDF, targetRef } = usePDF({ filename: "MyItinerary.pdf" });
 
   const nearbyPlaces = useSelector((state) => {
     console.log(state.nearbyPlaces);
@@ -174,7 +170,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
 
             <div
               className="px-1 my-4 border border-solid rounded-lg border-slate-400 "
-              ref={componentRef}
+              ref={targetRef}
             >
               <div className="flex justify-around gap-4 py-4 mx-2 md:gap-6 sm:justify-start">
                 {" "}
@@ -231,7 +227,7 @@ function DisplayPlaces({ SetDistinctMarker }) {
                     selectedPlaces={orderedPlaces}
                     time1={time1}
                     time2={time2}
-                    handlePrint={handlePrint}
+                    toPDF={toPDF}
                   />
                 </>
               )}
